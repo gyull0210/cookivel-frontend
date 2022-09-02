@@ -22,7 +22,7 @@ export default function Layout({children}) {
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">       
         {/* Navbar */}
-        <div className="w-full navbar bg-base-200 fixed top-0 z-50">
+        <div className="w-full navbar bg-base-200 fixed top-0 z-40">
         <div className="flex-1 items-center justify-around max-w-screen-2xl mx-auto">
           <div className="flex-none">
             <button className="btn btn-ghost btn-cirle" onClick={()=>(history.go(-1))}>
@@ -72,7 +72,7 @@ export default function Layout({children}) {
           </li>
           <li>
             <a className="">
-              1화           
+              1화
             </a>
           </li>
           <li>

@@ -8,10 +8,14 @@ import {useState, useRef } from 'react'
 export default function Viewer({children}) {
 
   const [modalShow, setModalShow] = useState(false);
+  const [commentShow, setCommentShow] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
   
   const handleModal = () => {
     setModalShow(!modalShow);
+  }
+  const handleCommentShow = () => {
+    setCommentShow(!commentShow);
   }
 
   return (
@@ -21,16 +25,15 @@ export default function Viewer({children}) {
       <meta name="description" content="소설 창작자들의 연재공간" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <Layout>
+    <Layout>     
       <Main>
         <div className="container max-w-screen-2xl mx-auto">
           {children}
         </div>       
-      </Main>
-      <Footer/>
+      </Main>     
       {/* drawer reply */}
-      <div className="drawer drawer-end top-0">
-        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+      <div className={`${commentShow && "z-50"} drawer drawer-end top-0 fixed`}>
+        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" checked={commentShow} onChange={handleCommentShow} />
         <div className="drawer-side">
             <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
             <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
@@ -39,7 +42,8 @@ export default function Viewer({children}) {
             <li><a>Sidebar Item 2</a></li>
           </ul>
         </div>
-      </div> 
+      </div>
+      <Footer handleCommentShow={handleCommentShow}/>       
       {/* modal */}
       <input type="checkbox" id="my-modal-2" className="modal-toggle" checked={modalShow} onChange={handleModal}/>
         <div className="modal modal-bottom sm:modal-middle">
