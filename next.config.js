@@ -5,6 +5,9 @@ const withTwin = require('./withTwin.js')
  * @type {import('next').NextConfig}
  */
 module.exports = withTwin({
-  reactStrictMode: true, // < Recommended by Next
+  images: {
+    domains: ["localhost", "*", "piscum.photos"],
+  },
+  reactStrictMode: true,
   // ...
 })
