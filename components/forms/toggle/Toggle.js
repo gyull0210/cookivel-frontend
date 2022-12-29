@@ -14,3 +14,5 @@ const Toggle = React.forwardRef((props, ref) => {
     </div>
   )
 })
+
+Toggle.displayName = "Toggle"
