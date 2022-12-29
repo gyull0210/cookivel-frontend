@@ -19,7 +19,7 @@ const Textarea = React.forwardRef((props, ref) => {
         textRef.current.style.height = "auto";
         textRef.current.style.height = textRef.current.scrollHeight + "px";
       }
-    }, [onChange]
+    }, [onChange, resize]
   )
   
   return (
