@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Badge from "../components/common/badge/Badge";
+import Badge from "../components/core/badge/Badge";
 import List from "../components/overlay/list/List";
 import ListItem from "../components/overlay/list/ListItem";
 import { HiPlus, HiX } from 'react-icons/hi'
