@@ -14,4 +14,6 @@ const FormHelperText = React.forwardRef((props, ref) => {
   )
 })
 
+FormHelperText.displayName = "FormHelperText"
+
 export default FormHelperText;

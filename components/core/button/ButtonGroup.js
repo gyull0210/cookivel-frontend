@@ -15,3 +15,7 @@ const ButtonGroup = React.forwardRef((props, ref) => {
     </div>
   )
 })
+
+ButtonGroup.displayName = "ButtonGroup"
+
+export default ButtonGroup;

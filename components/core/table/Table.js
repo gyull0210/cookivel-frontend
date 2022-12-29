@@ -23,4 +23,6 @@ const Table = React.forwardRef((props, ref) => {
   )
 })
 
+Table.displayName = "Table"
+
 export default Table;

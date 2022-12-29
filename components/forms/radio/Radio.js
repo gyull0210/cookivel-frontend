@@ -47,4 +47,6 @@ Radio.defaultProps = {
  size: "md"
 }
 
+Radio.displayName = "Radio"
+
 export default Radio;

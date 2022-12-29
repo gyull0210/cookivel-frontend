@@ -63,4 +63,6 @@ Avatar.defaultProps = {
 
 }
 
+Avatar.displayName = "Avatar"
+
 export default Avatar;

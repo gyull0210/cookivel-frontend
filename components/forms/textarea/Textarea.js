@@ -76,4 +76,6 @@ Textarea.defaultProps = {
   disabled: false
 }
 
+Textarea.displayName = "Textarea"
+
 export default Textarea;

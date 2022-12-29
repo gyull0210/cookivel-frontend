@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import tw from 'twin.macro'
 import { jsx } from '@emotion/react'
 
-export const Dropdown = ({label, menu}) => {
+const Dropdown = ({label, menu}) => {
 
   const dropDownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(dropDownRef, false);
@@ -53,3 +53,5 @@ Dropdown.defaultProps = {
 
   onClick: PropTypes.func,
 };
+
+export default Dropdown;

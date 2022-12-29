@@ -33,6 +33,7 @@ const Tab = React.forwardRef((props, ref) => {
       {data.filter(item => index === item.id).map(item => (
         <div
           tw=""
+          key={idx}
         >
           {item.description}
         </div>
@@ -48,5 +49,7 @@ Tab.propTypes = {
 Tab.defaultTypes = {
   
 }
+
+Tab.displayName = "Tab"
 
 export default Tab;

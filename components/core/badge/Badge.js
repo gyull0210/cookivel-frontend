@@ -1,6 +1,6 @@
 import { jsx } from '@emotion/react'
 import propTypes from 'prop-types'
-import React from 'react';
+import React from 'react'
 import tw from 'twin.macro'
 
 /**
@@ -77,5 +77,7 @@ Badge.defaultProps = {
   variant: "solid",
   styled: "rounded"
 }
+
+Badge.displayName = "Badge"
 
 export default Badge;

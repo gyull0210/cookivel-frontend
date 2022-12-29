@@ -50,4 +50,6 @@ Pagination.defaultProps = {
 
 }
 
+Pagination.displayName = "Pagination"
+
 export default Pagination;

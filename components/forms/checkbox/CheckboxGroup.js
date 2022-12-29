@@ -28,4 +28,6 @@ CheckboxGroup.defaultProps = {
 
 }
 
+CheckboxGroup.displayName = "CheckboxGroup"
+
 export default CheckboxGroup;

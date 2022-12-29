@@ -17,3 +17,7 @@ const FormErrorMessage = React.forwardRef((props, ref) => {
     />
   )
 })
+
+FormErrorMessage.displayName = "FormErrorMessage"
+
+export default FormErrorMessage;

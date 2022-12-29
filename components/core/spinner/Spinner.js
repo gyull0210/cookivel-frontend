@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import { jsx } from '@emotion/react'
 import tw from 'twin.macro'
 
-export const Spinner = React.forwardRef((props, ref) => {
+const Spinner = React.forwardRef((props, ref) => {
 
   const { size, color, position } = props;
 
@@ -33,5 +33,7 @@ Spinner.propTypes = {
 Spinner.defaultProps = {
   size: "md",
 };
+
+Spinner.displayName = "Spinner"
 
 export default Spinner;

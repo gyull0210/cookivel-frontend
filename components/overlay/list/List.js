@@ -14,4 +14,6 @@ const List = React.forwardRef((props, ref) => {
   )
 })
 
+List.displayName = "List"
+
 export default List;

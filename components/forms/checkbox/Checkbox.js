@@ -66,4 +66,6 @@ Checkbox.defaultProps = {
   disabled: false,
 };
 
+Checkbox.displayName = "Checkbox"
+
 export default Checkbox;

@@ -67,4 +67,6 @@ Accordion.defaultProps = {
   variants: "flush"
 }
 
+Accordion.displayName = "Accordion"
+
 export default Accordion;

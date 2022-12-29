@@ -40,4 +40,6 @@ FormControl.defaultProps = {
 
 }
 
+FormControl.displayName = "FormControl"
+
 export default FormControl;

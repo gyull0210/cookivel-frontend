@@ -50,4 +50,6 @@ Inputs.defaultProps = {
 
 }
 
+Inputs.displayName = "Inputs"
+
 export default Inputs;

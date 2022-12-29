@@ -69,4 +69,6 @@ TextInput.defaultProps = {
   disabled:false
 }
 
+TextInput.displayName = "TextInput"
+
 export default TextInput;

@@ -28,4 +28,6 @@ FormLabel.defaultProps = {
 
 }
 
+FormLabel.displayName = "FormLabel"
+
 export default FormLabel;

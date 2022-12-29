@@ -50,4 +50,6 @@ Tag.defaultProps = {
 
 }
 
+Tag.displayName = "Tag"
+
 export default Tag;

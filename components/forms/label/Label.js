@@ -28,4 +28,6 @@ Label.defaultProps = {
 
 }
 
+Label.displayName = "Label"
+
 export default Label;
