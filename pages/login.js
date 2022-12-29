@@ -3,14 +3,14 @@ import Image from 'next/image'
 
 import { jsx } from '@emotion/react'
 import tw from 'twin.macro'
-import TextInput from '../components/form/textinput/TextInput'
-import Button from '../components/common/button/Button'
-import Checkbox from '../components/form/checkbox/Checkbox'
+import TextInput from '../components/forms/textinput/TextInput'
+import Button from '../components/core/button/Button'
+import Checkbox from '../components/forms/checkbox/Checkbox'
 
 import { FcGoogle } from 'react-icons/fc'
 import { SiNaver } from 'react-icons/si'
 import { RiKakaoTalkFill } from 'react-icons/ri'
-import FormControl from '../components/form/formControl/FormControl'
+import FormControl from '../components/forms/formControl/FormControl'
 
 export default function Login(){
 
