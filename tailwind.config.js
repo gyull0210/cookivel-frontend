@@ -6,7 +6,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
+      colors: ({ colors}) => ({
         primary: colors.sky[400],
         secondary: colors.sky[400],
         accent: colors.sky[400],
@@ -14,7 +14,7 @@ module.exports = {
         success: colors.green[400],
         warning: colors.yellow[500],
         error: colors.red[500]
-      },
+      }),
     },
   },
   plugins: [
