@@ -80,7 +80,7 @@ const ListTest = () => {
           <div className="relative">
             <div className="p-3">
               <div className="w-[150px] h-[200px] rounded-lg object-cover overflow-hidden">
-                <img src="https://picsum.photos/150/200" alt="cover"/>
+                <Image src="https://picsum.photos/150/200" alt="cover"/>
               </div>
             </div>
             <div className="absolute top-0 right-0">
@@ -142,7 +142,7 @@ const ListTest = () => {
           <div className="relative">
             <div className="p-3">
               <div className="w-[150px] h-[200px] rounded-lg object-cover overflow-hidden">
-                <img src="https://picsum.photos/150/200" alt="cover"/>
+                <Image src="https://picsum.photos/150/200" alt="cover"/>
               </div>
             </div>
             <div className="absolute top-0 right-0">
