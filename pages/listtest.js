@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Badge from "../../components/common/badge/Badge";
-import List from "../../components/overlay/list/List";
-import ListItem from "../../components/overlay/list/ListItem";
+import Badge from "../components/common/badge/Badge";
+import List from "../components/overlay/list/List";
+import ListItem from "../components/overlay/list/ListItem";
 import { HiPlus, HiX } from 'react-icons/hi'
 import Image from "next/image";
 
