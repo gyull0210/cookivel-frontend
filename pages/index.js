@@ -67,7 +67,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <h2 className="font-sans">
-              Docs <span>-&gt;</span>
+              이게 뭔가요?
             </h2>
             <p className="font-sans">
               Find in-depth information about Next.js features and&nbsp;API.
