@@ -3,6 +3,7 @@ import Badge from "../../components/common/badge/Badge";
 import List from "../../components/overlay/list/List";
 import ListItem from "../../components/overlay/list/ListItem";
 import { HiPlus, HiX } from 'react-icons/hi'
+import Image from "next/image";
 
 const ListTest = () => {
 
@@ -25,7 +26,7 @@ const ListTest = () => {
           <div className="relative">
             <div className="p-3">
               <div className="w-[150px] h-[200px] rounded-lg object-cover overflow-hidden">
-                <img src="https://picsum.photos/150/200" alt="cover"/>
+                <Image src="https://picsum.photos/150/200" alt="cover"/>
               </div>
             </div>
             <div className="absolute top-0 right-0">
