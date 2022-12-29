@@ -14,4 +14,6 @@ const Tbody = React.forwardRef((props, ref) => {
   )
 })
 
+Tbody.displayName = "Tbody"
+
 export default Tbody;

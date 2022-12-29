@@ -3,6 +3,7 @@ import { jsx } from '@emotion/react'
 import tw from 'twin.macro'
 import propTypes from 'prop-types'
 import { HiUser } from 'react-icons/hi2'
+import Image from 'next/image'
 
 const Avatar = React.forwardRef((props, ref) => {
 
@@ -26,7 +27,7 @@ const Avatar = React.forwardRef((props, ref) => {
       ]}
     >
       {src &&
-      <img
+      <Image
         id=""
         className={className}
         css={[

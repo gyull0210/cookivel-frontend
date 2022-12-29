@@ -23,5 +23,6 @@ const Toast = React.forwardRef((props, ref) => {
   )
 })
 
+Toast.displayName = "Toast"
 
 export default Toast;
