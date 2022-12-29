@@ -66,6 +66,12 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
+            <h2 className="font-sans">
+              Docs <span>-&gt;</span>
+            </h2>
+            <p className="font-sans">
+              Find in-depth information about Next.js features and&nbsp;API.
+            </p>
             <h2 className={inter.className}>
               Docs <span>-&gt;</span>
             </h2>
