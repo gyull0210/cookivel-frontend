@@ -35,7 +35,8 @@ const Textarea = React.forwardRef((props, ref) => {
           size === "sm" && tw`w-full px-3 py-2 `,
           size === "md" && tw`w-full px-3 py-2 `,
           size === "lg" && tw`w-full px-3 py-2 `,
-          error && tw`form-textarea border border-red-500 rounded-lg focus:(border border-red-500 ring-2 ring-red-300)`
+          error && tw`form-textarea border border-red-500 rounded-lg focus:(border border-red-500 ring-2 ring-red-300)`,
+          resize && 1 && tw`overflow-y-hidden`
         ]}
         placeholder={placeholder}
         onChange={handleChange}
@@ -67,7 +68,8 @@ Textarea.propTypes = {
   
   error: propTypes.string,
 
-  variant: propTypes.oneOf(["outline", "flush"])
+  variant: propTypes.oneOf(["outline", "flush"]),
+
 };
 
 Textarea.defaultProps = {

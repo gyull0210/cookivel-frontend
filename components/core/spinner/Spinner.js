@@ -1,6 +1,5 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { jsx } from '@emotion/react'
 import tw from 'twin.macro'
 
 const Spinner = React.forwardRef((props, ref) => {
@@ -13,7 +12,7 @@ const Spinner = React.forwardRef((props, ref) => {
   
   return (
       <span 
-        className="animate-spin inline-block rounded-full border-t-sky-300 border-gray-100 opacity-70"
+        tw="animate-spin inline-block rounded-full border-t-sky-300 border-gray-100 opacity-70"
         css={[
           size === "xs" && tw`w-4 h-4 border-2`,
           size === "sm" && tw`w-6 h-6 border-[3px]`,

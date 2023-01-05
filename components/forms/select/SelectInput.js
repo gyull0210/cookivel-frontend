@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 
 export const SelectInput = React.forwardRef((props, ref) => {
 
-  const {} = props;
+  const { variant, size, children, value, defaultValue, readOnly, onChange } = props;
   
   const selectList = [...props];
   const [selected, setSelected] = useState();

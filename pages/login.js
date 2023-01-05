@@ -52,7 +52,7 @@ export default function Login(){
               <span css={[tw`text-3xl text-black`]}><RiKakaoTalkFill/></span>
             </button>
           </div>
-          <div className="mb-4 text-center">
+          <div tw="mb-4 text-center">
             이메일로 로그인
           </div>
           <form onSubmit={handleSubmit}>
@@ -72,7 +72,7 @@ export default function Login(){
               <Checkbox size="sm" label="로그인 유지"/>
             </div>
             <div tw="mb-4">
-              <Button className="w-full" type="button" size="lg" variant="solid" styled="rounded" color="primary" label="로그인"/>
+              <Button tw="w-full" type="button" size="lg" variant="solid" styled="rounded" color="primary" label="로그인"/>
             </div>
             <div tw="mb-4 text-center">
               비밀번호 찾기 | 회원가입

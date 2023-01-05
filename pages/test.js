@@ -10,12 +10,12 @@ import Checkbox from '../components/forms/checkbox/Checkbox'
 import Input from '../components/forms/input/Input'
 import Radio from '../components/forms/radio/Radio'
 import TextInput from '../components/forms/textinput/TextInput'
-import styles from '../styles/Home.module.css'
 import FormHelperText from '../components/forms/formHelperText/FormHelperText'
 import FormControl from '../components/forms/formControl/FormControl'
 import FormLabel from '../components/forms/formLabel/FormLabel'
 import Inputs from '../components/forms/input/inputs'
 import Accordion from '../components/overlay/accrodion/Accordion'
+import tw from 'twin.macro'
 
 const Test = () => {
 
@@ -39,8 +39,8 @@ const Test = () => {
         얍
       </header>
 
-      <main>
-        <div className="max-w-screen-lg gap-4 flex justify-center items-center mx-auto mb-4">
+      <main tw="max-w-screen-lg gap-4 flex flex-col justify-center items-center mx-auto mb-4">
+        <div>
           <Button label="하늘색" size="xs" variant="solid" color="primary"/>
           <Button label="하늘색" size="sm" variant="solid" color="primary"/>
           <Button label="하늘색" size="md" variant="solid" color="primary"/>
@@ -91,9 +91,9 @@ const Test = () => {
           <Input id="test" className="mb-4" variant="" size="md" label="Input"  />
           <Input id="test2" className="mb-4" variant="" size="md" label="Input" error="에러입니다" />
           
-          <Textarea className="mb-4"/>
-          <Textarea error="에러입니다"/>
-          <Textarea resize={true}/>
+          <Textarea id="ex1" className="mb-4"/>
+          <Textarea id="ex2" error="에러입니다"/>
+          <Textarea id="ex3" resize={true}/>
         </div>
 
         <div className="max-w-screen-lg flex mb-4 mx-auto">

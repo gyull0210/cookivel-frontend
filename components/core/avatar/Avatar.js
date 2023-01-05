@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 const Avatar = React.forwardRef((props, ref) => {
 
-  const {variant, id, className, size, src, alt, status, ...rest} = props;
+  const {variant, id, className, size, src, alt, status, width, height, ...rest} = props;
 
   return (
     <div css={[tw`inline-flex relative flex-shrink-0`,
@@ -31,27 +31,40 @@ const Avatar = React.forwardRef((props, ref) => {
         id=""
         className={className}
         css={[
-          tw`flex items-center justify-center w-full h-full object-cover border-inherit`        
+          tw`flex items-center justify-center w-full h-full object-cover ring-inherit`        
         ]}
         src={src}
         alt={alt}
+        width={width}
+        height={height}
         {...rest}
       />
       }
       {!src && 
       <div
         css={[
-        tw`flex items-center justify-center w-full h-full bg-gray-300`
+        tw`flex items-center justify-center w-full h-full bg-gray-300 rounded-full`,
+        size === "sm" && tw`w-8 h-8`,
+        size === "md" && tw`w-10 h-10`,
+        size === "lg" && tw`w-12 h-12`,
+        size === "xl" && tw`w-14 h-14`, 
         ]}
         alt={alt}
         {...rest}
       >
-        <span css={[tw`text-xl text-gray-400`]}><HiUser/></span>
+        <HiUser css={[
+          tw`text-gray-400 rounded-full`,
+          size === "sm" && tw`w-6 h-6`,
+          size === "md" && tw`w-8 h-8`,
+          size === "lg" && tw`w-10 h-10`,
+          size === "xl" && tw`w-12 h-12`, 
+        ]}
+        />
       </div>
       }
       
     </div>
-    {status && <span css={[tw`absolute right-0 bottom-1 w-3 h-3 rounded-full bg-sky-400 border-2 border-sky-200 scale-100 animate-[pulse_2s_infinite] flex-wrap z-10`]}/>}
+    {status && <span css={[tw`absolute right-0 bottom-1 w-3 h-3 rounded-full bg-sky-400 ring-2 ring-sky-200 scale-100 animate-[pulse_2s_infinite] flex-wrap z-10`]}/>}
     </div>
   )
 })

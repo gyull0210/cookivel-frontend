@@ -68,7 +68,7 @@ const Badge = React.forwardRef((props, ref) => {
 
 Badge.propTypes = {
   size: propTypes.oneOf(["xs", "sm", "md", "lg"]),
-  variant: propTypes.oneOf(["solid, subtle, outline"]),
+  variant: propTypes.oneOf(["solid", "subtle", "outline"]),
   styled: propTypes.oneOf(["rounded", "circle"])
 }
 
