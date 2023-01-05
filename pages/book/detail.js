@@ -74,7 +74,7 @@ export default function Detail() {
             </div>
 
             <div tw="hidden lg:flex space-x-4 text-lg">
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="/book/detail">자유연재</a>
+              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
               <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
               <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
               <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>

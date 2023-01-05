@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import tw from 'twin.macro'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
