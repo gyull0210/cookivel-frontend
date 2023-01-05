@@ -66,18 +66,18 @@ export default function Home() {
               <HiBars3 tw="w-6 h-6 text-gray-400"/>
             </button>
           </div>
-          <div tw="flex justify-between space-x-4">
-            <div tw="inline-flex">
-              <span tw="text-2xl lg:text-3xl font-bold">C</span>
-              <span tw="text-2xl lg:text-3xl font-bold text-[#E7CE96]">OO</span>
-              <span tw="text-2xl lg:text-3xl font-bold">KVEL</span>
+          <div tw="flex justify-between items-center space-x-4">
+            <div tw="inline-flex mb-1">
+              <span tw="text-2xl font-bold">C</span>
+              <span tw="text-2xl font-bold text-[#E7CE96]">OO</span>
+              <span tw="text-2xl font-bold">KVEL</span>
             </div>
 
             <div tw="hidden lg:flex space-x-4 text-lg">
-              <a tw="px-4 py-2 hover:(font-bold bg-gray-50) active:bg-gray-100 rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 hover:font-bold active:bg-gray-100 rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 hover:font-bold active:bg-gray-100 rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 hover:font-bold active:bg-gray-100 rounded-lg" href="">자유연재</a>
+              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="/book/detail">자유연재</a>
+              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
+              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
+              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
             </div>
           </div>
 
