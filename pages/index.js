@@ -122,9 +122,8 @@ export default function Home() {
       <div tw="md:hidden border-b border-gray-200">
         <nav tw="relative flex justify-between items-center text-center max-w-screen-lg mx-auto">
           <a tw="py-4 w-full font-semibold active:bg-gray-100" href="">자유연재</a>
-          <a tw="py-4 w-full font-semibold">자유연재</a>
-          <a tw="py-4 w-full font-semibold">자유연재</a>
-          <a tw="py-4 w-full font-semibold">자유연재</a>
+          <a tw="py-4 w-full font-semibold">리뷰</a>
+          <a tw="py-4 w-full font-semibold">내 서재</a>
         </nav>
       </div>   
       <aside tw="absolute w-[300px] md:hidden h-screen bg-gray-50 top-0 z-50 duration-300 transition-all ease-in-out shadow" css={[sidebarIsOpen ? tw``: tw`-translate-x-[300px]`]}>
@@ -150,7 +149,7 @@ export default function Home() {
           </div>
         </nav>
       </aside>
-      <main tw="flex flex-col mt-[115px]">
+      <main tw="flex flex-col mt-[115px] overflow-x-hidden">
         <section tw="relative w-full h-80">
           <div tw="lg:max-w-[1970px] w-full relative mx-auto p-0 flex justify-center">
           <Swiper
