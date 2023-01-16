@@ -12,7 +12,7 @@ import Avatar from '../components/core/avatar/Avatar'
 import MainCarousel from '../components/overlay/mainCarosel/MainCarosel'
 import { useEffect, useRef, useState } from 'react'
 
-export default function Home() {
+export default function Copy() {
 
   const handleAvatar = async () => {
     const res = await fetch("https://i.pravatar.cc/48");
