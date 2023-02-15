@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 const Avatar = React.forwardRef((props, ref) => {
 
-  const {variant, id, className, size, src, alt, status, width, height, ...rest} = props;
+  const {variant, id, className, size, src, alt, status, width, height, hover, ...rest} = props;
 
   return (
     <div css={[tw`inline-flex relative flex-shrink-0`,
@@ -23,7 +23,8 @@ const Avatar = React.forwardRef((props, ref) => {
         size === "sm" && tw`w-8 h-8`,
         size === "md" && tw`w-10 h-10`,
         size === "lg" && tw`w-12 h-12`,
-        size === "xl" && tw`w-14 h-14`, 
+        size === "xl" && tw`w-14 h-14`,
+        hover === "true" && tw`hover:(ring ring-[#E7CE96] ring-offset-2 ring-offset-gray-200)` 
       ]}
     >
       {src &&
@@ -43,7 +44,7 @@ const Avatar = React.forwardRef((props, ref) => {
       {!src && 
       <div
         css={[
-        tw`flex items-center justify-center w-full h-full bg-gray-300 rounded-full`,
+        tw`flex items-center justify-center w-full h-full bg-gray-300 hover:(ring ring-[#E7CE96] ring-offset-2 ring-offset-gray-200) rounded-full`,
         size === "sm" && tw`w-8 h-8`,
         size === "md" && tw`w-10 h-10`,
         size === "lg" && tw`w-12 h-12`,

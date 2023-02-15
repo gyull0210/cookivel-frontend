@@ -1,8 +1,11 @@
 import { jsx } from '@emotion/react'
 import tw, { theme } from 'twin.macro'
 import propTypes from 'prop-types'
-import React, { cloneElement, forwardRef } from 'react';
+import React, { cloneElement } from 'react';
 import Spinner from '../spinner/Spinner';
+import solidStyle from '../../style/button/solidStyle';
+import outlineStyle from '../../style/button/outlineStyle';
+import findMatch from '../../util/findMatch';
 
 const Button = React.forwardRef((props, ref) => {
 
@@ -32,12 +35,16 @@ const Button = React.forwardRef((props, ref) => {
     </div>
   )
 
+  const colors = {solidStyle, outlineStyle}
+
   const checkColors = () => {
     if(variant === "solid"){
       if(disabled === true){
-        return tw`bg-primary text-white hover:bg-primary active:bg-primary opacity-60`
+        return tw`text-white bg-primary hover:bg-primary active:bg-primary opacity-60`
       } else {
-        if(color.match("primary")){return tw`bg-primary border-primary hover:(bg-sky-500 border-sky-500) active:(bg-sky-600 border-sky-600)`}
+        solidStyle.find(color => {
+          solidStyle.match(color)
+        })
       }
     }
 
@@ -45,7 +52,13 @@ const Button = React.forwardRef((props, ref) => {
       if(disabled === true){
         return tw`text-primary hover:bg-sky-50 active:bg-sky-50`
       } else {
-        if(color.match("primary")){return tw`text-primary hover:(text-white bg-sky-400 border-sky-400) active:(text-white bg-sky-500 border-sky-500)`}
+        if(color.match("primary")){return outlineStyle.primary}
+        if(color.match("secondary")){return outlineStyle.secondary}
+        if(color.match("accent")){return tw``}
+        if(color.match("info")){return outlineStyle.info}
+        if(color.match("success")){return outlineStyle.success}
+        if(color.match("warning")){return outlineStyle.warning}
+        if(color.match("error")){return outlineStyle.error}
       }
     }
 
@@ -69,7 +82,7 @@ const Button = React.forwardRef((props, ref) => {
         disabled === true && tw`cursor-not-allowed`, 
         variant === "solid" && !disabled && tw`text-white border border-current` ,
         variant === "outline" && !disabled && tw`bg-transparent border border-current`,
-        variant === "ghost" && !disabled && tw`bg-transparent text-current border border-transparent`,
+        variant === "ghost" && !disabled && tw`text-current bg-transparent border border-transparent`,
         styled === "rounded" && tw`rounded-md`,
         styled === "circle" && tw`rounded-full`,
         size === "xs" && tw`px-3 h-7 min-w-[1.75rem] text-xs`,
@@ -111,7 +124,8 @@ Button.propTypes = {
 
 Button.defaultProps = {
   type:"button",  
-  variant: "solid", 
+  variant: "solid",
+  color: "primary",
   size:"md",
   styled: "rounded",
   isLoading: false,

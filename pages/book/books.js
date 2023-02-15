@@ -55,14 +55,14 @@ export default function Books() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header tw="w-full p-2 border-b border-gray-200">
-        <nav tw="relative flex justify-between items-center max-w-screen-lg mx-auto">
+      <header tw="min-w-[425px] border-b border-gray-200">
+        <nav tw="relative flex justify-between items-center max-w-screen-lg mx-auto px-4 py-2">
           <div tw="lg:hidden">
             <button
               ref={sidebarRef}
               type="button"
               tw="p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
-              onClick={asideHandler}
+              onClick={sidebarHandler}
             >
               <HiBars3 tw="w-6 h-6 text-gray-400"/>
             </button>
@@ -74,38 +74,34 @@ export default function Books() {
               <span tw="text-2xl font-bold">KVEL</span>
             </div>
 
-            <div tw="hidden lg:flex space-x-4 text-lg">
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
+            <div tw="hidden lg:flex space-x-4 text-base">
+              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
+              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">리뷰</a>
+              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">내 서재</a>
             </div>
           </div>
 
           <div tw="flex justify-between items-center">
-            <div tw="">
-              <button
-                type="button"
-                tw="p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
-              >
-                <HiMagnifyingGlass tw="w-6 h-6 text-gray-400"/>
-              </button>
-            </div>
-            <div tw="hidden">
-
-            </div>
-            <div tw="flex justify-between items-center space-x-2">
-              <button
+            <button
+              type="button"
+              tw="p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
+            >
+              <HiMagnifyingGlass tw="w-6 h-6 text-gray-400"/>
+            </button>
+            <button
                type="button"
                tw="hidden lg:block p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
               >
-                <HiOutlineBell tw="w-6 h-6 text-gray-400"/>
-              </button>
+              <HiOutlineBell tw="w-6 h-6 text-gray-400"/>
+            </button>
+            <div tw="hidden">
+
+            </div>              
               {
                  
               <>
-              <button tw="hidden" type="button" ref={myPageRef} onClick={myPageHandler}>
-                  <Avatar size="md" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={48} height={48}/>
+              <button tw="hidden md:block ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
+                  <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
               </button>
               <div css={[tw`hidden absolute bg-white w-[100px] h-full rounded-lg top-10 right-0 z-10 mt-4 origin-top-right shadow duration-150 ease-in-out`, myPageIsOpen ? tw`opacity-100`: tw`opacity-0`]}>
                 <ul tw="text-center">
@@ -115,7 +111,6 @@ export default function Books() {
               </div>
               </>
               }
-            </div>
           </div>
         </nav>
       </header>

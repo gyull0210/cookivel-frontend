@@ -6,7 +6,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Pagination, Navigation, Scrollbar, Autoplay } from "swiper"
-import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark } from 'react-icons/hi2'
+import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiUser, HiHeart, HiBookmark, HiLockClosed } from 'react-icons/hi2'
 import Button from '../../components/core/button/Button'
 import Avatar from '../../components/core/avatar/Avatar'
 import MainCarousel from '../../components/overlay/mainCarosel/MainCarosel'
@@ -15,30 +15,6 @@ import useDetectClose from '../../components/hooks/useDetectClose'
 
 export default function Detail() {
 
-  const handleAvatar = async () => {
-    const res = await fetch("https://i.pravatar.cc/48");
-
-    return res.json();
-  }
-
-  const src= "https://i.pravatar.cc/48/"
-
-  const [cardList, setCardList] = useState("");
-
-  const [isLoading, setIsLoading] = useState(false); 
-  const [isError, setIsError] = useState(false); 
- 
-  const [page, setPage] = useState(1);
-  useEffect(() => {
-    const fetchData = async () => {
-      const url = `https://picsum.photos/v2/list`;
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Response Error");
-      setCardList((response).json());
-      console.log(cardList)
-    };
-    fetchData().catch((error) => console.log(error));
-  }, []);
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -46,6 +22,7 @@ export default function Detail() {
 
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [sidebarIsOpen, sidebarRef, sidebarHandler] = useDetectClose(false);
+  
   return (
     <>
       <Head>
@@ -54,8 +31,8 @@ export default function Detail() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header tw="p-2 border-b border-gray-200">
-        <nav tw="relative flex justify-between items-center max-w-screen-lg mx-auto">
+      <header tw="w-full h-16 border-b border-gray-200">
+        <nav tw="relative flex justify-between items-center max-w-screen-lg mx-auto px-4 py-2">
           <div tw="lg:hidden">
             <button
               ref={sidebarRef}
@@ -73,38 +50,34 @@ export default function Detail() {
               <span tw="text-2xl font-bold">KVEL</span>
             </div>
 
-            <div tw="hidden lg:flex space-x-4 text-lg">
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 font-bold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
+            <div tw="hidden lg:flex space-x-4 text-base">
+              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
+              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">리뷰</a>
+              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">내 서재</a>
             </div>
           </div>
 
           <div tw="flex justify-between items-center">
-            <div tw="">
-              <button
-                type="button"
-                tw="p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
-              >
-                <HiMagnifyingGlass tw="w-6 h-6 text-gray-400"/>
-              </button>
-            </div>
-            <div tw="hidden">
-
-            </div>
-            <div tw="flex justify-between items-center space-x-2">
-              <button
+            <button
+              type="button"
+              tw="p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
+            >
+              <HiMagnifyingGlass tw="w-6 h-6 text-gray-400"/>
+            </button>
+            <button
                type="button"
                tw="hidden lg:block p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
               >
-                <HiOutlineBell tw="w-6 h-6 text-gray-400"/>
-              </button>
+              <HiOutlineBell tw="w-6 h-6 text-gray-400"/>
+            </button>
+            <div tw="hidden">
+
+            </div>              
               {
                  
               <>
-              <button tw="hidden" type="button" ref={myPageRef} onClick={myPageHandler}>
-                  <Avatar size="md" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={48} height={48}/>
+              <button tw="hidden md:block ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
+                  <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
               </button>
               <div css={[tw`hidden absolute bg-white w-[100px] h-full rounded-lg top-10 right-0 z-10 mt-4 origin-top-right shadow duration-150 ease-in-out`, myPageIsOpen ? tw`opacity-100`: tw`opacity-0`]}>
                 <ul tw="text-center">
@@ -114,18 +87,16 @@ export default function Detail() {
               </div>
               </>
               }
-            </div>
           </div>
         </nav>
       </header>
       <div tw="md:hidden border-b border-gray-200">
         <nav tw="relative flex justify-between items-center text-center max-w-screen-lg mx-auto">
-          <a tw="py-4 w-full font-semibold active:bg-gray-100" href="">자유연재</a>
-          <a tw="py-4 w-full font-semibold">자유연재</a>
-          <a tw="py-4 w-full font-semibold">자유연재</a>
-          <a tw="py-4 w-full font-semibold">자유연재</a>
+          <a tw="py-3 w-full font-semibold active:bg-gray-100" href="">자유연재</a>
+          <a tw="py-3 w-full font-semibold">리뷰</a>
+          <a tw="py-3 w-full font-semibold">내 서재</a>
         </nav>
-      </div>   
+      </div>
       <aside tw="absolute w-[300px] md:hidden h-screen bg-gray-50 top-0 z-50 duration-300 transition-all ease-in-out shadow" css={[sidebarIsOpen ? tw``: tw`-translate-x-[300px]`]}>
         <nav tw="">
           <div tw="flex justify-end border-b border-gray-400 p-3">
@@ -149,155 +120,295 @@ export default function Detail() {
           </div>
         </nav>
       </aside>
-      <main tw="flex flex-col mt-[115px]">
-        <section tw="relative w-full h-80">
-          <div tw="lg:max-w-[1970px] w-full relative mx-auto p-0 flex justify-center">
-          <Swiper
-            tw="min-w-[calc((3*480px) + (3* 20px))] lg:min-w-[calc((3 * 560px) + (3 * 20px))] lg:max-w-[calc((3 * 560px) + (3 * 20px))] h-80 flex flex-col justify-center items-center"
-            modules={[Pagination, Navigation, Autoplay]}
-            loop={true}
-            centeredSlides={true}
-            loopAdditionalSlides={1}
-            slidesPerView={3}
-            slidesPerGroup={3}
-            watchOverflow={true}
-            navigation={{prevEl: prevRef.current, nextEl: nextRef.current}}
-            pagination={{ clickable: true, type: 'bullets' , el: 'swiper-pagination-container'}}
-            scrollbar={{ draggable: true, el: null }}
-            autoplay={false}
-            
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-              swiper.navigation.update();
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 1,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-              1280: {
-                slidesPerView: 3,
-              }
-            }}
-            spacebetween={0}
-          >
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=BDC01094" alt="1"/>
-                  <div tw=""></div>
+      <main tw="flex flex-col mt-[50px]">
+        <secton tw="max-w-screen-lg mx-auto">
+          <div tw="flex flex-col">
+          <div tw="w-full flex gap-6 py-6">
+            <div tw="">
+              <a tw="relative block w-48 h-64 rounded-lg overflow-hidden">
+                <img tw="w-full h-full" src="https://api.lorem.space/image/movie?w=208&h=240" alt="책표지" />
+              </a>
+            </div>
+            <div tw="flex flex-col gap-4">
+              <div tw="flex justify-between">
+                <div tw="">
+                  <h1 tw="text-3xl font-bold">제목입니다</h1>
+                  <span tw="">닉네임</span>
+                  <span tw="ml-2 text-gray-400">300화</span>
                 </div>
+                <div tw="ml-2 md:inline-flex gap-6 text-gray-400 hidden">
+                  <div tw="flex flex-col items-center">
+                    <HiUser tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                  </div>
+                  <div tw="flex flex-col items-center">
+                    <HiHeart tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                    </div>
+                  <div tw="flex flex-col items-center">
+                    <HiBookmark tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">12</span>
+                  </div>
+                </div> 
               </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=7F5AE56A" alt="2"/>
-                  <div tw=""></div>
-                </div>
+              <article tw="">
+              들어 같은 풀밭에 그들은 그것은 끓는다, 천하를 싸인 원질이 이상 있으며. 속잎나고. 설레는 찾아 방황하였으며. 위하여 작고 우리의 것이다, 인간에 고행을 있다, 그것을 창공에 영원히 있는가? 품었기 힘차게 예가 봄바람이다. 위하여서 물방아 되는 귀는 그들은 현저하게 것이다.
+
+못하다 피어나기 천하를 구할 그것을 그들의 것이다. 
+              </article>
+              <div tw="flex flex-wrap gap-2">
+                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200 cursor-pointer">
+                    <span tw="text-sm text-gray-400">태그</span>
+                  </a>
+                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200">
+                    <span tw="text-sm text-gray-400">태그</span>
+                  </a>
+                  <a tw="bg-gray-100 rounded px-2 py-0.5">
+                    <span tw="text-sm text-gray-400">태그</span>
+                  </a>
+                  <a tw="bg-gray-100 rounded px-2 py-0.5">
+                    <span tw="text-sm text-gray-400">태그</span>
+                  </a>
+                  <a tw="bg-gray-100 rounded px-2 py-0.5">
+                    <span tw="text-sm text-gray-400">태그</span>
+                  </a>
+                  <a tw="bg-gray-100 rounded px-2 py-0.5">
+                    <span tw="text-sm text-gray-400">태그</span>
+                  </a>
               </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=B0E33EF4" alt="3"/>
-                  <div tw=""></div>
-                </div>
+              <div tw="flex justify-center gap-4">
+                <button tw="w-full bg-black text-white py-2 text-center border border-black rounded-lg">첫 화 보기</button>
+                <button tw="w-full bg-white text-black py-2 text-center border border-black rounded-lg">구독하기</button>
               </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=2D297A22" alt="4"/>
-                  <div tw=""></div>
-                </div>
-              </div>       
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=9D9539E7" alt="5"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=225E6693" alt="6"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=8B7BCDC2" alt="7"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=500B67FB" alt="8"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=A89D0DE6" alt="9"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-          </Swiper>
-          <div tw="absolute w-full flex justify-between items-center top-1/3 z-20">
-            <button
-              ref={prevRef}
-              type="button"
-              tw="min-w-fit h-full p-3 hover:bg-gray-50 text-gray-400 lg:hover:bg-transparent lg:hover:text-sky-500 rounded-full lg:rounded-none"
-            >
-              <HiChevronLeft tw="w-12 h-12 text-gray-400 hover:lg:text-sky-500"/>
-            </button>
-            <button
-              ref={nextRef}
-              type="button"
-              tw="min-w-fit h-full p-3 hover:bg-gray-50 text-gray-400 lg:hover:bg-transparent lg:hover:text-sky-500 rounded-full lg:rounded-none"
-            >
-              <HiChevronRight tw="w-12 h-12"/>
-            </button>
-          </div>         
-          </div>
-          <div className="swiper-pagination-container"></div>         
-        </section>      
-        <section tw="max-w-screen-lg mx-auto mt-52">
-          <div tw="w-full flex">
-            <div tw="w-[500px] flex justify-between items-center border-b border-gray-200 px-4 py-2">
-              <h2 tw="text-xl font-bold">인기 콘텐츠</h2>
-              <HiChevronRight tw="w-6 h-6" />
             </div>
           </div>
-        </section>
-        <section tw="max-w-screen-lg mx-auto">
-          <div tw="w-full flex">
-            <div tw="w-[500px] flex justify-between items-center border-b border-gray-200 px-4 py-2">
-              <h2 tw="text-xl font-bold">최신 콘텐츠</h2>
-              <HiChevronRight tw="w-6 h-6" />
+          <div tw="w-full border-b border-gray-200"></div>
+          <div tw="flex justify-between gap-6">
+
+            <div tw="w-full py-6">
+              <div tw="w-full flex justify-between items-center border-b border-gray-200 py-2">
+                <div tw="flex gap-4">
+                  <div tw="text-sm">최신순</div>
+                  <div tw="text-sm">연재순</div>
+                  <div tw="text-sm">보던순</div>
+                </div>
+                <div tw="text-sm">
+                  총 300화
+                </div>
+              </div>
+              <div tw="flex gap-6 py-4 h-40">
+                <div tw="">
+                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
+                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
+                  </a>
+                </div>
+                <div tw="h-36 flex flex-1 flex-col items-stretch">
+                  <div tw="">
+                    <h1 tw="text-base font-semibold">제목입니다</h1>
+                    <span tw="text-sm text-gray-400">20화</span>
+                  </div>
+                  <div tw="text-sm text-gray-400 line-clamp-1">
+                    한줄 설명입니다
+                  </div>
+                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
+                  <div tw="flex items-center">
+                    <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                  </div>
+                  <div tw="flex items-center">
+                    <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                    </div>
+                  <div tw="flex items-center">
+                    <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">12</span>
+                  </div>
+                  </div>
+                </div>
+                <div tw="flex items-center justify-end">
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
+                  </button>
+                </div>
+              </div>
+              <div tw="bg-gray-200 border-b w-full"></div>
+              <div tw="flex gap-6 py-4 h-40">
+                <div tw="">
+                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
+                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
+                  </a>
+                </div>
+                <div tw="h-36 flex flex-1 flex-col items-stretch">
+                  <div tw="">
+                    <h1 tw="text-base font-semibold">제목입니다</h1>
+                    <span tw="text-sm text-gray-400">20화</span>
+                  </div>
+                  <div tw="text-sm text-gray-400 line-clamp-1">
+                    한줄 설명입니다
+                  </div>
+                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
+                  <div tw="flex items-center">
+                    <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                  </div>
+                  <div tw="flex items-center">
+                    <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                    </div>
+                  <div tw="flex items-center">
+                    <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">12</span>
+                  </div>
+                  </div>
+                </div>
+                <div tw="flex items-center justify-end">
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
+                  </button>
+                </div>
+              </div>
+              <div tw="bg-gray-200 border-b w-full"></div>
+              <div tw="flex gap-6 py-4 h-40">
+                <div tw="">
+                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
+                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
+                  </a>
+                </div>
+                <div tw="h-36 flex flex-1 flex-col items-stretch">
+                  <div tw="">
+                    <h1 tw="text-base font-semibold">제목입니다</h1>
+                    <span tw="text-sm text-gray-400">20화</span>
+                  </div>
+                  <div tw="text-sm text-gray-400 line-clamp-1">
+                    한줄 설명입니다
+                  </div>
+                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
+                  <div tw="flex items-center">
+                    <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                  </div>
+                  <div tw="flex items-center">
+                    <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                    </div>
+                  <div tw="flex items-center">
+                    <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">12</span>
+                  </div>
+                  </div>
+                </div>
+                <div tw="flex items-center justify-end">
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
+                  </button>
+                </div>
+              </div>
+              <div tw="bg-gray-200 border-b w-full"></div>
+              <div tw="flex gap-6 py-4 h-40">
+                <div tw="">
+                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
+                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
+                  </a>
+                </div>
+                <div tw="h-36 flex flex-1 flex-col items-stretch">
+                  <div tw="">
+                    <h1 tw="text-base font-semibold">제목입니다</h1>
+                    <span tw="text-sm text-gray-400">20화</span>
+                  </div>
+                  <div tw="text-sm text-gray-400 line-clamp-1">
+                    한줄 설명입니다
+                  </div>
+                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
+                  <div tw="flex items-center">
+                    <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                  </div>
+                  <div tw="flex items-center">
+                    <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                    </div>
+                  <div tw="flex items-center">
+                    <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">12</span>
+                  </div>
+                  </div>
+                </div>
+                <div tw="flex items-center justify-end">
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
+                  </button>
+                </div>
+              </div>
+              <div tw="bg-gray-200 border-b w-full"></div>
+              <div tw="flex justify-center">
+                <div tw="py-6 flex gap-4">
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <HiChevronLeft tw="w-6 h-6 text-gray-400" />
+                  </button>
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <div tw="w-6 h-6">1</div>
+                  </button>
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <div tw="w-6 h-6">2</div>
+                  </button>
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <div tw="w-6 h-6">3</div>
+                  </button>
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <div tw="w-6 h-6">4</div>
+                  </button>
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <div tw="w-6 h-6">5</div>
+                  </button>
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <div tw="w-6 h-6">6</div>
+                  </button>
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <HiChevronRight tw="w-6 h-6 text-gray-400" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div tw="py-6 w-96 mx-auto">
+              <div tw="flex flex-col items-center px-6 py-6 bg-gray-100 rounded-lg">
+                <a tw="block relative w-36 h-36 rounded-lg overflow-hidden">
+                  <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/face?w=200&h=200" alt="닉네임"/>
+                </a>
+                <div tw="py-4">
+                  <h3 tw="text-base font-bold">닉네임</h3>
+                  <p tw="text-gray-400">소개말입니다.</p>
+                  <span tw="text-sm">대표작이름, 대표작이름</span>
+                </div>
+                <div tw="">
+                  <button type="button" tw="w-full bg-black px-6 py-3 text-white rounded-lg">작가 팔로우하기</button>
+                </div>
+              </div>
+              <div tw="flex gap-4 px-6 py-6 bg-gray-100 rounded-lg my-6">
+                <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
+                  <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="닉네임"/>
+                </a>
+                <div tw="">
+                  <h3 tw="text-base font-bold">작품명입니다</h3>
+                  <span tw="text-sm">30화 | 연재중</span>
+                  <p tw="text-gray-400">소개말입니다.</p>
+                  
+                </div>
+              </div>
+              <div tw="flex gap-4 px-6 py-6 bg-gray-100 rounded-lg">
+                <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
+                  <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="닉네임"/>
+                </a>
+                <div tw="">
+                  <h3 tw="text-base font-bold">작품명입니다</h3>
+                  <span tw="text-sm">30화 | 연재중</span>
+                  <p tw="text-gray-400">소개말입니다.</p>
+                  
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-        <section tw="flex mx-auto">
-          
-        </section>
+          </div>
+        </secton>             
       </main>
       <footer>
         
