@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
@@ -50,8 +51,8 @@ const Login = () => {
             <div tw="my-6">
               <button type="submit" tw="w-full rounded-md bg-black px-3 py-4 text-white focus:bg-neutral-800 focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-70">로그인</button>
             </div>
-            <p tw="text-center text-sm text-gray-500">아직 계정이 없으신가요? <a href="/register" tw="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">회원가입</a></p>
-            <p tw="text-center text-sm text-gray-500">비밀번호가 기억나지 않으신다면 <a href="/search" tw="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">비밀번호 찾기</a></p>
+            <p tw="text-center text-sm text-gray-500">아직 계정이 없으신가요? <Link href="/register"><a href="" tw="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">회원가입</a></Link></p>
+            <p tw="text-center text-sm text-gray-500">비밀번호가 기억나지 않으신다면 <Link href="/search"><a href="" tw="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">비밀번호 찾기</a></Link></p>
           </form> 
         </div>
       </div>

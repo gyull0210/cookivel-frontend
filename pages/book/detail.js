@@ -6,7 +6,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Pagination, Navigation, Scrollbar, Autoplay } from "swiper"
-import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiUser, HiHeart, HiBookmark, HiLockClosed } from 'react-icons/hi2'
+import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiLockClosed, HiOutlineHeart, HiOutlineUser } from 'react-icons/hi2'
 import Button from '../../components/core/button/Button'
 import Avatar from '../../components/core/avatar/Avatar'
 import MainCarousel from '../../components/overlay/mainCarosel/MainCarosel'
@@ -44,7 +44,7 @@ export default function Detail() {
             </button>
           </div>
           <div tw="flex justify-between items-center space-x-4">
-            <div tw="inline-flex mb-1">
+            <div tw="inline-flex font-jua">
               <span tw="text-2xl font-bold">C</span>
               <span tw="text-2xl font-bold text-[#E7CE96]">OO</span>
               <span tw="text-2xl font-bold">KVEL</span>
@@ -76,9 +76,11 @@ export default function Detail() {
               {
                  
               <>
-              <button tw="hidden md:block ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
-                  <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
+              {                
+              <button tw="hidden md:flex items-center ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
+                <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
               </button>
+              }
               <div css={[tw`hidden absolute bg-white w-[100px] h-full rounded-lg top-10 right-0 z-10 mt-4 origin-top-right shadow duration-150 ease-in-out`, myPageIsOpen ? tw`opacity-100`: tw`opacity-0`]}>
                 <ul tw="text-center">
                   <li>메뉴</li>
@@ -138,15 +140,15 @@ export default function Detail() {
                 </div>
                 <div tw="ml-2 md:inline-flex gap-6 text-gray-400 hidden">
                   <div tw="flex flex-col items-center">
-                    <HiUser tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
+                    <HiOutlineUser tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
                     <span tw="text-sm">13</span>
                   </div>
                   <div tw="flex flex-col items-center">
-                    <HiHeart tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
+                    <HiOutlineHeart tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
                     <span tw="text-sm">13</span>
                     </div>
                   <div tw="flex flex-col items-center">
-                    <HiBookmark tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
+                    <HiOutlineBell tw="w-6 h-6 stroke-1 text-gray-400"/>
                     <span tw="text-sm">12</span>
                   </div>
                 </div> 
@@ -212,17 +214,44 @@ export default function Detail() {
                   </div>
                   <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
                   <div tw="flex items-center">
-                    <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <HiOutlineUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
                     <span tw="text-sm">13</span>
                   </div>
                   <div tw="flex items-center">
-                    <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <HiOutlineHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
                     <span tw="text-sm">13</span>
                     </div>
-                  <div tw="flex items-center">
-                    <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">12</span>
                   </div>
+                </div>
+                <div tw="flex items-center justify-end">
+                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
+                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
+                  </button>
+                </div>
+              </div>
+              <div tw="flex gap-6 py-4 h-40">
+                <div tw="">
+                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
+                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
+                  </a>
+                </div>
+                <div tw="h-36 flex flex-1 flex-col items-stretch">
+                  <div tw="">
+                    <h1 tw="text-base font-semibold">제목입니다</h1>
+                    <span tw="text-sm text-gray-400">20화</span>
+                  </div>
+                  <div tw="text-sm text-gray-400 line-clamp-1">
+                    한줄 설명입니다
+                  </div>
+                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
+                  <div tw="flex items-center">
+                    <HiOutlineUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                  </div>
+                  <div tw="flex items-center">
+                    <HiOutlineHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <span tw="text-sm">13</span>
+                    </div>
                   </div>
                 </div>
                 <div tw="flex items-center justify-end">
@@ -248,89 +277,13 @@ export default function Detail() {
                   </div>
                   <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
                   <div tw="flex items-center">
-                    <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <HiOutlineUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
                     <span tw="text-sm">13</span>
                   </div>
                   <div tw="flex items-center">
-                    <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
-                    </div>
-                  <div tw="flex items-center">
-                    <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">12</span>
-                  </div>
-                  </div>
-                </div>
-                <div tw="flex items-center justify-end">
-                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
-                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
-                  </button>
-                </div>
-              </div>
-              <div tw="bg-gray-200 border-b w-full"></div>
-              <div tw="flex gap-6 py-4 h-40">
-                <div tw="">
-                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
-                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
-                  </a>
-                </div>
-                <div tw="h-36 flex flex-1 flex-col items-stretch">
-                  <div tw="">
-                    <h1 tw="text-base font-semibold">제목입니다</h1>
-                    <span tw="text-sm text-gray-400">20화</span>
-                  </div>
-                  <div tw="text-sm text-gray-400 line-clamp-1">
-                    한줄 설명입니다
-                  </div>
-                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
-                  <div tw="flex items-center">
-                    <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
-                  </div>
-                  <div tw="flex items-center">
-                    <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
+                    <HiOutlineHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
                     <span tw="text-sm">13</span>
                     </div>
-                  <div tw="flex items-center">
-                    <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">12</span>
-                  </div>
-                  </div>
-                </div>
-                <div tw="flex items-center justify-end">
-                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
-                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
-                  </button>
-                </div>
-              </div>
-              <div tw="bg-gray-200 border-b w-full"></div>
-              <div tw="flex gap-6 py-4 h-40">
-                <div tw="">
-                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
-                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
-                  </a>
-                </div>
-                <div tw="h-36 flex flex-1 flex-col items-stretch">
-                  <div tw="">
-                    <h1 tw="text-base font-semibold">제목입니다</h1>
-                    <span tw="text-sm text-gray-400">20화</span>
-                  </div>
-                  <div tw="text-sm text-gray-400 line-clamp-1">
-                    한줄 설명입니다
-                  </div>
-                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
-                  <div tw="flex items-center">
-                    <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
-                  </div>
-                  <div tw="flex items-center">
-                    <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
-                    </div>
-                  <div tw="flex items-center">
-                    <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">12</span>
-                  </div>
                   </div>
                 </div>
                 <div tw="flex items-center justify-end">

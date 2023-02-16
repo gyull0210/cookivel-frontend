@@ -115,7 +115,7 @@ export default function Usepage() {
               <div tw="">
                 <div tw="">
                   <div tw="block relative mb-4">
-                    <label tw="block relative bg-gray-100 flex flex-col items-center justify-center w-32 h-40 rounded-lg overflow-hidden py-2 px-4 hover:bg-gray-200 active:bg-gray-300" HtmlFor="uploadImage">
+                    <label htmlFor="uploadImage" tw="block relative bg-gray-100 flex flex-col items-center justify-center w-32 h-40 rounded-lg overflow-hidden py-2 px-4 hover:bg-gray-200 active:bg-gray-300">
                       <HiPhoto tw="w-8 h-8 fill-gray-400"/>
                       <span tw="block text-sm text-gray-400 select-none">이미지 업로드</span>
                       <input id="uploadImage" tw="hidden" type="file"/>

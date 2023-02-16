@@ -100,9 +100,11 @@ export default function Home() {
               {
                  
               <>
-              <button tw="hidden md:block ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
+              {                
+              <button tw="hidden md:flex items-center ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
                 <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
               </button>
+              }
               </>
               }
           </div>
@@ -289,6 +291,7 @@ export default function Home() {
       <footer>
         
       </footer>
+      
     </>
   )
 }

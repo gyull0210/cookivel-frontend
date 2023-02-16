@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiBookmark, HiChevronLeft, HiChevronRight, HiCog8Tooth, HiHeart, HiOutlineBars3, HiOutlineBell, HiOutlineBookmark, HiOutlineChatBubbleOvalLeft, HiOutlineCog8Tooth, HiOutlineEllipsisHorizontal, HiOutlineHeart, HiOutlineShare, HiOutlineXMark } from 'react-icons/hi2';
 import tw from 'twin.macro'
 import Avatar from '../../components/core/avatar/Avatar';
+import Toast from '../../components/overlay/toast/Toast';
+import { Slide,ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const View = () => {
@@ -14,7 +17,8 @@ const View = () => {
 
   const [isClose, setIsClose] = useState(false);
 
-  const [isAlart, setIsAlert] = useState(false);
+  const [isAlert, setIsAlert] = useState(false);
+  const [isShowToast, setIsShowToast] = useState(false);
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [isChapterListOpen, setIsChapterListOpen] = useState(false);
@@ -28,7 +32,21 @@ const View = () => {
   const [isMoreText, setIsMoreText] = useState(false);
 
   const handleFavorite = () => {
-    setIsFavorite(!isFavorite)
+    if(!isFavorite){
+      setIsFavorite(!isFavorite)
+      toast.success("선호작품에 등록되었습니다", {
+        position: toast.POSITION.TOP_CENTER,
+        hideProgressBar: true,
+        autoClose: 2500
+      })
+    } else {
+      setIsFavorite(false)
+      toast.success("선호작품에서 삭제되었습니다", {
+        position: toast.POSITION.TOP_CENTER,
+        hideProgressBar: true,
+        autoClose: 2500
+      })
+    }    
   }
 
   const handleCommentLike = () => {
@@ -44,16 +62,24 @@ const View = () => {
     console.log(isClose)
   }
 
-  const handleAlart = () => {
-    if(!isAlart){
+  let [isMessage, setIsMessage] = useState("");
+
+  const handleAlert = () => {
+    if(!isAlert){
       setIsAlert(true)
-      //자동으로 사라지는 toast로 처리
-      return alert("구독알림이 설정되었습니다")
+      toast.success("구독 알림이 설정되었습니다", {
+        position: toast.POSITION.TOP_CENTER,
+        hideProgressBar: true,
+        autoClose: 2500
+      })
     }
     else {
       setIsAlert(false)
-      //자동으로 사라지는 toast로 처리
-      return alert("구독 알림이 취소되었습니다")
+      toast.success("구독 알림이 취소되었습니다", {
+        position: toast.POSITION.TOP_CENTER,
+        hideProgressBar: true,
+        autoClose: 2500
+      })
     }
   }
 
@@ -88,12 +114,25 @@ const View = () => {
     setIsSetttingOpen(false)
     console.log(isChapterListOpen, isCommentListOpen, isSettingOpen)
   }
+
+  // useEffect(() => {
+  //   document.body.style.cssText = `
+  //     position: fixed; 
+  //     top: -${window.scrollY}px;
+  //     overflow-y: scroll;
+  //     width: 100%;`;
+  //   return () => {
+  //     const scrollY = document.body.style.top;
+  //     document.body.style.cssText = '';
+  //     window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+  //   };
+  // }, []);
   return (
     <div tw="relative">
       <header css={[tw`flex justify-center fixed top-0 z-30 w-full h-14 bg-white border-b border-gray-200 py-1.5`, isClose ? tw`hidden`: tw`` ]}>
         <nav tw="w-[425px] lg:w-[800px] flex justify-between items-center overflow-hidden px-2.5 sm:px-4">
           <div tw="relative">
-            <button type="button" tw="p-3">
+            <button type="button" tw="p-3" onClick={()=>history.go(-1)}>
               <HiArrowLeft tw="w-6 h-6 text-gray-400"/>
             </button>
           </div>
@@ -101,8 +140,8 @@ const View = () => {
             <div tw="max-w-full text-lg font-semibold truncate text-ellipsis overflow-hidden whitespace-nowrap">{dummyData.title}</div>
           </div>
           <div tw="relative">
-            <button type="button" tw="p-3" onClick={handleAlart}>
-              <HiOutlineBell css={[tw`w-6 h-6 stroke-gray-400`, isAlart ? tw`fill-amber-200 stroke-amber-200 active:scale-50 duration-300 ease-in-out` : tw`active:scale-50 duration-300 ease-in-out`]}/>
+            <button type="button" tw="p-3" onClick={handleAlert}>
+              <HiOutlineBell css={[tw`w-6 h-6 stroke-gray-400`, isAlert ? tw`fill-amber-200 stroke-amber-200 active:scale-50 duration-300 ease-in-out` : tw`active:scale-50 duration-300 ease-in-out`]}/>
             </button>
             <button type="button" tw="p-3" onClick={handleChapterList}>
               <HiOutlineBars3 tw="w-6 h-6 stroke-gray-400"/>
@@ -115,9 +154,9 @@ const View = () => {
         <div tw="bg-transparent">
           <div tw="w-[425px] lg:w-[800px] mx-auto">
             <section tw="relative">
-              <div tw="pt-24 px-12 break-all">
-                <article css={[tw`text-lg`, isChapterListOpen || isCommentListOpen || isShareOpen || isSettingOpen ? tw`overflow-y-hidden` : tw``]}>
-                  <pre tw="max-w-full font-semibold mb-4 truncate text-ellipsis overflow-hidden whitespace-nowrap">{dummyData.subTitle}</pre>
+              <div tw="pt-24 px-6 sm:px-4 break-all">
+                <article tw="text-xl">
+                  <h1 tw="max-w-full font-semibold text-2xl text-center truncate text-ellipsis overflow-hidden whitespace-nowrap">{dummyData.subTitle}</h1>
                   {dummyData.content}
                 </article>
                 <div tw="w-full h-48 overflow-hidden"></div>
@@ -126,6 +165,7 @@ const View = () => {
           </div>
         </div>
       </main>
+
       <footer css={[tw`flex flex-col justify-center fixed bottom-0 z-30 w-full h-24 bg-white border-t border-gray-200`, isClose ? tw`hidden`: tw`` ]}>
         <div tw="flex justify-center w-full border-b border-gray-200 py-2">
           <div tw="w-[425px] lg:w-[800px] flex justify-between px-2 sm:px-4">
@@ -287,7 +327,8 @@ const View = () => {
             <h3 tw="text-xl font-semibold text-center">뷰어설정</h3>
           </div>
         </div>
-      </section>       
+      </section>
+      <ToastContainer transition={Slide}/>    
     </div>
   )
 }

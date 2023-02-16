@@ -100,9 +100,11 @@ export default function Books() {
               {
                  
               <>
-              <button tw="hidden md:block ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
-                  <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
+              {                
+              <button tw="hidden md:flex items-center ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
+                <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
               </button>
+              }
               <div css={[tw`hidden absolute bg-white w-[100px] h-full rounded-lg top-10 right-0 z-10 mt-4 origin-top-right shadow duration-150 ease-in-out`, myPageIsOpen ? tw`opacity-100`: tw`opacity-0`]}>
                 <ul tw="text-center">
                   <li>메뉴</li>
