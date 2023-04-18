@@ -5,7 +5,7 @@ import { HiChevronDown } from 'react-icons/hi';
 
 const Accordion = React.forwardRef((props, ref) => {
 
-  const { variants, header, children } = props;
+  const { variants, header, children, key } = props;
 
   // const ref = useRef(null);
 
@@ -22,6 +22,7 @@ const Accordion = React.forwardRef((props, ref) => {
   return (
     <div
       ref={ref}
+      key={key}
       tw="flex flex-col relative"
       css={[
         variants === "default" && tw`border border-gray-400 rounded-l-lg rounded-r-lg`,
