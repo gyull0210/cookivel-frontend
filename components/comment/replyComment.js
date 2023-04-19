@@ -4,10 +4,10 @@ import Avatar from '../core/avatar/Avatar';
 import { useState } from 'react';
 import CommentForm from './commentForm';
 
-const ReplyComment = ({comment}) => {
+const ReplyComment = ({comment, key}) => {
 
   return (
-    <div tw="flex px-2 py-2" key={comment.id}>
+    <div tw="flex px-2 py-2" key={key}>
       <div tw="mr-2">
         <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
       </div>

@@ -170,7 +170,7 @@ const CommentList = () => {
               }
               {isReplyOpen.includes(comment.id) &&
               (<div tw="mb-4">
-                <CommentForm id={comment.id}/>
+                <CommentForm />
                 {childComment(comment.id).length > 0 && childComment(comment.id).map((reply) => (
                 <ReplyComment key={reply.id} comment={reply} />
               ))}             

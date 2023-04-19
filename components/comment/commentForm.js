@@ -1,10 +1,10 @@
 import tw from 'twin.macro'
 import Avatar from '../core/avatar/Avatar';
 
-const CommentForm = ({id}) => {
+const CommentForm = ({key}) => {
 
   return (
-    <div tw="flex flex-col p-4 border rounded-lg" key={id}>
+    <div tw="flex flex-col p-4 border rounded-lg" key={key}>
       <div tw="flex items-center mb-4">
         <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
         <div tw="ml-2 overflow-hidden">
