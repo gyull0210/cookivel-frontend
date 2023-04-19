@@ -1,10 +1,19 @@
 import tw from 'twin.macro'
 import Avatar from '../core/avatar/Avatar';
+import { useState } from 'react';
 
-const CommentForm = ({key}) => {
+const CommentForm = ({id}) => {
+
+  const [content, setContent] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // 댓글 작성 로직
+    setContent('');
+  };
 
   return (
-    <div tw="flex flex-col p-4 border rounded-lg" key={key}>
+    <div tw="flex flex-col p-4 border rounded-lg" key={id}>
       <div tw="flex items-center mb-4">
         <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
         <div tw="ml-2 overflow-hidden">
