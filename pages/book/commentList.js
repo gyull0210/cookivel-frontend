@@ -86,27 +86,26 @@ const CommentList = () => {
     return childComments;
   }
 
-  // const [isReplyOpen, setIsReplyOpen] = useState(-1);
+  const [isReplyOpen, setIsReplyOpen] = useState([]);
 
-  // // 댓글 열기
-  // const handleReplyOpen = (id) => {
-  //   if (isReplyOpen === id) {
-  //     setIsReplyOpen(-1);
-  //   } else {
-  //     setIsReplyOpen(id);
-  //   }
-  // }
+  // 댓글 열기
+  const handleReplyOpen = (id) => {
+    if (isReplyOpen.length === 0 || !isReplyOpen.includes(id)) {
+      setIsReplyOpen([id]);
+    } else {
+      setIsReplyOpen([]);
+    }
+  };
   
-  // useEffect(() => {
-  //   console.log(isReplyOpen);
-  // }, [isReplyOpen]);
-
+  useEffect(() => {
+    console.log(isReplyOpen);
+  }, [isReplyOpen]);
 // 댓글 열기
-const [isReplyOpen, setIsReplyOpen] = useState(null);
+// const [isReplyOpen, setIsReplyOpen] = useState(null);
 
-const handleReplyOpen = (id) => {
-  setIsReplyOpen((prevId) => (prevId === id ? null : id));
-};
+// const handleReplyOpen = (id) => {
+//   setIsReplyOpen((prevId) => (prevId === id ? null : id));
+// };
 
   //댓글 팝오버 (수정, 삭제)
 
@@ -166,7 +165,7 @@ const handleReplyOpen = (id) => {
                   </button>
                 </div>
               </div>
-              {comment.replies && comment.replies.length > 0 && isReplyOpen === comment.id ?             
+              {comment.replies && comment.replies.length > 0 && isReplyOpen.includes(comment.id) ?             
               <div tw="font-semibold mb-4 cursor-pointer" onClick={()=> handleReplyOpen(comment.id)}>
                 {comment.replies?.length > 0 ? "접기" : null}
               </div> 
@@ -175,10 +174,10 @@ const handleReplyOpen = (id) => {
                 {comment.replies?.length > 0 ? comment.replies.length+"개의 댓글 더 보기" : null}
               </div>
               }
-              {isReplyOpen === comment.id && 
+              {isReplyOpen.includes(comment.id) &&
               (<div tw="mb-4">
                 <CommentForm id={comment.id}/>
-                {comment.replies?.length > 0 && childComment(comment.id).map((reply) => (
+                {childComment(comment.id).length > 0 && childComment(comment.id).map((reply) => (
                 <ReplyComment key={reply.id} comment={reply} />
               ))}             
               </div>)}
