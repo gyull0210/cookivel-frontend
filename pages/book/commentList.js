@@ -1,7 +1,7 @@
 import { HiOutlineChatBubbleOvalLeft, HiOutlineEllipsisHorizontal, HiOutlineHeart } from "react-icons/hi2";
 import Avatar from "../../components/core/avatar/Avatar";
 import tw from 'twin.macro';
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import CommentForm from "../../components/comment/commentForm";
 import ReplyComment from "../../components/comment/replyComment";
 
@@ -86,17 +86,27 @@ const CommentList = () => {
     return childComments;
   }
 
-  const [isReplyOpen, setIsReplyOpen] = useState(null);
+  // const [isReplyOpen, setIsReplyOpen] = useState(-1);
 
-  // 댓글 열기
-  const handleReplyOpen = (id) => {
-    if (isReplyOpen === id) {
-      setIsReplyOpen(null);
-    } else {
-      setIsReplyOpen(id);
-    }
-  }
+  // // 댓글 열기
+  // const handleReplyOpen = (id) => {
+  //   if (isReplyOpen === id) {
+  //     setIsReplyOpen(-1);
+  //   } else {
+  //     setIsReplyOpen(id);
+  //   }
+  // }
   
+  // useEffect(() => {
+  //   console.log(isReplyOpen);
+  // }, [isReplyOpen]);
+
+// 댓글 열기
+const [isReplyOpen, setIsReplyOpen] = useState(null);
+
+const handleReplyOpen = (id) => {
+  setIsReplyOpen((prevId) => (prevId === id ? null : id));
+};
 
   //댓글 팝오버 (수정, 삭제)
 
@@ -143,9 +153,7 @@ const CommentList = () => {
               </div>
               <div tw="mt-4 flex justify-end">
                 <div tw="flex gap-4">
-                  <button type="button" tw="flex items-center" onClick={() => {
-                  setIsLike(!isLike);
-                }}>
+                  <button type="button" tw="flex items-center" onClick={() => {setIsLike(!isLike);}}>
                     <HiOutlineHeart tw="w-6 h-6 stroke-gray-400 hover:stroke-red-400" />
                     {comment.likes > 0 ? <span tw="text-gray-400 ml-2">{comment.likes}</span> : null}
                   </button>
@@ -167,12 +175,13 @@ const CommentList = () => {
                 {comment.replies?.length > 0 ? comment.replies.length+"개의 댓글 더 보기" : null}
               </div>
               }
-              {<div tw="mb-4">
-                {/* {isReplyOpen === comment.id && <CommentForm id={comment.id}/>} */}
-                {isReplyOpen === comment.id && childComment(comment.id)?.length > 0 && childComment(comment.id).map((reply) => (
+              {isReplyOpen === comment.id && 
+              (<div tw="mb-4">
+                <CommentForm id={comment.id}/>
+                {comment.replies?.length > 0 && childComment(comment.id).map((reply) => (
                 <ReplyComment key={reply.id} comment={reply} />
               ))}             
-              </div>}
+              </div>)}
             </div>
           </div>))}
         </div>
