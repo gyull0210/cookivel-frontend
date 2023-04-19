@@ -100,12 +100,6 @@ const CommentList = () => {
   useEffect(() => {
     console.log(isReplyOpen);
   }, [isReplyOpen]);
-// 댓글 열기
-// const [isReplyOpen, setIsReplyOpen] = useState(null);
-
-// const handleReplyOpen = (id) => {
-//   setIsReplyOpen((prevId) => (prevId === id ? null : id));
-// };
 
   //댓글 팝오버 (수정, 삭제)
 
