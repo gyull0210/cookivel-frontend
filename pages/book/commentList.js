@@ -171,8 +171,8 @@ const CommentList = () => {
               {isReplyOpen.includes(comment.id) &&
               (<div tw="mb-4">
                 <CommentForm id={comment.id}/>
-                {childComment(comment.id).length > 0 && childComment(comment.id).map((reply) => (
-                <ReplyComment key={reply.id} id={reply.id} comment={reply} />
+                {childComment(comment.id).length > 0 && childComment(comment.id).map((comment) => (
+                <ReplyComment key={comment.id} comment={comment} />
               ))}             
               </div>)}
             </div>
