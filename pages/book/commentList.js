@@ -74,16 +74,9 @@ const CommentList = () => {
   },
   ]
 
-  
-
-  const [isMoreText, setIsMoreText] = useState(false);
-  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
-
-
   const parentComment = dummyComment.filter(comment => comment.parent_id === null);
-  const childComment = (parent_id) => {
-    const childComments = dummyComment.filter(comment => comment.parent_id === parent_id);   
-    return childComments;
+  const childComment = (comment) => {
+    comment?.replies?.parent_id === comment.id;   
   }
 
   const [isReplyOpen, setIsReplyOpen] = useState([]);
@@ -99,6 +92,7 @@ const CommentList = () => {
   
   useEffect(() => {
     console.log(isReplyOpen);
+    // console.log("value:"+[childComment(parentComment.id)])
   }, [isReplyOpen]);
 
   //댓글 팝오버 (수정, 삭제)
@@ -113,8 +107,8 @@ const CommentList = () => {
   //좋아요순 최신순 정렬
 
   return (
-    <div tw="max-w-screen-lg py-4 mx-auto">
-      
+    <div tw="max-w-screen-lg py-4 mx-auto text-base">
+      <CommentForm/>
       <div tw="mt-4 pt-4 pb-2 border-t border-gray-400">
         <h3 tw="font-bold text-xl">댓글 목록</h3>
         <div tw="flex gap-6 py-4">
@@ -171,7 +165,7 @@ const CommentList = () => {
               {isReplyOpen.includes(comment.id) &&
               (<div tw="mb-4">
                 <CommentForm id={comment.id}/>
-                {comment.replies.length > 0 && comment.replies.map((comment) => (
+                {comment.replies?.length > 0 && comment.replies.map((comment) => (
                 <ReplyComment key={comment.id} comment={comment} />
               ))}             
               </div>)}

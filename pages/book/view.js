@@ -7,7 +7,7 @@ import { Slide,ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Portal } from './portal';
 import { css } from '@emotion/react';
-import Comment from './comment';
+import CommentList from './commentList';
 
 const View = () => {
 
@@ -284,7 +284,7 @@ const View = () => {
       </header>
 
       <main css={[tw`min-h-screen`, bgColor, textColor]} onClick={handleBar}>
-        <div tw="min-h-screen">
+        <div tw="flex min-h-screen">
           <div tw="w-[425px] md:w-[675px] lg:w-[800px] mx-auto">
             <section tw="relative">
               <div tw="pt-24 px-6 sm:px-4 break-all">
@@ -296,6 +296,21 @@ const View = () => {
               </div>            
             </section>
           </div>
+        <aside css={[tw`fixed bg-white w-full h-full z-10 right-0 border-l border-gray-200 shadow-sm`, isCommentListOpen ? tw``:tw`hidden`]}>
+          <div tw="h-14 flex items-center border-b border-gray-200 py-1.5">
+            <div tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-between items-center overflow-hidden px-2.5 sm:px-4 mx-auto">
+              <button type="button" onClick={handleSidebar}>
+                <HiArrowLeft tw="w-6 h-6 text-gray-400"/>
+              </button>
+            </div>
+          </div>
+          <div tw="max-w-screen-lg mx-auto px-8 sm:px-4">
+            
+            <div tw="w-[760px] h-screen overflow-y-scroll overscroll-none scrollbar-hide mx-auto">
+              <CommentList/>
+            </div>
+          </div>
+        </aside>
         </div>
       </main>
 
@@ -388,33 +403,23 @@ const View = () => {
         </aside>
       </div> 
       </section>
-      <section css={[tw`absolute top-0 left-0 z-50`, isCommentListOpen ? tw`` : tw`hidden`]} aria-label="댓글 목록">
+      {/* <section css={[tw`absolute top-0 left-0 z-50`, isCommentListOpen ? tw`` : tw`hidden`]} aria-label="댓글 목록">
       <div css={[tw`fixed w-full h-full`, isCommentListOpen ? tw``:tw`hidden`]}>
         <div tw="absolute w-full h-full bg-black opacity-10 z-[40]" onClick={handleCommentListOpen}></div>
-        <aside tw="absolute bg-white w-full h-full z-50 right-0 border-l border-gray-200 shadow-sm ">
-          <div tw="max-w-screen-lg px-2 py-4 sm:px-4">
-          <div tw="border-b border-gray-200">
-            <button type="button" onClick={handleSidebar}>
-              <HiOutlineXMark tw="w-6 h-6 stroke-gray-400"/>
-            </button>
-          </div>
-          <div tw="">
-            <div tw="mb-4 text-xl px-4 py-3 font-semibold">댓글 목록</div>
-            <div tw="px-4 py-1">
-              <div tw="w-full h-24 border border-gray-200 text-gray-400 rounded-lg">
-                댓글을 남겨주세요
-              </div>
+        <aside tw="absolute bg-white w-[500px] h-full z-50 right-0 border-l border-gray-200 shadow-sm ">
+          <div tw="max-w-screen-lg mx-auto px-8 sm:px-4">
+            <div tw="h-14 flex items-center border-b border-gray-200 py-1.5">
+              <button type="button" onClick={handleSidebar}>
+                <HiOutlineXMark tw="w-6 h-6 stroke-gray-400"/>
+              </button>
             </div>
-            <div tw="flex gap-6">
-              <a href="###" tw="block font-semibold px-6 py-2">인기순</a>
-              <a href="###" tw="block font-semibold px-6 py-2">최신순</a>
+            <div tw="h-screen overflow-y-scroll overscroll-none scrollbar-hide">
+              <CommentList/>
             </div>
-            <Comment comment={dummyComment}/>
-          </div>
           </div>
         </aside>
       </div> 
-      </section>
+      </section> */}
       <section css={[tw`fixed w-full h-full top-0 left-0 z-50`, isShareOpen ? tw`` : tw`hidden`]} aria-label="공유 목록">
         <div tw="fixed w-full h-full bg-black opacity-10" onClick={handleShareOpen}></div>
         <div tw="fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-[60]">
