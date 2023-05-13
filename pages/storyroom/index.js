@@ -2,52 +2,48 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import tw from 'twin.macro'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import { Pagination, Navigation, Scrollbar, Autoplay } from "swiper"
-import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark } from 'react-icons/hi2'
+import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiOutlineChevronLeft, HiOutlineChevronRight, HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from 'react-icons/hi2'
 import Button from '../../components/core/button/Button'
 import Avatar from '../../components/core/avatar/Avatar'
 import MainCarousel from '../../components/overlay/mainCarosel/MainCarosel'
 import { useEffect, useRef, useState } from 'react'
 import useDetectClose from '../../components/hooks/useDetectClose'
-import {faker} from '@faker-js/faker'
+import { faker } from '@faker-js/faker/locale/ko'
 import Badge from '../../components/core/badge/Badge'
 import StoryItem from './storyItem'
 import Sidebar from '../../components/layout/sidebar/sidebar'
 import Dropdown from './dropdown'
-import { Menu, Popover, Transition } from '@headlessui/react'
+import { Menu, Popover } from '@headlessui/react'
+import Pagination from './pagination'
 
-export default function StoryList() {
-
-  
-  const [cardList, setCardList] = useState("");
-
-  const [isLoading, setIsLoading] = useState(false); 
-  const [isError, setIsError] = useState(false); 
- 
-  const [page, setPage] = useState(1);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const url = `https://picsum.photos/v2/list`;
-  //     const response = await fetch(url);
-  //     if (!response.ok) throw new Error("Response Error");
-  //     setCardList((response).json());
-  //     console.log(cardList)
-  //   };
-  //   fetchData().catch((error) => console.log(error));
-  // }, []);
-
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const pageRef= useRef(null);
+export default function StoryRoom() {
 
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [sidebarIsOpen, sidebarRef, sidebarHandler] = useDetectClose(false);
 
-  const imgUrl = faker.image.food(150,200)
+  const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+
+  const story = {
+    title: faker.lorem.words(2),
+    coverUrl: faker.image.food(),
+    chapters: faker.datatype.number({min:1, max:500}),
+    description:faker.lorem.sentences(3),
+    tags:[
+      faker.random.word(),
+      faker.random.word(),
+      faker.random.word(),
+      faker.random.word(),
+      faker.random.word()
+    ]
+  }
+
+  useEffect(() => {
+    setData(Array(367).fill(story))
+  },[])
+
   return (
     <>
       <Head>
@@ -170,17 +166,27 @@ export default function StoryList() {
       </div>   
       <Sidebar isOpen={sidebarIsOpen} onClick={sidebarHandler}/>
       <main tw="flex flex-col mt-12 overflow-x-hidden">     
-        <section tw="container mx-auto mt-12">
+        <section tw="container mx-auto mt-12 mb-4">
           <div tw="max-w-screen-lg mx-auto">
             <div tw="flex justify-end">
               <Button variant="solid" size="lg" label="작품 등록"/>
             </div>
-           
-            <StoryItem/>         
+            {data.slice(offset, offset + limit).map((data, i) => (
+            <StoryItem key={i} story={data}/> 
+            ))}        
           </div>
         </section>
+        <div tw="flex justify-center"> 
+          <Pagination
+            total={data.length}
+            limit={limit}
+            page={page}
+            setPage={setPage}
+            viewPerPage={5}
+          />
+        </div>
       </main>
-      <footer>
+      <footer tw="h-20">
         
       </footer>
     </>

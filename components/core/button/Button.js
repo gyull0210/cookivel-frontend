@@ -24,14 +24,14 @@ const Button = React.forwardRef((props, ref) => {
   )
   const content = (
     <div
-      tw="flex items-center"
+      tw="!w-full !flex items-center"
       css={[
         loadingText && isLoading ? tw`hidden`: tw`inline-block`
       ]}
     >
-      {leftIcon && <span tw="mr-2">{cloneElement(leftIcon)}</span>}
+      {leftIcon && <span tw="block mr-2">{cloneElement(leftIcon)}</span>}
       <span tw="truncate">{label}</span>
-      {rightIcon && <span tw="ml-2">{cloneElement(rightIcon)}</span>}
+      {rightIcon && <span tw="block ml-2">{cloneElement(rightIcon)}</span>}
     </div>
   )
 
