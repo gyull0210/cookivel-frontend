@@ -6,7 +6,7 @@ const withTwin = require('./withTwin.js')
  */
 module.exports = withTwin({
   images: {
-    domains: ['api.lorem.space', 'i.pravatar.cc'],
+    domains: ['api.lorem.space', 'i.pravatar.cc','loremflickr.com','cloudflare-ipfs.com'],
   },
   reactStrictMode: true,
   async rewrites(){

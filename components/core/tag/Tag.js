@@ -5,7 +5,7 @@ import tw from 'twin.macro'
 
 const Tag = React.forwardRef((props, ref) => {
 
-  const { className, variant, styled, size, leftIcon, rightIcon, label } = props;
+  const { className, variant, styled, size, leftIcon, rightIcon, label, color, ...rest } = props;
 
   const content = (
     <div
@@ -21,6 +21,10 @@ const Tag = React.forwardRef((props, ref) => {
     </div>
   )
 
+  const colors = {
+
+  }
+  
   return (
     <div
       className={className}
@@ -34,7 +38,9 @@ const Tag = React.forwardRef((props, ref) => {
         size === "md" && tw`px-1 py-0.5 text-sm`,
         size === "lg" && tw`px-1 py-1 text-base`,
         styled === "pill" && tw`rounded-lg`,
-        styled === "chip" && tw`rounded-full`
+        styled === "chip" && tw`rounded-full`,
+        color && variant && colors[color][variant],
+        {...rest}
       ]}
     >
       {content}

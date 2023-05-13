@@ -10,7 +10,7 @@ const Avatar = React.forwardRef((props, ref) => {
   const {variant, id, className, size, src, alt, status, width, height, hover, ...rest} = props;
 
   return (
-    <div css={[tw`inline-flex relative flex-shrink-0`,
+    <div css={[tw`relative inline-flex flex-shrink-0`,
         size === "sm" && tw`w-8 h-8`,
         size === "md" && tw`w-10 h-10`,
         size === "lg" && tw`w-12 h-12`,
@@ -19,7 +19,7 @@ const Avatar = React.forwardRef((props, ref) => {
     <div
       id={id}
       css={[
-        tw`inline-flex relative overflow-hidden rounded-full`,
+        tw`relative inline-flex overflow-hidden rounded-full`,
         size === "sm" && tw`w-8 h-8`,
         size === "md" && tw`w-10 h-10`,
         size === "lg" && tw`w-12 h-12`,
@@ -32,7 +32,7 @@ const Avatar = React.forwardRef((props, ref) => {
         id=""
         className={className}
         css={[
-          tw`flex items-center justify-center w-full h-full object-cover ring-inherit`        
+          tw`flex items-center justify-center object-cover w-full h-full ring-inherit`        
         ]}
         src={src}
         alt={alt}

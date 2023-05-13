@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/react'
+import { css, jsx } from '@emotion/react'
 import tw, { theme } from 'twin.macro'
 import propTypes from 'prop-types'
 import React, { cloneElement } from 'react';
@@ -24,7 +24,7 @@ const Button = React.forwardRef((props, ref) => {
   )
   const content = (
     <div
-      tw="flex"
+      tw="flex items-center"
       css={[
         loadingText && isLoading ? tw`hidden`: tw`inline-block`
       ]}
@@ -35,42 +35,48 @@ const Button = React.forwardRef((props, ref) => {
     </div>
   )
 
-  const colors = {solidStyle, outlineStyle}
-
-  const checkColors = () => {
-    if(variant === "solid"){
-      if(disabled === true){
-        return tw`text-white bg-primary hover:bg-primary active:bg-primary opacity-60`
-      } else {
-        solidStyle.find(color => {
-          solidStyle.match(color)
-        })
-      }
+  const colors = {
+    primary: {
+      solid: tw`border bg-sky-400 border-sky-400 hover:shadow active:(bg-sky-500 border-sky-500)`,
+      outline: tw`text-sky-400 hover:bg-sky-100`,
+      ghost: tw`text-sky-400 hover:bg-sky-100`
+    },
+    cookie: {
+      solid:{},
+      outline:{},
+      ghost:{}
+    },
+    secondary: {
+      solid:{},
+      outline:{},
+      ghost:{}
+    },
+    accent: {
+      solid:{},
+      outline:{},
+      ghost:{}
+    },
+    info: {
+      solid:{},
+      outline:{},
+      ghost:{}
+    },
+    success: {
+      solid: tw`bg-green-400 border border-green-400 hover:shadow active:(bg-green-500 border-green-500)`,
+      outline: tw`text-green-400 hover:bg-green-100`,
+      ghost: tw`text-green-400 hover:bg-green-100`
+    },
+    warning: {
+      solid: tw`bg-yellow-500 border border-yellow-500 hover:shadow active:(bg-yellow-600 border-yellow-600)`,
+      outline: tw`text-yellow-500 hover:bg-yellow-200`,
+      ghost: tw`text-yellow-500 hover:bg-yellow-200`
+    },
+    error: {
+      solid: tw`bg-red-500 border-red-500 hover:shadow active:(bg-red-600 border-red-600)`,
+      outline: tw`text-red-500 hover:bg-red-200`,
+      ghost: tw`text-red-500 hover:bg-red-200`
     }
-
-    if(variant === "outline"){
-      if(disabled === true){
-        return tw`text-primary hover:bg-sky-50 active:bg-sky-50`
-      } else {
-        if(color.match("primary")){return outlineStyle.primary}
-        if(color.match("secondary")){return outlineStyle.secondary}
-        if(color.match("accent")){return tw``}
-        if(color.match("info")){return outlineStyle.info}
-        if(color.match("success")){return outlineStyle.success}
-        if(color.match("warning")){return outlineStyle.warning}
-        if(color.match("error")){return outlineStyle.error}
-      }
-    }
-
-    if(variant === "ghost"){
-      if(disabled === true){
-        return tw`hover:(bg-sky-400 opacity-20) active:(bg-sky-500 opacity-20)`
-      } else {
-        if(color === ""){return tw`hover:bg-gray-100 active:bg-gray-200`}
-        if(color.match("primary")){return tw`text-primary hover:(text-white bg-sky-500 opacity-80) active:(text-white bg-sky-600 opacity-80)`}
-      }
-    }
-  };
+  }
 
   return (
     <button
@@ -79,8 +85,7 @@ const Button = React.forwardRef((props, ref) => {
       ref={ref}
       css={[
         tw`inline-flex items-center justify-center select-none`,
-        disabled === true && tw`cursor-not-allowed`, 
-        variant === "solid" && !disabled && tw`text-white border border-current` ,
+        variant === "solid" && !disabled && tw`text-white`,
         variant === "outline" && !disabled && tw`bg-transparent border border-current`,
         variant === "ghost" && !disabled && tw`text-current bg-transparent border border-transparent`,
         styled === "rounded" && tw`rounded-md`,
@@ -89,8 +94,14 @@ const Button = React.forwardRef((props, ref) => {
         size === "sm" && tw`px-4 h-8 min-w-[2rem] text-sm`,
         size === "md" && tw`px-4 h-9 min-w-[2.25rem] text-sm`,
         size === "lg" && tw`px-4 h-11 min-w-[2.5rem] text-base`,
-        size === "xl" && tw`px-6 h-12 min-w-[3rem] text-lg`,
-        color && checkColors
+        size === "xl" && tw`px-6 h-12 min-w-[3rem] text-lg`,       
+        color && variant === "solid" && colors[color][variant],
+        color && variant === "outline" && colors[color][variant],
+        color && variant === "ghost" && colors[color][variant],
+        disabled === true && tw`cursor-not-allowed`,
+        disabled === true && variant === "solid" && tw`text-gray-400 bg-gray-200 border border-gray-200`,
+        disabled === true && variant === "outline" && tw`text-gray-400 border border-current`,
+        disabled === true && variant === "ghost" && tw`text-gray-400 hover:bg-transparent`,
         ]}    
       onClick={onClick}
       disabled={disabled || isLoading}

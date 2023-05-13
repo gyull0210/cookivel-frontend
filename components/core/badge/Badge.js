@@ -11,35 +11,41 @@ const Badge = React.forwardRef((props, ref) => {
 
   const { className, size, variant, styled, color, label, ...rest } = props;
 
-  const checkColors = () => {
-    if(variant.match("solid")){
-      if(color.match("primary")){return tw`bg-primary`}
-      if(color.match("secondary")){return tw`bg-secondary`}
-      if(color.match("accent")){return tw``}
-      if(color.match("info")){return tw``}
-      if(color.match("success")){return tw``}
-      if(color.match("warning")){return tw``}
-      if(color.match("error")){return tw``}
-    }
-
-    if(variant.match("subtle")){
-      if(color.match("primary")){return tw``}
-      if(color.match("secondary")){return tw``}
-      if(color.match("accent")){return tw``}
-      if(color.match("info")){return tw``}
-      if(color.match("success")){return tw``}
-      if(color.match("warning")){return tw``}
-      if(color.match("error")){return tw``}
-    }
-
-    if(variant.match("outline")){
-      if(color.match("primary")){return tw`text-primary border-primary`}
-      if(color.match("secondary")){return tw``}
-      if(color.match("accent")){return tw``}
-      if(color.match("info")){return tw``}
-      if(color.match("success")){return tw``}
-      if(color.match("warning")){return tw``}
-      if(color.match("error")){return tw``}
+  const colors = {
+    primary: {
+      solid: tw`border bg-sky-400 border-sky-400`,
+      outline: tw`text-sky-400`,
+      subtle: tw`text-sky-400 bg-sky-200`
+    },
+    secondary: {
+      solid:{},
+      outline:{},
+      subtle:{}
+    },
+    accent: {
+      solid:{},
+      outline:{},
+      subtle:{}
+    },
+    info: {
+      solid:{},
+      outline:{},
+      subtle:{}
+    },
+    success: {
+      solid: tw`bg-green-400 border border-green-400`,
+      outline: tw`text-green-400`,
+      subtle: tw`text-green-400 bg-green-200`
+    },
+    warning: {
+      solid: tw`bg-yellow-500 border border-yellow-500`,
+      outline: tw`text-yellow-500`,
+      subtle: tw`text-yellow-500 bg-yellow-200`
+    },
+    error: {
+      solid: tw`bg-red-500 border-red-500`,
+      outline: tw`text-red-500`,
+      subtle: tw`text-red-500 bg-red-200`
     }
   }
 
@@ -47,17 +53,17 @@ const Badge = React.forwardRef((props, ref) => {
     <span 
       className={className}
       css={[
-        tw`inline-block whitespace-nowrap align-middle text-center`,
+        tw`inline-block text-center align-middle whitespace-nowrap`,
         variant === "solid" && tw`text-white`,
         variant === "subtle" && tw`text-sky-400 bg-sky-200`,
-        variant === "outline" && tw`bg-transparent text-current border border-current`,
+        variant === "outline" && tw`text-current bg-transparent border border-current`,
         size === "xs" && tw`px-1 py-1 text-xs`,
         size === "sm" && tw`px-1 py-1 text-sm`,
         size === "md" && tw`px-2 py-1 text-sm`,
         size === "lg" && tw`px-3 py-1 text-base`,
         styled === "rounded" && tw`rounded-lg`,
         styled === "circle" && tw`rounded-full`,
-        color && checkColors
+        color && variant && colors[color][variant]
       ]}
       {...rest}
     >

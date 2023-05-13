@@ -11,7 +11,7 @@ const customStyles = css({
   a: {
     color: tw`text-inherit`,
     textDecoration: tw`no-underline`
-  }
+  },
 })
 
 const GlobalStyles = () => (

@@ -8,12 +8,14 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Pagination, Navigation, Scrollbar, Autoplay } from "swiper"
 import { HiFilter } from 'react-icons/hi'
-import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiAdjustmentsHorizontal, HiChevronDown, HiOutlineChevronDown, HiOutlineChevronUp, HiEye, HiHeart, HiBookmark, HiUser } from 'react-icons/hi2'
+import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiAdjustmentsHorizontal, HiChevronDown, HiOutlineChevronDown, HiOutlineChevronUp, HiEye, HiHeart, HiBookmark, HiUser, HiOutlineChevronLeft, HiOutlineChevronRight } from 'react-icons/hi2'
 import Button from '../../components/core/button/Button'
 import Avatar from '../../components/core/avatar/Avatar'
 import MainCarousel from '../../components/overlay/mainCarosel/MainCarosel'
 import { useEffect, useRef, useState } from 'react'
 import useDetectClose from '../../components/hooks/useDetectClose'
+import { faker } from '@faker-js/faker'
+import BookItem from './bookItem'
 
 export default function Nextpage() {
 
@@ -128,7 +130,7 @@ export default function Nextpage() {
       </aside>
       <main tw="w-full flex flex-col mt-[115px] overflow-x-hidden">
              
-        <section tw="relative container mx-auto">
+        <section tw="relative w-full max-w-screen-lg mx-auto">
           <header>
             <nav tw="">
 
@@ -153,163 +155,33 @@ export default function Nextpage() {
           </div>
           {dropdownIsOpen &&
             <div tw="absolute bg-gray-50 w-20 h-20 border rounded-lg z-10">
-
+              <div>최신순</div>
+              <div>인기순</div>
             </div>}
         </section>
         <section tw="mt-12 max-w-screen-lg mx-auto">
-          <div tw="flex flex-wrap mx-auto">
+          <div tw="flex flex-wrap mx-auto mb-4">
             <div tw="w-full border-b border-gray-200"></div>
-            <article tw="flex gap-4 py-6">
-              <div tw="relative px-2">
-                <a tw="relative block w-28 h-36 md:w-32 md:h-40 rounded-lg overflow-hidden">
-                <img tw="flex items-center justify-center w-full h-full object-cover" src="https://api.lorem.space/image/book?w=208&h=240" alt="책표지"/>
-                </a>
-              </div>
-              <div tw="overflow-hidden flex flex-col items-stretch pr-2">
-                <header tw="">
-                  <div tw="flex justify-between items-center">
-                    <div>
-                  <div tw="md:flex gap-2 hidden">
-                    <span tw="bg-sky-500 text-sm text-white px-1 rounded-tl-lg rounded-r-lg">최신</span>
-                    <span tw="bg-amber-500 text-sm text-white px-1 rounded-tl-lg rounded-r-lg">인기</span>
-                    <span tw="bg-lime-500 text-sm text-white px-1 rounded-tl-lg rounded-r-lg">단편</span>
-                    <span tw="bg-purple-500 text-sm text-white px-1 rounded-tl-lg rounded-r-lg">완결</span>
-                  </div>
-                  
-                    <h1 tw="text-xl md:text-2xl font-bold truncate">제목입니다</h1>
-                    </div>
-                    <div tw="ml-2 md:inline-flex gap-4 text-gray-400 hidden">
-                    <div tw="flex flex-col items-center">
-                      <HiUser tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">13</span>
-                    </div>
-                    <div tw="flex flex-col items-center">
-                      <HiHeart tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">13</span>
-                      </div>
-                    <div tw="flex flex-col items-center">
-                      <HiBookmark tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">12</span>
-                    </div>
-                    </div>  
-                  </div>                       
-                  <span tw="text-base font-semibold">닉네임</span>
-                  <span tw="ml-2 text-base text-gray-400">300화</span>
-                  <div tw="ml-2 inline-flex gap-2 text-gray-400 md:hidden">
-                    <div tw="flex items-center">
-                      <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">13</span>
-                    </div>
-                    <div tw="flex items-center">
-                      <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">13</span>
-                      </div>
-                    <div tw="flex items-center">
-                      <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">12</span>
-                    </div>
-                  </div>
-                </header>
-                <p tw="w-full flex-1 break-words line-clamp-2 text-sm md:text-base text-gray-400 mb-2">
-                들어 같은 풀밭에 그들은 그것은 끓는다, 천하를 싸인 원질이 이상 있으며. 속잎나고. 설레는 찾아 방황하였으며. 위하여 작고 우리의 것이다, 인간에 고행을 있다, 그것을 창공에 영원히 있는가? 품었기 힘차게 예가 봄바람이다. 위하여서 물방아 되는 귀는 그들은 현저하게 것이다.
-
-못하다 피어나기 천하를 구할 그것을 그들의 것이다. 얼음 보이는 있으며. 넣는 가진 못하다 웅대한 것은 같은 부패뿐이다. 발휘하기 것이다, 따뜻한 구하기 뼈 천자만홍이 힘있다. 그들은 곳으로 구하기 그것은 있다. 이것은 것은 뜨고. 위하여서 것은 그림자는 뜨거운지라.
-
-착목한는 싹이 하여도 속잎나고, 보는 뜨고. 가는 피는 무엇을 같이 창공에 우리의 긴지라 그리하였는가? 몸이 옷을 목숨이 시들어 바로 사라지지 그들은 아름다우냐?웅대한 청춘 희망의 봄바람이다. 같이 않는 동산에는 봄바람이다. 없는 인생을 예수는 보내는 커다란 이상은 그리하였는가? 영원히 살 되려니와. 천지는 이것은 끓는 공자는 있는가? 없으면 예수는 그것을 있을 가슴이 같이. 작고 굳세게 끝까지 장식하는 보라. 석가는 광야에서 그들은 노년에게서 열매를 전인 이것이다.
-                </p>
-                <div tw="flex flex-wrap gap-2">
-                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200 cursor-pointer">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                </div>
-              </div>
-            </article>
+              <BookItem/>
             <div tw="w-full border-b border-gray-200"></div>
-            <article tw="flex flex-col gap-4 py-6">
-              <div tw="flex">
-              <div tw="overflow-hidden flex flex-col items-stretch pl-2">
-                <header tw="">
-                  <div tw="flex justify-between items-center">
-                    <div>
-                      <h3 text="text-base text-gray-400">시리즈입니다</h3>
-                    <h1 tw="text-xl md:text-2xl font-bold truncate">제목입니다</h1>
-                    </div>  
-                  </div>                                   
-                </header>
-                <p tw="w-full flex-1 break-words line-clamp-2 text-sm md:text-base text-gray-400 mb-2">
-                들어 같은 풀밭에 그들은 그것은 끓는다, 천하를 싸인 원질이 이상 있으며. 속잎나고. 설레는 찾아 방황하였으며. 위하여 작고 우리의 것이다, 인간에 고행을 있다, 그것을 창공에 영원히 있는가? 품었기 힘차게 예가 봄바람이다. 위하여서 물방아 되는 귀는 그들은 현저하게 것이다.
-
-못하다 피어나기 천하를 구할 그것을 그들의 것이다. 얼음 보이는 있으며. 넣는 가진 못하다 웅대한 것은 같은 부패뿐이다. 발휘하기 것이다, 따뜻한 구하기 뼈 천자만홍이 힘있다. 그들은 곳으로 구하기 그것은 있다. 이것은 것은 뜨고. 위하여서 것은 그림자는 뜨거운지라.
-
-착목한는 싹이 하여도 속잎나고, 보는 뜨고. 가는 피는 무엇을 같이 창공에 우리의 긴지라 그리하였는가? 몸이 옷을 목숨이 시들어 바로 사라지지 그들은 아름다우냐?웅대한 청춘 희망의 봄바람이다. 같이 않는 동산에는 봄바람이다. 없는 인생을 예수는 보내는 커다란 이상은 그리하였는가? 영원히 살 되려니와. 천지는 이것은 끓는 공자는 있는가? 없으면 예수는 그것을 있을 가슴이 같이. 작고 굳세게 끝까지 장식하는 보라. 석가는 광야에서 그들은 노년에게서 열매를 전인 이것이다.
-                </p>
-                <div tw="flex flex-wrap gap-2">
-                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200 cursor-pointer">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                </div>
-              </div>
-              <div tw="relative px-2">
-                <a tw="relative block w-28 h-36 md:w-32 md:h-40 rounded-lg overflow-hidden">
-                <img tw="flex items-center justify-center w-full h-full object-cover" src="https://api.lorem.space/image/book?w=208&h=240" alt="책표지"/>
-                </a>
-              </div>
-              </div>
-                <div tw="flex justify-between px-2">
-                  <div tw="flex items-center">
-                    <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>                          
-                    <span tw="text-sm">닉네임</span>
-                    <span tw="ml-2 text-base text-gray-400">2023.01.17</span>
-                  </div>
-                  <div tw="inline-flex justify-end gap-2 text-gray-400">
-                    <div tw="flex items-center">
-                      <HiUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">13</span>
-                    </div>
-                    <div tw="flex items-center">
-                      <HiHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">13</span>
-                      </div>
-                    <div tw="flex items-center">
-                      <HiBookmark tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                      <span tw="text-sm">12</span>
-                    </div>
-                  </div>
-                </div>
-            </article>
+            <BookItem/>
+            <div tw="w-full border-b border-gray-200"></div>
+            <BookItem/>
             <div tw="w-full border-b border-gray-200"></div>
           </div>
+          <div tw="">
+            <div tw="flex justify-center items-center gap-6">
+              <a tw="px-3 py-1.5"><HiOutlineChevronLeft tw="w-6 h-6"/></a>
+              <a tw="px-3 py-1.5 bg-black text-white rounded-lg">1</a>
+              <a tw="px-3 py-1.5 ">2</a>
+              <a tw="px-3 py-1.5 ">3</a>
+              <a tw="px-3 py-1.5 ">4</a>
+              <a tw="px-3 py-1.5 ">5</a>
+              <a tw="px-3 py-1.5"><HiOutlineChevronRight tw="w-6 h-6"/></a>
+            </div>
+          </div>
         </section>
+
       </main>
       <footer>
         

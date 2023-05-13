@@ -6,7 +6,7 @@ import Toast from '../../components/overlay/toast/Toast';
 import { Slide,ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Portal } from './portal';
-import { ThemeProvider, css, useTheme } from '@emotion/react';
+import { ThemeProvider, css } from '@emotion/react';
 import CommentList from './commentList';
 import ViewSettingModal from './viewSettingModal';
 import ChapterList from './chapterList';
@@ -17,7 +17,7 @@ const ViewTest = () => {
   const dummyData = 
   {title:"제목입니다", 
   subTitle:"1화 - 세부제목인데 조금 깁니다 더 길 수도 있습니다", 
-  content:["<p>토마스는 창밖을 내다보며 깊은 한숨을 내쉬었다. 이제는 정말로 모든 게 끝났다. 그동안 끊임없이 연구해온 내용이 실패로 돌아간 것이다. 그러나 그는 이런 낙오자같은 자신을 비난하지 않았다. 대신에 내일은 더 나은 결과를 얻기 위해 더 열심히 노력해야 한다고 다짐했다.</p>\r\n토마스는 미래를 위한 대비책을 세우고자 했다. 그래서 그는 자신이 개발한 인공지능 로봇을 이용해 새로운 기술을 개발하기로 결심했다. 그는 이로 인해 자신의 연구에 대한 새로운 방향을 찾을 수 있을 것이라고 믿었다. \r\n 그러나 그의 계획에는 예기치 않은 문제가 있었다. 그는 자신의 인공지능 로봇이 다른 개발자들에게도 공개될 수 있다는 것을 간과했다. 그래서 그의 로봇은 다른 사람들의 손에 넘어가면서 예상치 못한 결과를 초래했다.\r\n 그리고 그 결과는 인류의 운명을 좌우하는 것일 수도 있었다.\r\n 토마스는 이를 바로잡기 위해 본격적인 연구를 시작했다. 그는 자신의 로봇이 다른 사람들의 손에 넘어가는 것을 막기 위해 많은 시간과 노력을 기울였다. 그리고 그는 결국 성공했다.\r\n그의 로봇은 세상을 변화시키는 대단한 기술로 자리잡았다. 하지만 그의 성공은 이제 그의 손에서 벗어나게 된다. 그리고 토마스는 또다시 자신이 어디로 가야 할지 모르게 되었다.\r\n하지만 그는 이전보다는 자신감을 가지고 이를 받아들일 수 있었다. 그는 이제 새로운 도전에 대한 강한 의지를 가지고 있었다. 그리고 그는 또 다른 혁신을 이루어낼 수 있을 것이라는 확신을 가졌다. 토마스는 창밖을 내다보며 깊은 한숨을 내쉬었다. 이제는 정말로 모든 게 끝났다. 그동안 끊임없이 연구해온 내용이 실패로 돌아간 것이다. 그러나 그는 이런 낙오자같은 자신을 비난하지 않았다. 대신에 내일은 더 나은 결과를 얻기 위해 더 열심히 노력해야 한다고 다짐했다. \r\n토마스는 미래를 위한 대비책을 세우고자 했다. 그래서 그는 자신이 개발한 인공지능 로봇을 이용해 새로운 기술을 개발하기로 결심했다. 그는 이로 인해 자신의 연구에 대한 새로운 방향을 찾을 수 있을 것이라고 믿었다. \r\n 그러나 그의 계획에는 예기치 않은 문제가 있었다. 그는 자신의 인공지능 로봇이 다른 개발자들에게도 공개될 수 있다는 것을 간과했다. 그래서 그의 로봇은 다른 사람들의 손에 넘어가면서 예상치 못한 결과를 초래했다.\r\n 그리고 그 결과는 인류의 운명을 좌우하는 것일 수도 있었다.\r\n 토마스는 이를 바로잡기 위해 본격적인 연구를 시작했다. 그는 자신의 로봇이 다른 사람들의 손에 넘어가는 것을 막기 위해 많은 시간과 노력을 기울였다. 그리고 그는 결국 성공했다.\r\n그의 로봇은 세상을 변화시키는 대단한 기술로 자리잡았다. 하지만 그의 성공은 이제 그의 손에서 벗어나게 된다. 그리고 토마스는 또다시 자신이 어디로 가야 할지 모르게 되었다.\r\n하지만 그는 이전보다는 자신감을 가지고 이를 받아들일 수 있었다. 그는 이제 새로운 도전에 대한 강한 의지를 가지고 있었다. 그리고 그는 또 다른 혁신을 이루어낼 수 있을 것이라는 확신을 가졌다."]
+  content:["토마스는 창밖을 내다보며 깊은 한숨을 내쉬었다. 이제는 정말로 모든 게 끝났다. 그동안 끊임없이 연구해온 내용이 실패로 돌아간 것이다. 그러나 그는 이런 낙오자같은 자신을 비난하지 않았다. 대신에 내일은 더 나은 결과를 얻기 위해 더 열심히 노력해야 한다고 다짐했다.\r\n토마스는 미래를 위한 대비책을 세우고자 했다. 그래서 그는 자신이 개발한 인공지능 로봇을 이용해 새로운 기술을 개발하기로 결심했다. 그는 이로 인해 자신의 연구에 대한 새로운 방향을 찾을 수 있을 것이라고 믿었다. \r\n 그러나 그의 계획에는 예기치 않은 문제가 있었다. 그는 자신의 인공지능 로봇이 다른 개발자들에게도 공개될 수 있다는 것을 간과했다. 그래서 그의 로봇은 다른 사람들의 손에 넘어가면서 예상치 못한 결과를 초래했다.\r\n 그리고 그 결과는 인류의 운명을 좌우하는 것일 수도 있었다.\r\n 토마스는 이를 바로잡기 위해 본격적인 연구를 시작했다. 그는 자신의 로봇이 다른 사람들의 손에 넘어가는 것을 막기 위해 많은 시간과 노력을 기울였다. 그리고 그는 결국 성공했다.\r\n그의 로봇은 세상을 변화시키는 대단한 기술로 자리잡았다. 하지만 그의 성공은 이제 그의 손에서 벗어나게 된다. 그리고 토마스는 또다시 자신이 어디로 가야 할지 모르게 되었다.\r\n하지만 그는 이전보다는 자신감을 가지고 이를 받아들일 수 있었다. 그는 이제 새로운 도전에 대한 강한 의지를 가지고 있었다. 그리고 그는 또 다른 혁신을 이루어낼 수 있을 것이라는 확신을 가졌다. 토마스는 창밖을 내다보며 깊은 한숨을 내쉬었다. 이제는 정말로 모든 게 끝났다. 그동안 끊임없이 연구해온 내용이 실패로 돌아간 것이다. 그러나 그는 이런 낙오자같은 자신을 비난하지 않았다. 대신에 내일은 더 나은 결과를 얻기 위해 더 열심히 노력해야 한다고 다짐했다. \r\n토마스는 미래를 위한 대비책을 세우고자 했다. 그래서 그는 자신이 개발한 인공지능 로봇을 이용해 새로운 기술을 개발하기로 결심했다. 그는 이로 인해 자신의 연구에 대한 새로운 방향을 찾을 수 있을 것이라고 믿었다. \r\n 그러나 그의 계획에는 예기치 않은 문제가 있었다. 그는 자신의 인공지능 로봇이 다른 개발자들에게도 공개될 수 있다는 것을 간과했다. 그래서 그의 로봇은 다른 사람들의 손에 넘어가면서 예상치 못한 결과를 초래했다.\r\n 그리고 그 결과는 인류의 운명을 좌우하는 것일 수도 있었다.\r\n 토마스는 이를 바로잡기 위해 본격적인 연구를 시작했다. 그는 자신의 로봇이 다른 사람들의 손에 넘어가는 것을 막기 위해 많은 시간과 노력을 기울였다. 그리고 그는 결국 성공했다.\r\n그의 로봇은 세상을 변화시키는 대단한 기술로 자리잡았다. 하지만 그의 성공은 이제 그의 손에서 벗어나게 된다. 그리고 토마스는 또다시 자신이 어디로 가야 할지 모르게 되었다.\r\n하지만 그는 이전보다는 자신감을 가지고 이를 받아들일 수 있었다. 그는 이제 새로운 도전에 대한 강한 의지를 가지고 있었다. 그리고 그는 또 다른 혁신을 이루어낼 수 있을 것이라는 확신을 가졌다. \r\n 토마스는 창밖을 내다보며 깊은 한숨을 내쉬었다. 이제는 정말로 모든 게 끝났다. 그동안 끊임없이 연구해온 내용이 실패로 돌아간 것이다. 그러나 그는 이런 낙오자같은 자신을 비난하지 않았다. 대신에 내일은 더 나은 결과를 얻기 위해 더 열심히 노력해야 한다고 다짐했다.\r\n토마스는 미래를 위한 대비책을 세우고자 했다. 그래서 그는 자신이 개발한 인공지능 로봇을 이용해 새로운 기술을 개발하기로 결심했다. 그는 이로 인해 자신의 연구에 대한 새로운 방향을 찾을 수 있을 것이라고 믿었다. \r\n 그러나 그의 계획에는 예기치 않은 문제가 있었다. 그는 자신의 인공지능 로봇이 다른 개발자들에게도 공개될 수 있다는 것을 간과했다. 그래서 그의 로봇은 다른 사람들의 손에 넘어가면서 예상치 못한 결과를 초래했다.\r\n 그리고 그 결과는 인류의 운명을 좌우하는 것일 수도 있었다.\r\n 토마스는 이를 바로잡기 위해 본격적인 연구를 시작했다. 그는 자신의 로봇이 다른 사람들의 손에 넘어가는 것을 막기 위해 많은 시간과 노력을 기울였다. 그리고 그는 결국 성공했다.\r\n그의 로봇은 세상을 변화시키는 대단한 기술로 자리잡았다. 하지만 그의 성공은 이제 그의 손에서 벗어나게 된다. 그리고 토마스는 또다시 자신이 어디로 가야 할지 모르게 되었다.\r\n하지만 그는 이전보다는 자신감을 가지고 이를 받아들일 수 있었다. 그는 이제 새로운 도전에 대한 강한 의지를 가지고 있었다. 그리고 그는 또 다른 혁신을 이루어낼 수 있을 것이라는 확신을 가졌다. 토마스는 창밖을 내다보며 깊은 한숨을 내쉬었다. 이제는 정말로 모든 게 끝났다. 그동안 끊임없이 연구해온 내용이 실패로 돌아간 것이다. 그러나 그는 이런 낙오자같은 자신을 비난하지 않았다. 대신에 내일은 더 나은 결과를 얻기 위해 더 열심히 노력해야 한다고 다짐했다. \r\n토마스는 미래를 위한 대비책을 세우고자 했다. 그래서 그는 자신이 개발한 인공지능 로봇을 이용해 새로운 기술을 개발하기로 결심했다. 그는 이로 인해 자신의 연구에 대한 새로운 방향을 찾을 수 있을 것이라고 믿었다. \r\n 그러나 그의 계획에는 예기치 않은 문제가 있었다. 그는 자신의 인공지능 로봇이 다른 개발자들에게도 공개될 수 있다는 것을 간과했다. 그래서 그의 로봇은 다른 사람들의 손에 넘어가면서 예상치 못한 결과를 초래했다.\r\n 그리고 그 결과는 인류의 운명을 좌우하는 것일 수도 있었다.\r\n 토마스는 이를 바로잡기 위해 본격적인 연구를 시작했다. 그는 자신의 로봇이 다른 사람들의 손에 넘어가는 것을 막기 위해 많은 시간과 노력을 기울였다. 그리고 그는 결국 성공했다.\r\n그의 로봇은 세상을 변화시키는 대단한 기술로 자리잡았다. 하지만 그의 성공은 이제 그의 손에서 벗어나게 된다. 그리고 토마스는 또다시 자신이 어디로 가야 할지 모르게 되었다.\r\n하지만 그는 이전보다는 자신감을 가지고 이를 받아들일 수 있었다. 그는 이제 새로운 도전에 대한 강한 의지를 가지고 있었다. 그리고 그는 또 다른 혁신을 이루어낼 수 있을 것이라는 확신을 가졌다."]
   }
     const dummyComment = [{
       id: 1,
@@ -92,6 +92,14 @@ const ViewTest = () => {
     return childComments;
   }
 
+  const dummyChapters = [ 
+    {
+      chapter_id: 1,
+      book_id:1,
+      chapter_title:"임시 제목입니다"
+    } 
+  ]
+
   const [isClose, setIsClose] = useState(false);
 
   const [isAlert, setIsAlert] = useState(false);
@@ -101,7 +109,7 @@ const ViewTest = () => {
   const [isChapterListOpen, setIsChapterListOpen] = useState(false);
   const [isCommentListOpen, setIsCommentListOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
-  const [isSettingOpen, setIsSetttingOpen] = useState(false);
+  const [isSettingOpen, setIsSettingOpen] = useState(false);
 
   const handleFavorite = () => {
     if(!isFavorite){
@@ -147,14 +155,14 @@ const ViewTest = () => {
 
   const handleChapterListOpen = () => {
     setIsCommentListOpen(false)
-    setIsSetttingOpen(false)
+    setIsSettingOpen(false)
     setIsChapterListOpen(!isChapterListOpen)
     console.log(isChapterListOpen, isCommentListOpen, isSettingOpen, "open")
   }
 
   const handleCommentListOpen = () => {
     setIsChapterListOpen(false)
-    setIsSetttingOpen(false)
+    setIsSettingOpen(false)
     setIsCommentListOpen(!isCommentListOpen)
     console.log(isChapterListOpen, isCommentListOpen, isSettingOpen, "open")
   }
@@ -166,14 +174,14 @@ const ViewTest = () => {
   const handleSettingOpen = () => {
     setIsChapterListOpen(false)
     setIsCommentListOpen(false)
-    setIsSetttingOpen(!isSettingOpen)
+    setIsSettingOpen(!isSettingOpen)
     console.log(isChapterListOpen, isCommentListOpen, isSettingOpen, "open")
   }
 
   const handleSidebar = () => {
     setIsChapterListOpen(false)
     setIsCommentListOpen(false)
-    setIsSetttingOpen(false)
+    setIsSettingOpen(false)
     console.log(isChapterListOpen, isCommentListOpen, isSettingOpen, "open")
   }
 
@@ -239,7 +247,7 @@ const ViewTest = () => {
     const storedSetting = {themeName, fontSize};
     localStorage.setItem("viewerSetting", JSON.stringify(storedSetting));
     setSettingValue(storedSetting);
-    setIsSetttingOpen(false);
+    setIsSettingOpen(false);
   };
 
   useEffect(() => {
@@ -251,10 +259,23 @@ const ViewTest = () => {
     }
   }, []);
 
+  useEffect(() => {
+    document.body.style.cssText = `
+      position: fixed; 
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={theme[themeName]}>
     <div css={[tw`relative`, fontStyle]}>
-      <header css={[tw`flex justify-center fixed top-0 z-30 w-full h-14 border-b py-1.5 bg-white`, isClose ? tw`hidden`: tw`` ]}>
+      <header css={[tw`flex justify-center fixed top-0 z-30 w-full border-b py-1.5 bg-white`, isClose ? tw`hidden`: tw`` ]}>
         <nav tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-between items-center overflow-hidden px-2.5 sm:px-4">
           <div tw="relative">
             <button type="button" tw="p-3" onClick={()=>history.go(-1)}>
@@ -275,11 +296,11 @@ const ViewTest = () => {
         </nav>
       </header>
 
-      <main css={[tw`min-h-screen`]} onClick={handleBar}>
+      <main css={[tw`min-h-screen`]}>
         <div tw="flex min-h-screen">
-          <div tw="w-[425px] md:w-[675px] lg:w-[800px] mx-auto">
+          <div tw="w-[425px] md:w-[675px] lg:w-[800px] mx-auto" onClick={handleBar}>
             <section tw="relative">
-              <div tw="pt-24 px-6 sm:px-4 break-all">
+              <div tw="pt-24 pb-16 px-6 sm:px-4 break-all h-screen overflow-y-scroll overscroll-none scrollbar-hide">
                 <article ref={articleRef} css={[tw`whitespace-pre-line select-none`, fontStyle]}>
                   <h1 tw="max-w-full font-semibold text-center truncate text-ellipsis overflow-hidden whitespace-nowrap mb-16">{dummyData.subTitle}</h1>
                   {dummyData.content}
@@ -289,45 +310,100 @@ const ViewTest = () => {
             </section>
           </div>
           {/* 회차목록 */}
-          <aside css={[tw`fixed bg-white w-full h-full z-10 right-0 border-l border-gray-200 shadow-sm`, isChapterListOpen ? tw``:tw`hidden`]}>
-            <div tw="h-14 flex items-center border-b border-gray-200 py-1.5">
-              <div tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-between items-center overflow-hidden px-2.5 sm:px-4 mx-auto">
-                <button type="button" onClick={handleSidebar}>
-                  <HiArrowLeft tw="w-6 h-6 text-gray-400"/>
-                </button>
+          <aside css={[tw`fixed bg-white w-full h-full z-[60] top-0 border-l border-gray-200 shadow-sm`, isChapterListOpen ? tw``:tw`hidden`]}>
+            <div tw="relative flex justify-center fixed w-full border-b py-1.5 bg-white">
+              <div tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-between items-center overflow-hidden px-2.5 sm:px-4">
+                <div tw="relative">
+                  <button type="button" tw="p-3" onClick={handleSidebar}>
+                    <HiArrowLeft tw="w-6 h-6 text-gray-400"/>
+                  </button>
+                </div>
+                <div tw="max-w-[280px] lg:max-w-lg relative">
+                  <div tw="max-w-full text-lg font-semibold truncate text-ellipsis overflow-hidden text-gray-400 whitespace-nowrap">회차 목록 </div>
+                </div>
+                <div tw="relative">
+                  <button type="button" tw="p-3" onClick={handleAlert}>
+                    <HiOutlineBell css={[tw`w-6 h-6 stroke-gray-400`, isAlert ? tw`fill-amber-200 stroke-amber-200 active:scale-50 duration-300 ease-in-out` : tw`active:scale-50 duration-300 ease-in-out`]}/>
+                  </button>
+                  <button type="button" tw="p-3" onClick={handleChapterListOpen}>
+                    <HiOutlineBars3 tw="w-6 h-6 stroke-gray-400"/>
+                  </button>
+                </div>
               </div>
             </div>          
-            <div tw="h-screen overflow-y-scroll overscroll-none scrollbar-hide mx-auto px-8 sm:px-4">
+            <div tw="w-[425px] md:w-[675px] lg:w-[800px] h-screen overflow-y-scroll overscroll-none scrollbar-hide mx-auto px-8 sm:px-4 bg-white text-black">
               <ChapterList/>
             </div>
+            <div tw="fixed flex justify-center items-center bottom-0 w-full py-4 bg-white border-t border-gray-200">        
+              <div tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-around items-center px-2 sm:px-4">
+                <button type="button" onClick={handleFavorite}>
+                  <HiOutlineHeart css={[
+                    tw`w-6 h-6 stroke-gray-400`, 
+                    isFavorite ? tw`stroke-red-400 fill-red-400 active:scale-50 duration-300 ease-in-out` : tw`active:scale-50 duration-300 ease-in-out`
+                    ]}
+                  />
+                </button>   
+                <button type="button" onClick={handleCommentListOpen}><HiOutlineChatBubbleOvalLeft tw="w-6 h-6 stroke-gray-400"/></button>
+                <button type="button" onClick={handleShareOpen}><HiOutlineShare tw="w-6 h-6 stroke-gray-400"/></button>
+                <button type="button" onClick={handleSettingOpen}><HiOutlineCog8Tooth tw="w-6 h-6  stroke-gray-400"/></button>
+              </div>           
+             </div>
           </aside> 
           {/* 댓글 */}
-          <aside css={[tw`fixed bg-white w-full h-full z-10 right-0 border-l border-gray-200 shadow-sm`, isCommentListOpen ? tw``:tw`hidden`]}>
-            <div tw="h-14 flex items-center border-b border-gray-200 py-1.5">
-              <div tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-between items-center overflow-hidden px-2.5 sm:px-4 mx-auto">
-                <button type="button" onClick={handleSidebar}>
-                  <HiArrowLeft tw="w-6 h-6 text-gray-400"/>
-                </button>
+          <aside css={[tw`fixed bg-white w-full h-full z-[60] right-0 border-l border-gray-200 shadow-sm`, isCommentListOpen ? tw``:tw`hidden`]}>
+            <div tw="relative flex justify-center w-full border-b py-1.5 bg-white">
+              <div tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-between items-center overflow-hidden px-2.5 sm:px-4">
+                <div tw="relative">
+                  <button type="button" tw="p-3" onClick={handleSidebar}>
+                    <HiArrowLeft tw="w-6 h-6 text-gray-400"/>
+                  </button>
+                </div>
+                <div tw="max-w-[280px] lg:max-w-lg relative">
+                  <div tw="max-w-full text-lg font-semibold truncate text-ellipsis overflow-hidden text-gray-400 whitespace-nowrap">댓글 {dummyComment?.length}</div>
+                </div>
+                <div tw="relative">
+                  <button type="button" tw="p-3" onClick={handleAlert}>
+                    <HiOutlineBell css={[tw`w-6 h-6 stroke-gray-400`, isAlert ? tw`fill-amber-200 stroke-amber-200 active:scale-50 duration-300 ease-in-out` : tw`active:scale-50 duration-300 ease-in-out`]}/>
+                  </button>
+                  <button type="button" tw="p-3" onClick={handleChapterListOpen}>
+                    <HiOutlineBars3 tw="w-6 h-6 stroke-gray-400"/>
+                  </button>
+                </div> 
               </div>
             </div>
-            <div tw="max-w-screen-lg mx-auto px-8 sm:px-4">           
-              <div tw="w-[760px] h-screen overflow-y-scroll overscroll-none scrollbar-hide mx-auto">
+            <div tw="max-w-screen-lg mx-auto px-8 sm:px-4 bg-white text-black">           
+              <div tw="w-[425px] md:w-[675px] lg:w-[800px] h-screen overflow-y-scroll overscroll-none scrollbar-hide px-2.5 sm:px-4 mx-auto  py-14">
                 <CommentList/>
               </div>
             </div>
+            <div tw="fixed flex justify-center items-center bottom-0 w-full py-4 bg-white border-t border-gray-200">        
+              <div tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-around items-center px-2 sm:px-4">
+                <button type="button" onClick={handleFavorite}>
+                  <HiOutlineHeart css={[
+                    tw`w-6 h-6 stroke-gray-400`, 
+                    isFavorite ? tw`stroke-red-400 fill-red-400 active:scale-50 duration-300 ease-in-out` : tw`active:scale-50 duration-300 ease-in-out`
+                    ]}
+                  />
+                </button>   
+                <button type="button" onClick={handleCommentListOpen}><HiOutlineChatBubbleOvalLeft tw="w-6 h-6 stroke-gray-400"/></button>
+                <button type="button" onClick={handleShareOpen}><HiOutlineShare tw="w-6 h-6 stroke-gray-400"/></button>
+                <button type="button" onClick={handleSettingOpen}><HiOutlineCog8Tooth tw="w-6 h-6  stroke-gray-400"/></button>
+              </div>           
+             </div>
           </aside>
           {/* 공유하기 */}
-          <div css={[tw`fixed w-full h-full top-0 left-0 z-10`, isSettingOpen ? tw`` : tw`hidden`]}>
+          <div css={[tw`fixed w-full h-full top-0 left-0 z-10`, isShareOpen ? tw`` : tw`hidden`]}>
             <ShareModal 
             isOpen={isShareOpen}
             onClose={()=> setIsShareOpen}
+            onClick={handleShareOpen}
             />
           </div>
           {/* 설정 */}
           <div css={[tw`fixed w-full h-full top-0 left-0 z-10`, isSettingOpen ? tw`` : tw`hidden`]}>
             <ViewSettingModal 
               isOpen={isSettingOpen} 
-              onClose={()=> setIsSetttingOpen}
+              onClose={()=> setIsSettingOpen}
               lightTheme={() => handleThemeChange("light")}
               darkTheme={() => handleThemeChange("dark")}
               greenTheme={() => handleThemeChange("green")}
@@ -340,7 +416,7 @@ const ViewTest = () => {
         </div>
       </main>
 
-      <footer css={[tw`flex flex-col justify-center fixed bottom-0 z-30 w-full h-24 border-t bg-white`, isClose ? tw`hidden`: tw`` ]}>
+      <footer css={[tw`flex flex-col justify-center fixed bottom-0 z-30 w-full border-t bg-white`, isClose ? tw`hidden`: tw`` ]}>
         <div tw="flex justify-center w-full border-b py-2">
           <div tw="w-[425px] md:w-[675px] lg:w-[800px] flex justify-between px-2 sm:px-4">
             <div tw="text-lg font-semibold text-gray-400">

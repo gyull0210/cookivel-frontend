@@ -13,6 +13,12 @@ import Avatar from '../../components/core/avatar/Avatar'
 import MainCarousel from '../../components/overlay/mainCarosel/MainCarosel'
 import { useEffect, useRef, useState } from 'react'
 import useDetectClose from '../../components/hooks/useDetectClose'
+import {faker} from '@faker-js/faker'
+import Badge from '../../components/core/badge/Badge'
+import StoryItem from './storyItem'
+import Sidebar from '../../components/layout/sidebar/sidebar'
+import Dropdown from './dropdown'
+import { Menu, Popover, Transition } from '@headlessui/react'
 
 export default function StoryList() {
 
@@ -23,16 +29,16 @@ export default function StoryList() {
   const [isError, setIsError] = useState(false); 
  
   const [page, setPage] = useState(1);
-  useEffect(() => {
-    const fetchData = async () => {
-      const url = `https://picsum.photos/v2/list`;
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Response Error");
-      setCardList((response).json());
-      console.log(cardList)
-    };
-    fetchData().catch((error) => console.log(error));
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const url = `https://picsum.photos/v2/list`;
+  //     const response = await fetch(url);
+  //     if (!response.ok) throw new Error("Response Error");
+  //     setCardList((response).json());
+  //     console.log(cardList)
+  //   };
+  //   fetchData().catch((error) => console.log(error));
+  // }, []);
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -40,6 +46,8 @@ export default function StoryList() {
 
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [sidebarIsOpen, sidebarRef, sidebarHandler] = useDetectClose(false);
+
+  const imgUrl = faker.image.food(150,200)
   return (
     <>
       <Head>
@@ -48,7 +56,7 @@ export default function StoryList() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header tw="min-w-[425px] border-b border-gray-200">
+      <header tw="w-full h-16 border-b border-gray-200">
         <nav tw="relative flex justify-between items-center max-w-screen-lg mx-auto px-4 py-2">
           <div tw="lg:hidden">
             <button
@@ -61,16 +69,16 @@ export default function StoryList() {
             </button>
           </div>
           <div tw="flex justify-between items-center space-x-4">
-            <div tw="inline-flex mb-1">
+            <div tw="inline-flex font-jua">
               <span tw="text-2xl font-bold">C</span>
               <span tw="text-2xl font-bold text-[#E7CE96]">OO</span>
               <span tw="text-2xl font-bold">KVEL</span>
             </div>
 
             <div tw="hidden lg:flex space-x-4 text-base">
-              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">리뷰</a>
-              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">내 서재</a>
+              <Link tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="/book/nextpage">자유연재</Link>
+              <Link tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="/review/forum">리뷰</Link>
+              <Link tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">내 서재</Link>
             </div>
           </div>
 
@@ -78,32 +86,78 @@ export default function StoryList() {
             <button
               type="button"
               tw="p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
+              onClick={()=>router.push("/search")}
             >
               <HiMagnifyingGlass tw="w-6 h-6 text-gray-400"/>
             </button>
-            <button
-               type="button"
-               tw="hidden lg:block p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
-              >
-              <HiOutlineBell tw="w-6 h-6 text-gray-400"/>
-            </button>
-            <div tw="hidden">
-
-            </div>              
-              {
-                 
-              <>
-              <button tw="hidden md:block ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
-                  <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
-              </button>
-              <div css={[tw`hidden absolute bg-white w-[100px] h-full rounded-lg top-10 right-0 z-10 mt-4 origin-top-right shadow duration-150 ease-in-out`, myPageIsOpen ? tw`opacity-100`: tw`opacity-0`]}>
-                <ul tw="text-center">
-                  <li>메뉴</li>
-                  <li>메뉴</li>
-                </ul>
+            <Popover tw="relative">
+              <Popover.Button tw="hidden lg:block p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full">
+                <HiOutlineBell tw="w-6 h-6 text-gray-400"/>
+              </Popover.Button>
+              <Popover.Panel tw="absolute z-10 w-32 h-48 mt-4 flex flex-col shadow rounded-lg duration-200 bg-white overflow-hidden">
+                <div tw="flex flex-col h-full">
+                  <div tw="border-b py-2 px-6">알림</div>
+                  <div tw="">
+                    <div tw="border-b py-2 px-6">메세지</div>
+                    <div tw="border-b py-2 px-6">메세지</div>
+                    <div tw="border-b py-2 px-6">메세지</div>
+                  </div>           
+                </div>
+              </Popover.Panel>
+            </Popover>
+            <Menu as="div" tw="relative inline-block text-left">
+              <div tw="relative">
+              <Menu.Button tw="hidden md:flex items-center ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
+                <Avatar size="sm" alt="avatar" src={faker.image.avatar()} width={32} height={32}/>
+              </Menu.Button>
+              <Menu.Items tw="absolute w-32 mt-4 z-10 flex flex-col shadow rounded-lg duration-200 bg-white overflow-hidden right-0">
+                <Menu.Item>
+                  {({ active }) => (
+                    <a
+                      tw="px-4 py-2"
+                      css={active && tw`bg-gray-200`}
+                      href="/account-settings"
+                    >
+                    알림
+                    </a>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <a
+                      tw="px-4 py-2"
+                      css={active && tw`bg-gray-200`}
+                      href="/account-settings"
+                    >
+                    스토리룸
+                    </a>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <a
+                      tw="px-4 py-2"
+                      css={active && tw`bg-gray-200`}
+                      href="/account-settings"
+                    >
+                    공지사항
+                    </a>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <a
+                      tw="px-4 py-2"
+                      css={active && tw`bg-gray-200`}
+                      href="/account-settings"
+                    >
+                    로그아웃
+                    </a>
+                  )}
+                </Menu.Item>       
+              </Menu.Items>
               </div>
-              </>
-              }
+            </Menu>
           </div>
         </nav>
       </header>
@@ -114,82 +168,15 @@ export default function StoryList() {
           <a tw="py-3 w-full font-semibold">내 서재</a>
         </nav>
       </div>   
-      <aside tw="absolute w-[300px] md:hidden h-screen bg-gray-50 top-0 z-50 duration-300 transition-all ease-in-out shadow" css={[sidebarIsOpen ? tw``: tw`-translate-x-[300px]`]}>
-        <nav tw="">
-          <div tw="flex justify-end border-b border-gray-400 p-3">
-            <button type="button" onClick={sidebarHandler}><HiXMark tw="w-8 h-8"/></button>
-          </div>
-          <div tw="flex items-center p-3">
-            <Avatar size="md" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={48} height={48}/>
-            <div tw="ml-4">
-              <p tw="text-xl font-bold">빵냥 님</p>
-              <span tw="text-gray-400">mkht0210@gmail.com</span>
-            </div>
-          </div>
-          <div tw="flex flex-col p-3">
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">알림</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">내 서재</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">작품 쓰기</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">스토리룸</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">이벤트</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">고객센터</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">공지사항</a>
-          </div>
-        </nav>
-      </aside>
-      <main tw="flex flex-col mt-12 overflow-x-hidden">      
+      <Sidebar isOpen={sidebarIsOpen} onClick={sidebarHandler}/>
+      <main tw="flex flex-col mt-12 overflow-x-hidden">     
         <section tw="container mx-auto mt-12">
           <div tw="max-w-screen-lg mx-auto">
-            <div tw="w-full border-b border-gray-200"/>
-            <div tw="flex justify-end py-4">
-              <button tw="bg-black text-white px-6 py-2 rounded-lg">
-                작품 등록
-              </button>
+            <div tw="flex justify-end">
+              <Button variant="solid" size="lg" label="작품 등록"/>
             </div>
-            <div tw="w-full border-b border-gray-200"/>
-            <div tw="w-full flex py-6 justify-between">
-              <div tw="flex gap-6">
-                <div tw="">
-                  <div tw="block relative w-32 h-40 rounded-lg overflow-hidden">
-                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=208&h=240" alt="책표지"/>
-                  </div>
-                </div>
-                <div tw="flex flex-col gap-6 items-stretch">
-                  <div tw="">
-                    <h1 tw="text-lg font-bold">제목입니다</h1>
-                    <span tw="text-sm text-gray-400">총 300화</span>
-                    <p tw="text-sm text-gray-400">간단한 설명입니다</p>
-                  </div>
-                  <div tw="flex flex-wrap gap-2">
-                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200 cursor-pointer">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                </div>
-                </div>
-              </div>
-              <div tw="flex flex-col gap-2">
-                <button tw="px-6 py-2 border text-sm rounded-lg hover:shadow">공지 등록</button>
-                <button tw="px-6 py-2 border text-sm rounded-lg hover:shadow">회차 쓰기</button>
-                <button tw="px-6 py-2 border text-sm rounded-lg hover:shadow">작품 수정</button>
-                <button tw="px-6 py-2 border text-sm rounded-lg hover:shadow">작품 삭제</button>
-              </div>
-            </div>
-            <div tw="w-full border-b border-gray-200"/>
+           
+            <StoryItem/>         
           </div>
         </section>
       </main>
