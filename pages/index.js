@@ -202,7 +202,7 @@ export default function Home() {
                   <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}} key={i}>
               <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
                 <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=BDC01094" alt={i}/>
+                  <img tw="absolute object-center object-cover w-full top-0 left-0" src={image} alt={i}/>
                   <div tw=""></div>
                 </div>
               </div>
