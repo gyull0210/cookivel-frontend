@@ -13,6 +13,7 @@ import Avatar from '../components/core/avatar/Avatar'
 import MainCarousel from '../components/overlay/mainCarosel/MainCarosel'
 import { useEffect, useRef, useState } from 'react'
 import useDetectClose from '../components/hooks/useDetectClose'
+import { faker } from '@faker-js/faker'
 
 export default function Home() {
 
@@ -44,6 +45,13 @@ export default function Home() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const pageRef= useRef(null);
+  
+  const image = faker.image.urlLoremFlicker({width:580})
+  const [images, setImages] = useState([])
+  
+  useEffect(() => {
+    setImages(Array(9).fill(image))
+  },[])
 
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [sidebarIsOpen, sidebarRef, sidebarHandler] = useDetectClose(false);
@@ -188,78 +196,22 @@ export default function Home() {
             }}
             spacebetween={0}
           >
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
+            {
+              images.map((image,i) => {
+                return (
+                  <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}} key={i}>
               <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
                 <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=BDC01094" alt="1"/>
+                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=BDC01094" alt={i}/>
                   <div tw=""></div>
                 </div>
               </div>
             </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=7F5AE56A" alt="2"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=B0E33EF4" alt="3"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=2D297A22" alt="4"/>
-                  <div tw=""></div>
-                </div>
-              </div>       
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=9D9539E7" alt="5"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=225E6693" alt="6"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=8B7BCDC2" alt="7"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=500B67FB" alt="8"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=A89D0DE6" alt="9"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
+                )
+              })
+              
+            }
+                      
           </Swiper>
           <div tw="absolute w-full flex justify-between items-center top-1/3 z-20">
             <button
