@@ -1,61 +1,64 @@
-import React, { useEffect, useState } from 'react'
 import tw from 'twin.macro'
-import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight, HiOutlineChevronLeft, HiOutlineChevronRight } from 'react-icons/hi2';
+import { HiOutlineChevronLeft, HiOutlineChevronRight, HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from 'react-icons/hi2'
 
-const Pagination = ({ total, limit, page, setPage }) => {
+const Pagination = (props) => {
+/**
+ * total = 게시물 총 갯수 data.length
+ * limit = 페이지당 게시물 갯수
+ * page = 현재 페이지
+ * viewPerPage = 페이지 당 페이지네이션 버튼 수
+ * totalPage = 총 페이지 갯수
+ * startPage = 현재 페이지의 첫번째 페이네이션 버튼 숫자
+ * endPage = 현재 페이지의 마지막 페이네이션 버튼 숫자 
+ * firstNum = 현재 페이지의 첫번째 게시물 번호
+ * lastNum = 현재 페이지의 마지막 게시물 번호
+ */
+  const { total, limit, page, setPage, viewPerPage } = props;
 
-  const pageNum = Math.ceil(total / limit);
+  const totalPage = Math.ceil(total/limit);
 
-  const onPrev = () => {
-    setPage(page-1); 
-    setCurrPage(page-2);
-  }
-
-  const onNext = () => {  
-    setPage(page + 1 < pageNum ? page+1 : page = pageNum ); 
-    setCurrPage(page);
-  }
-
-  const onFirst = () => {
+  if(page < 1){
     setPage(1);
-    setCurrPage(1)
+  } else if(page > totalPage){
+    setPage(totalPage);
   }
 
-  const onEnd = () => {
-    setPage(pageNum);
-    setCurrPage(pageNum) 
+  let startPage, endPage;
+  if(totalPage <= viewPerPage){
+    startPage = 1;
+    endPage = totalPage;
+  } else {
+    let maxPagesBeforeCurrPage = Math.floor(viewPerPage / 2);
+    let maxPagesAfterCurrPage = Math.ceil(viewPerPage / 2) - 1;
+      if (page <= maxPagesBeforeCurrPage) {
+            // current page near the start
+            startPage = 1;
+            endPage = viewPerPage;
+        } else if (page + maxPagesAfterCurrPage >= totalPage) {
+            // current page near the end
+            startPage = totalPage - viewPerPage + 1;
+            endPage = totalPage;
+        } else {
+            // current page somewhere in the middle
+            startPage = page - maxPagesBeforeCurrPage;
+            endPage = page + maxPagesAfterCurrPage;
+        }
   }
 
-  const [currPage, setCurrPage] = useState(page);
-
-  const maxFirstNum = pageNum - 4;
-  const clampedFirstNum = Math.min(currPage - (currPage % 5) + 1, maxFirstNum);
-  const firstNum = Math.max(clampedFirstNum, 1);
-  const lastNum = Math.min(firstNum + 4, pageNum);
-
-  /**
-   * 모든 글의 갯수
-   * 현재 페이지 번호
-   * 한 페이지당 표시할 게시물 수
-   * 한번에 표시할 페이지 갯수
-   * 
-   * prev = (startPage === 1) ? false : true
-   * next = (endPage === totalPage) ? false : true
-   * 
-   * totalPage = ((totalPost - 1)/postPerPage) + 1
-   */
+  let firstNum = (page - 1) * limit + 1;
+  let lastNum = Math.min(firstNum + limit - 1, total);
 
   return (
     <div tw="flex flex-col lg:flex-row lg:items-center gap-6">
       <div tw="">
         총 {total} 개 게시물 중 {firstNum} - {lastNum}
       </div>
-    <div tw="flex justify-center items-center gap-4">
+      <div tw="flex justify-center items-center gap-4">
 
       <button 
         tw="py-1.5"
         css={page === 1 ? tw`text-gray-200`: null}
-        onClick={() => onFirst()}
+        onClick={() => setPage(1)}
         disabled={page === 1}
       >
         <HiOutlineChevronDoubleLeft tw="w-6 h-6"/>
@@ -63,61 +66,41 @@ const Pagination = ({ total, limit, page, setPage }) => {
       <button
         tw="py-1.5"
         css={page === 1 ? tw`text-gray-200`: null}
-        onClick={() => onPrev()}
+        onClick={() => setPage(page-1)}
         disabled={page === 1}
       >
         <HiOutlineChevronLeft tw="w-6 h-6" />
       </button>
-      <button 
-        tw="px-3 py-1.5 rounded-lg"
-        onClick={() => setPage(firstNum)}
-        css={page === firstNum ? tw`text-white bg-black` : null}>
-        {firstNum}
-      </button>
-      {Array(4).fill().map((_, i) => {
-        if(i <= 2){
-          return (
-            <button
+      {Array.from(Array((endPage+1)-startPage).keys()).map(i => (
+        <button
           tw="px-3 py-1.5 rounded-lg"
-          key={i + 1}
-          css={page === firstNum + i + 1 ? tw`text-white bg-black` : null}
-          onClick={() => {setPage(firstNum+1+i)}}
+          key={startPage+i}
+          css={page === startPage + i ? tw`text-white bg-black` : null}
+          onClick={() => setPage(startPage+i)}
+          aria-current={page === startPage + i ? "active" : null}
         >
-          {firstNum + i + 1}
+          {startPage + i}
         </button>
-          )
-        }
-        else if(i>=3){
-          return (
-            <button
-          tw="px-3 py-1.5 rounded-lg"
-          key={i + 1}
-          css={page === lastNum ? tw`text-white bg-black` : null}
-          onClick={() => setPage(lastNum)}
-        >
-          {lastNum}
-        </button>
-          )
-        }})}
+      ))}
       <button
         tw="py-1.5"
-        css={page === pageNum ? tw`text-gray-200`: null}
-        onClick={() => onNext()}
-        disabled={page === pageNum}
+        css={page === totalPage ? tw`text-gray-200`: null}
+        onClick={() => setPage(page+1)}
+        disabled={page === totalPage}
       >
         <HiOutlineChevronRight tw="w-6 h-6" />
       </button>
       <button 
         tw="py-1.5"
-        css={page === pageNum ? tw`text-gray-200`: null}
-        onClick={() => onEnd()}
-        disabled={page === pageNum}
+        css={page === totalPage ? tw`text-gray-200`: null}
+        onClick={() => setPage(totalPage)}
+        disabled={page === totalPage}
       >
         <HiOutlineChevronDoubleRight tw="w-6 h-6"/>
       </button>
+    </div>
   </div>
-  </div>
- )
+  )
 }
 
 export default Pagination;

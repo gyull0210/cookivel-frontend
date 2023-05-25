@@ -2,51 +2,51 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import tw from 'twin.macro'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import { Pagination, Navigation, Scrollbar, Autoplay } from "swiper"
-import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark } from 'react-icons/hi2'
+import { useEffect, useRef, useState } from 'react'
+import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight } from 'react-icons/hi2'
 import Button from '../components/core/button/Button'
 import Avatar from '../components/core/avatar/Avatar'
-import MainCarousel from '../components/overlay/mainCarosel/MainCarosel'
-import { useEffect, useRef, useState } from 'react'
+import MainCarousel from '../components/overlay/mainCarousel/MainCarousel'
 import useDetectClose from '../components/hooks/useDetectClose'
+import Sidebar from '../components/layout/sidebar/sidebar'
+import { Menu, Popover } from '@headlessui/react'
+import { faker } from '@faker-js/faker/locale/ko'
 
 export default function Home() {
 
-  const handleAvatar = async () => {
-    const res = await fetch("https://i.pravatar.cc/48");
-
-    return res.json();
-  }
-
-  const src= "https://i.pravatar.cc/48/"
-
-  const [cardList, setCardList] = useState("");
-
-  const [isLoading, setIsLoading] = useState(false); 
-  const [isError, setIsError] = useState(false); 
- 
-  const [page, setPage] = useState(1);
-  useEffect(() => {
-    const fetchData = async () => {
-      const url = `https://picsum.photos/v2/list`;
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Response Error");
-      setCardList((response).json());
-      console.log(cardList)
-    };
-    fetchData().catch((error) => console.log(error));
-  }, []);
-
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const pageRef= useRef(null);
-
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [sidebarIsOpen, sidebarRef, sidebarHandler] = useDetectClose(false);
+
+  const [images, setImages] = useState([]);
+  const [ranks, setRanks] = useState([]);
+  const [news, setNews] = useState([]);
+
+  faker.seed(42);
+
+  const image = faker.image.urlLoremFlickr({ width: 560, height:320 });
+
+  const data = [
+    {src: image},{src: image},{src: image},{src: image},{src: image},{src: image},{src: image},{src: image},{src: image}
+  ]
+  
+  const book = faker.image.urlPlaceholder({width: 100, height: 125, format: "Webp", backGroundColor: faker.color.human(), textColor: "FFFFFF", text:"book"});
+
+  const newData = faker.lorem.paragraph(1);
+
+  useEffect(() => {
+    setRanks(Array(6).fill(book))
+  },[])
+
+  useEffect(() => {
+    setNews(Array(10).fill(newData))
+  },[])
+
+  useEffect(() => {
+    setImages(Array(6).fill(image))
+    console.log(images);
+  },[image])
+
+  const genre = ["판타지", "무협", "현대판타지", "로맨스판타지", "BL", "GL"];
   return (
     <>
       <Head>
@@ -68,16 +68,16 @@ export default function Home() {
             </button>
           </div>
           <div tw="flex justify-between items-center space-x-4">
-            <div tw="inline-flex font-jua">
+            <Link tw="inline-flex font-jua" href="/">
               <span tw="text-2xl font-bold">C</span>
               <span tw="text-2xl font-bold text-[#E7CE96]">OO</span>
               <span tw="text-2xl font-bold">KVEL</span>
-            </div>
+            </Link>
 
-            <div tw="hidden lg:flex space-x-4 text-base">
-              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">자유연재</a>
-              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">리뷰</a>
-              <a tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">내 서재</a>
+            <div tw="relative hidden lg:flex items-center space-x-4 text-lg">
+              <Link tw="relative px-4 py-2 font-semibold hover:text-[#E7CE96]" href="/book">자유연재</Link>
+              <Link tw="relative px-4 py-2 font-semibold hover:text-[#E7CE96]" href="/review/forum">리뷰</Link>
+              <Link tw="relative px-4 py-2 font-semibold hover:text-[#E7CE96]" href="/bookshelf">내 서재</Link>
             </div>
           </div>
 
@@ -85,210 +85,169 @@ export default function Home() {
             <button
               type="button"
               tw="p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
+              onClick={()=>router.push("/search")}
             >
               <HiMagnifyingGlass tw="w-6 h-6 text-gray-400"/>
             </button>
-            <button
-               type="button"
-               tw="hidden lg:block p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full"
-              >
-              <HiOutlineBell tw="w-6 h-6 text-gray-400"/>
-            </button>
-            <div tw="hidden">
-
-            </div>              
-              {
-                 
-              <>
-              {                
-              <button tw="hidden md:flex items-center ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
-                <Avatar size="sm" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={32} height={32}/>
-              </button>
-              }
-              </>
-              }
+            <Popover tw="relative">
+              <Popover.Button tw="hidden lg:block p-3 hover:bg-gray-50 active:bg-gray-100 rounded-full">
+                <HiOutlineBell tw="w-6 h-6 text-gray-400"/>
+              </Popover.Button>
+              <Popover.Panel tw="absolute z-10 w-72 h-96 mt-4 flex flex-col shadow rounded-lg duration-200 bg-white overflow-hidden right-0">
+                <div tw="flex flex-col h-full">
+                  <div tw="border-b py-2 px-6">알림</div>
+                  <div tw="">
+                    <div tw="border-b py-2 px-6">메세지</div>
+                    <div tw="border-b py-2 px-6">메세지</div>
+                    <div tw="border-b py-2 px-6">메세지</div>
+                  </div>           
+                </div>
+              </Popover.Panel>
+            </Popover>
+            <Menu as="div" tw="relative inline-block text-left">
+              <div tw="relative">
+              <Menu.Button tw="hidden md:flex items-center ml-3" type="button" ref={myPageRef} onClick={myPageHandler}>
+                <Avatar size="sm" alt="avatar" src={faker.image.avatar()} width={32} height={32}/>
+              </Menu.Button>
+              <Menu.Items tw="absolute w-56 mt-4 z-10 flex flex-col shadow rounded-lg duration-200 bg-white overflow-hidden right-0">
+                <Menu.Item>
+                  {({ active }) => (
+                    <a
+                      tw="px-4 py-2"
+                      css={active && tw`bg-gray-200`}
+                      href="/notification"
+                    >
+                    알림
+                    </a>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      tw="px-4 py-2"
+                      css={active && tw`bg-gray-200`}
+                      href="/storyroom"
+                    >
+                    스토리룸
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      tw="px-4 py-2"
+                      css={active && tw`bg-gray-200`}
+                      href="/notice"
+                    >
+                    공지사항
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      tw="px-4 py-2"
+                      css={active && tw`bg-gray-200`}
+                      href="/logout"
+                    >
+                    로그아웃
+                    </Link>
+                  )}
+                </Menu.Item>       
+              </Menu.Items>
+              </div>
+            </Menu>
           </div>
         </nav>
       </header>
-      <div tw="md:hidden border-b border-gray-200">
+      <div tw="lg:hidden border-b border-gray-200">
         <nav tw="relative flex justify-between items-center text-center max-w-screen-lg mx-auto">
-          <a tw="py-3 w-full font-semibold active:bg-gray-100" href="">자유연재</a>
-          <a tw="py-3 w-full font-semibold">리뷰</a>
-          <a tw="py-3 w-full font-semibold">내 서재</a>
+          <Link tw="py-3 w-full font-semibold active:bg-gray-100" href="/book">자유연재</Link>
+          <Link tw="py-3 w-full font-semibold" href="/review">리뷰</Link>
+          <Link tw="py-3 w-full font-semibold" href="/bookshelf">내 서재</Link>
         </nav>
-      </div>
-      <aside tw="absolute w-[300px] md:hidden h-screen bg-gray-50 top-0 z-50 duration-300 transition-all ease-in-out shadow" css={[sidebarIsOpen ? tw``: tw`-translate-x-[300px]`]}>
-        <nav tw="">
-          <div tw="flex justify-end border-b border-gray-400 p-3">
-            <button type="button" onClick={sidebarHandler}><HiXMark tw="w-8 h-8"/></button>
+      </div>   
+      <Sidebar isOpen={sidebarIsOpen} onClick={sidebarHandler}/>
+      <main tw="flex flex-col overflow-x-hidden">
+        <MainCarousel slides={data}/>             
+        <section tw="flex justify-center w-full max-w-screen-lg mx-auto mt-12">
+          <div tw="w-1/2 lg:(flex w-full) flex-1 flex-wrap gap-6">
+            {
+              genre.map((genre, i) => (
+                <div tw="w-full flex-1 bg-gray-100 p-4 text-center rounded-lg" key={i}>
+                  <Link href="/">
+                    {genre}
+                  </Link>                 
+                </div>
+              ))
+            }
           </div>
-          <div tw="flex items-center p-3">
-            <Avatar size="md" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={48} height={48}/>
-            <div tw="ml-4">
-              <p tw="text-xl font-bold">빵냥 님</p>
-              <span tw="text-gray-400">mkht0210@gmail.com</span>
-            </div>
-          </div>
-          <div tw="flex flex-col p-3">
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">알림</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">내 서재</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">작품 쓰기</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">스토리룸</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">이벤트</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">고객센터</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">공지사항</a>
-          </div>
-        </nav>
-      </aside>
-      <main tw="flex flex-col mt-[115px] overflow-x-hidden">
-        <section tw="relative w-full h-80">
-          <div tw="lg:max-w-[1970px] w-full relative mx-auto p-0 flex justify-center">
-          <Swiper
-            tw="min-w-[calc((3*480px) + (3* 20px))] lg:min-w-[calc((3 * 560px) + (3 * 20px))] lg:max-w-[calc((3 * 560px) + (3 * 20px))] h-80 flex flex-col justify-center items-center"
-            modules={[Pagination, Navigation, Autoplay]}
-            loop={true}
-            centeredSlides={true}
-            loopAdditionalSlides={1}
-            slidesPerView={3}
-            slidesPerGroup={3}
-            watchOverflow={true}
-            navigation={{prevEl: prevRef.current, nextEl: nextRef.current}}
-            pagination={{ clickable: true, type: 'bullets' , el: 'swiper-pagination-container'}}
-            scrollbar={{ draggable: true, el: null }}
-            autoplay={false}
-            
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-              swiper.navigation.update();
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 1.25,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-
-            }}
-            spacebetween={0}
-          >
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=BDC01094" alt="1"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=7F5AE56A" alt="2"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=B0E33EF4" alt="3"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=2D297A22" alt="4"/>
-                  <div tw=""></div>
-                </div>
-              </div>       
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=9D9539E7" alt="5"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=225E6693" alt="6"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=8B7BCDC2" alt="7"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=500B67FB" alt="8"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide style={{width:'580px', padding: '0 10px', borderRadius: '0.5rem', overflow:'hidden'}}>
-              <div tw="w-[480px] lg:w-[580px] md:min-w-[500px] rounded-lg overflow-hidden px-[10px]">
-                <div tw="w-full relative aspect-w-4 aspect-h-3 pb-[75%] text-white">
-                  <img tw="absolute object-center object-cover w-full top-0 left-0" src="https://api.lorem.space/image/pizza?w=800&h=600&hash=A89D0DE6" alt="9"/>
-                  <div tw=""></div>
-                </div>
-              </div>
-            </SwiperSlide>
-          </Swiper>
-          <div tw="absolute w-full flex justify-between items-center top-1/3 z-20">
-            <button
-              ref={prevRef}
-              type="button"
-              tw="min-w-fit h-full p-3 hover:bg-gray-50 text-gray-400 lg:hover:bg-transparent lg:hover:text-sky-500 rounded-full lg:rounded-none"
-            >
-              <HiChevronLeft tw="w-12 h-12 text-gray-400 hover:lg:text-sky-500"/>
-            </button>
-            <button
-              ref={nextRef}
-              type="button"
-              tw="min-w-fit h-full p-3 hover:bg-gray-50 text-gray-400 lg:hover:bg-transparent lg:hover:text-sky-500 rounded-full lg:rounded-none"
-            >
-              <HiChevronRight tw="w-12 h-12"/>
-            </button>
-          </div>         
-          </div>
-          <div className="swiper-pagination-container"></div>         
-        </section>      
-        <section tw="max-w-screen-lg mx-auto mt-52">
+        </section>
+        <section tw="w-full max-w-screen-lg mx-auto">
           <div tw="w-full flex">
-            <div tw="w-[500px] flex justify-between items-center border-b border-gray-200 px-4 py-2">
-              <h2 tw="text-xl font-bold">인기 콘텐츠</h2>
+            <div tw="w-full flex justify-between items-center border-b border-gray-200 px-4 py-2">
+              <h2 tw="text-xl font-bold">신규 작품</h2>
               <HiChevronRight tw="w-6 h-6" />
             </div>
           </div>
+          <div tw="w-full flex flex-grow justify-between gap-6 py-2 overflow-x-scroll scrollbar-hide">
+            {
+              ranks.map((rank, l) => (
+                <div tw="w-[100px] flex flex-col" key={l}>
+                  <div tw="w-[100px] h-[125px] rounded-lg overflow-hidden">
+                    <img tw="w-full h-full" src={rank} alt={`표지${l}`}/>
+                  </div>       
+                  <div tw="text-base truncate w-full">{faker.lorem.lines(1)}</div>
+                </div>
+              ))
+            }
+          </div>
         </section>
-        <section tw="max-w-screen-lg mx-auto">
+        <section tw="w-full max-w-screen-lg mx-auto mt-12">
           <div tw="w-full flex">
-            <div tw="w-[500px] flex justify-between items-center border-b border-gray-200 px-4 py-2">
-              <h2 tw="text-xl font-bold">최신 콘텐츠</h2>
+            <div tw="w-full flex justify-between items-center border-b border-gray-200 px-4 py-2">
+              <h2 tw="text-xl font-bold">인기 작품</h2>
               <HiChevronRight tw="w-6 h-6" />
             </div>
           </div>
+          <div tw="w-full flex flex-col lg:flex-row gap-6  overflow-x-scroll scrollbar-hide">
+          <div tw="flex flex-wrap ">
+            {
+              ranks.map((rank, i) => (
+                <div tw="w-1/2 flex gap-6 py-2" key={i}>
+                  <div tw="flex">
+                    <div tw="font-bold">{i+1}</div>
+                    <div tw="w-[100px] h-[125px] rounded-lg overflow-hidden">
+                      <img tw="w-full h-full" src={rank} alt={`표지${i}`}/>
+                    </div>
+                  </div>
+                  <div tw="text-base truncate w-full">{faker.lorem.lines(1)}</div>
+                </div>
+              ))
+            }
+          </div>
+          </div>
         </section>
-        <section tw="flex mx-auto">
-          
-        </section>
+        <section tw="w-full max-w-screen-lg mx-auto">
+          <div tw="w-full flex">
+            <div tw="w-full flex justify-between items-center border-b border-gray-200 px-4 py-2">
+              <h2 tw="text-xl font-bold">인기 리뷰</h2>
+              <HiChevronRight tw="w-6 h-6" />
+            </div>
+          </div>
+          <div tw="flex flex-col  overflow-x-scroll scrollbar-hide">
+            {
+              news.map((news, k) => (
+                <div tw="flex items-center px-4 py-4 border-b" key={k}>
+                  <div tw="font-bold">{k+1}</div>
+                  <div tw="text-base">{faker.lorem.sentences(1)}</div>
+                </div>
+              ))
+            }
+          </div>
+        </section>       
       </main>
-      <footer>
+      <footer tw="w-full h-20">
         
       </footer>
       

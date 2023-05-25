@@ -1,5 +1,5 @@
 import React from 'react'
-import { jsx } from '@emotion/react'
+import { css } from '@emotion/react'
 import tw from 'twin.macro'
 
 const FormErrorMessage = React.forwardRef((props, ref) => {
@@ -12,7 +12,7 @@ const FormErrorMessage = React.forwardRef((props, ref) => {
       id={id}
       className={className}
       css={[
-        tw``
+        tw`text-red-500`
       ]}
     />
   )

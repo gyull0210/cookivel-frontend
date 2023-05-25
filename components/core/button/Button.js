@@ -99,7 +99,7 @@ const Button = React.forwardRef((props, ref) => {
         color && variant === "outline" && colors[color][variant],
         color && variant === "ghost" && colors[color][variant],
         disabled === true && tw`cursor-not-allowed`,
-        disabled === true && variant === "solid" && tw`text-gray-400 bg-gray-200 border border-gray-200`,
+        disabled === true && variant === "solid" && tw`text-gray-400 bg-gray-200 border border-gray-200 hover:shadow-none active:(bg-gray-200 border-gray-200)`,
         disabled === true && variant === "outline" && tw`text-gray-400 border border-current`,
         disabled === true && variant === "ghost" && tw`text-gray-400 hover:bg-transparent`,
         ]}    

@@ -7,9 +7,11 @@ const Sidebar = (props) => {
 
   const {isOpen, onClick} = props;
 
+  faker.seed(42);
+
   const dummyData = {
     avatar: faker.image.avatar(),
-    userName: faker.name.firstName(),
+    userName: faker.person.firstName(),
     email: faker.internet.email()
 
   }
@@ -19,7 +21,7 @@ const Sidebar = (props) => {
   const anonymousMenu = {};
 
   return (
-    <aside tw="absolute w-[300px] md:hidden h-screen bg-gray-50 top-0 z-50 duration-300 transition-all ease-in-out shadow" css={[isOpen ? tw``: tw`-translate-x-[300px]`]}>
+    <aside tw="absolute w-[300px] lg:hidden h-screen bg-gray-50 top-0 z-50 duration-300 transition-all ease-in-out shadow" css={[isOpen ? tw``: tw`-translate-x-[300px]`]}>
       <nav tw="">
         <div tw="flex justify-end border-b border-gray-400 p-3">
           <button type="button" onClick={onClick}><HiXMark tw="w-8 h-8"/></button>

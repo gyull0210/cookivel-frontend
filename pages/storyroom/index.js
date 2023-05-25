@@ -2,10 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import tw from 'twin.macro'
-import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiOutlineChevronLeft, HiOutlineChevronRight, HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from 'react-icons/hi2'
+import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiOutlineChevronLeft, HiOutlineChevronRight, HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight, HiOutlinePencilSquare } from 'react-icons/hi2'
 import Button from '../../components/core/button/Button'
 import Avatar from '../../components/core/avatar/Avatar'
-import MainCarousel from '../../components/overlay/mainCarosel/MainCarosel'
+import MainCarousel from '../../components/overlay/mainCarousel/MainCarousel'
 import { useEffect, useRef, useState } from 'react'
 import useDetectClose from '../../components/hooks/useDetectClose'
 import { faker } from '@faker-js/faker/locale/ko'
@@ -15,7 +15,11 @@ import Sidebar from '../../components/layout/sidebar/sidebar'
 import Dropdown from './dropdown'
 import { Menu, Popover } from '@headlessui/react'
 import Pagination from './pagination'
+import StoryList from './storyList'
 
+/**
+ * 이용자가 연재할 이야기 책 정보를 등록하는 페이지
+ */
 export default function StoryRoom() {
 
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
@@ -27,21 +31,21 @@ export default function StoryRoom() {
   const offset = (page - 1) * limit;
 
   const story = {
-    title: faker.lorem.words(2),
+    title: faker.lorem.lines(1),
     coverUrl: faker.image.food(),
     chapters: faker.datatype.number({min:1, max:500}),
     description:faker.lorem.sentences(3),
     tags:[
-      faker.random.word(),
-      faker.random.word(),
-      faker.random.word(),
-      faker.random.word(),
-      faker.random.word()
+      faker.lorem.word(),
+      faker.lorem.word(),
+      faker.lorem.word(),
+      faker.lorem.word(),
+      faker.lorem.word()
     ]
   }
 
   useEffect(() => {
-    setData(Array(367).fill(story))
+    setData(Array(328).fill(story))
   },[])
 
   return (
@@ -72,7 +76,7 @@ export default function StoryRoom() {
             </div>
 
             <div tw="hidden lg:flex space-x-4 text-base">
-              <Link tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="/book/nextpage">자유연재</Link>
+              <Link tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="/book">자유연재</Link>
               <Link tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="/review/forum">리뷰</Link>
               <Link tw="px-4 py-2 font-semibold hover:(underline decoration-4 underline-offset-4 decoration-[#E7CE96]) rounded-lg" href="">내 서재</Link>
             </div>
@@ -159,24 +163,30 @@ export default function StoryRoom() {
       </header>
       <div tw="md:hidden border-b border-gray-200">
         <nav tw="relative flex justify-between items-center text-center max-w-screen-lg mx-auto">
-          <a tw="py-3 w-full font-semibold active:bg-gray-100" href="">자유연재</a>
-          <a tw="py-3 w-full font-semibold">리뷰</a>
-          <a tw="py-3 w-full font-semibold">내 서재</a>
+          <Link tw="py-3 w-full font-semibold active:bg-gray-100" href="/book">자유연재</Link>
+          <Link tw="py-3 w-full font-semibold" href="/review">리뷰</Link>
+          <Link tw="py-3 w-full font-semibold" href="/bookshelf">내 서재</Link>
         </nav>
       </div>   
       <Sidebar isOpen={sidebarIsOpen} onClick={sidebarHandler}/>
-      <main tw="flex flex-col mt-12 overflow-x-hidden">     
+      <main tw="flex flex-col overflow-x-hidden">
+        <section tw="w-full h-48 bg-gray-100 shadow-inner overflow-hidden">
+          <Image tw="w-full h-full object-cover" src={faker.image.abstract(1970, 768, true)} alt="banner" width={1920} height={768}/>
+        </section>     
         <section tw="container mx-auto mt-12 mb-4">
           <div tw="max-w-screen-lg mx-auto">
-            <div tw="flex justify-end">
-              <Button variant="solid" size="lg" label="작품 등록"/>
+            <div tw="flex justify-end mb-4">
+              <Button variant="solid" size="lg" leftIcon={<HiOutlinePencilSquare tw="w-6 h-6"/>} label="작품 등록"/>
             </div>
-            {data.slice(offset, offset + limit).map((data, i) => (
-            <StoryItem key={i} story={data}/> 
-            ))}        
+            { data && data.length > 0 ?
+              <StoryList offset={offset} limit={limit} stories={data}/>
+              :
+              <div>자신만의 이야기를 등록해주세요.</div> 
+            }             
           </div>
         </section>
-        <div tw="flex justify-center"> 
+        { data && data.length > 0 && 
+        <div tw="flex justify-center">              
           <Pagination
             total={data.length}
             limit={limit}
@@ -185,6 +195,7 @@ export default function StoryRoom() {
             viewPerPage={5}
           />
         </div>
+        }
       </main>
       <footer tw="h-20">
         

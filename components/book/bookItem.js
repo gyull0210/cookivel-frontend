@@ -27,7 +27,7 @@ const BookItem = ({id, book}) => {
                 <span tw="bg-purple-500 text-sm text-white px-1 rounded-tl-lg rounded-r-lg">완결</span>
               </div>
                   
-              <h1 tw="text-xl font-bold truncate max-w-[300px] lg:max-w-[500px]">{book.bookTitle}</h1>
+              <h1 tw="text-xl font-bold truncate max-w-[280px] lg:max-w-[500px]">{book.bookTitle}</h1>
             </div>
               
           </div>                       

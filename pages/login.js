@@ -37,14 +37,14 @@ const Login = () => {
             <p tw="mt-2 font-semibold text-gray-500 text-center">이메일 계정으로 로그인</p>
         </div>
         <div tw="mt-8">
-          <form action="" novalidate className="group">
+          <form action="" noValidate className="group">
             <div tw="relative mt-5">
-              <input type="email" name="email" id="email" placeholder="이메일" className="peer" tw="w-full rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) valid:[&:not(:placeholder-shown)]:border-green-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400" required pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autocomplete="off" />
+              <input type="email" name="email" id="email" placeholder="이메일" className="peer" tw="w-full rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) valid:[&:not(:placeholder-shown)]:(border-green-500 border-2) [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:(border-red-400 border-2)" required pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autoComplete="off" />
               <label htmlFor="email" tw="pointer-events-none absolute top-0 left-0 ml-3 origin-left -translate-y-1/2 transform bg-white px-1 text-sm text-gray-500 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:ml-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-0 peer-focus:ml-3 peer-focus:text-sm peer-focus:text-gray-800">이메일</label>
               <span tw="mt-2 hidden text-sm text-red-400">이메일 형식에 맞게 입력해주세요. </span>
             </div>
             <div tw="relative mt-5">
-              <input type="password" name="password" id="password" placeholder="비밀번호" className="peer" tw="w-full rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) valid:[&:not(:placeholder-shown)]:border-green-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400" pattern=".{6,}" required />
+              <input type="password" name="password" id="password" placeholder="비밀번호" className="peer" tw="w-full rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) valid:[&:not(:placeholder-shown)]:(border-green-500 border-2) [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:(border-red-400 border-2)" pattern=".{6,}" required autoCcomplete="off"/>
               <label htmlFor="password" tw="pointer-events-none absolute top-0 left-0 ml-3 origin-left -translate-y-1/2 transform bg-white px-1 text-sm text-gray-500 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:ml-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-0 peer-focus:ml-3 peer-focus:text-sm peer-focus:text-gray-800">비밀번호</label>
               <span tw="mt-2 hidden text-sm text-red-400">비밀번호는 6자리 이상이어야 합니다. </span>
             </div>

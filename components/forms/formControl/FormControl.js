@@ -1,6 +1,6 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { jsx } from '@emotion/react'
+import { css } from '@emotion/react'
 import tw from 'twin.macro'
 import Input from '../input/inputs'
 
@@ -18,7 +18,7 @@ const FormControl = React.forwardRef((props, ref) => {
         className={className}
         ref={ref}
         css={[
-          tw`w-full relative`
+          tw`relative w-full`
         ]}
         {...rest}
       >

@@ -1,12 +1,13 @@
 // next.config.js
 const withTwin = require('./withTwin.js')
-
+const path = require('path');
 /**
  * @type {import('next').NextConfig}
  */
 module.exports = withTwin({
+  swcMinify: true,
   images: {
-    domains: ['api.lorem.space', 'i.pravatar.cc','loremflickr.com','cloudflare-ipfs.com'],
+    domains: ['loremflickr.com','cloudflare-ipfs.com', 'avatars.githubusercontent.com'],
   },
   reactStrictMode: true,
   async rewrites(){
@@ -15,6 +16,9 @@ module.exports = withTwin({
         destination: 'https://picsum.photos/v2/list'       
       }
     ]
-  }
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
   // ...
 })

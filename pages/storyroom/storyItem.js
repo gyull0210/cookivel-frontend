@@ -4,13 +4,18 @@ import { faker } from '@faker-js/faker'
 import Button from '../../components/core/button/Button'
 import { router } from 'next/router'
 import { useState } from 'react'
+import Link from 'next/link'
 
 
 const StoryItem = (props) => {
 
-  const { story, onDelete } = props;
+  const { story } = props;
 
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+
+  const onDelete = () => {
+    setIsOpenDeleteModal(!isOpenDeleteModal);
+  }
 
   return (
     <div tw="w-full flex flex-col lg:flex-row gap-6 px-4 py-6 justify-between items-center border-b border-gray-200">
@@ -27,9 +32,9 @@ const StoryItem = (props) => {
           </div>
           <div tw="flex flex-wrap gap-2">
             {story.tags.map((tag, index)=> (
-              <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200 cursor-pointer" key={index}>
+              <Link tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200 cursor-pointer" key={index} href="/">
                 <span tw="text-sm text-gray-400">{tag}</span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -38,7 +43,7 @@ const StoryItem = (props) => {
         <Button variant="solid" size="md" label="회차 쓰기" onClick={()=>router.push("/storyroom/chapters/createChater")}/>
         <Button variant="outline" size="md" label="공지 쓰기" onClick={()=>router.push("/storyroom/chapters/createChater")}/>
         <Button variant="outline" size="md" label="작품 수정" onClick={()=>router.push("/storyroom/chapters/createChater")}/>
-        <Button variant="outline" size="md" label="작품 삭제" onClick={()=>onDelete}/>               
+        <Button variant="outline" size="md" label="작품 삭제" onClick={()=> onDelete}/>               
       </div>
     </div>
   )

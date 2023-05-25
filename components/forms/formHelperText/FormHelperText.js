@@ -9,6 +9,7 @@ const FormHelperText = React.forwardRef((props, ref) => {
       ref={ref}
       id={id}
       className={className}
+      css={[tw`text-gray-300`]}
       {...rest}
     />
   )

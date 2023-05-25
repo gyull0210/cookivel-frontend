@@ -77,9 +77,17 @@ const ChapterList = () => {
               <ChapterItem key={i} id={i+1} chapter={data}/>
             ))}
             </div>
-            <div tw="flex justify-center">
-              <Pagination total={data.length} limit={limit} page={page} setPage={setPage}/>
+            { data && data.length > 0 && 
+            <div tw="flex justify-center">              
+              <Pagination
+                total={data.length}
+                limit={limit}
+                page={page}
+                setPage={setPage}
+                viewPerPage={5}
+              />
             </div>
+            }
           </div>
         </div>
       </main>

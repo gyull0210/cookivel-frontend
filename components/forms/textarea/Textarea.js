@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import propTypes from 'prop-types';
 import { jsx } from '@emotion/react'
 import tw from 'twin.macro'
@@ -8,6 +8,9 @@ const Textarea = React.forwardRef((props, ref) => {
   const { size, variant, id, label, className, placeholder, onChange, defaultValue, value, readonly, disabled, error, resize, ...rest } = props;
 
   const textRef = useRef(null);
+
+  const [minHeight, setMinHeight] = useState();
+  const [maxHeight, setMaxHeight] = useState();
 
   const handleChange = useCallback(
     (e) => {
@@ -32,9 +35,9 @@ const Textarea = React.forwardRef((props, ref) => {
         className={className}
         css={[
           tw`form-textarea border border-gray-300 rounded-lg focus:(border border-sky-400 ring-2 ring-sky-300) resize-none`,
-          size === "sm" && tw`w-full px-3 py-2 `,
-          size === "md" && tw`w-full px-3 py-2 `,
-          size === "lg" && tw`w-full px-3 py-2 `,
+          size === "sm" && tw`w-full px-3 py-2`,
+          size === "md" && tw`w-full px-3 py-2`,
+          size === "lg" && tw`w-full px-3 py-2`,
           error && tw`form-textarea border border-red-500 rounded-lg focus:(border border-red-500 ring-2 ring-red-300)`,
           resize && 1 && tw`overflow-y-hidden`
         ]}

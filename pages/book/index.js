@@ -15,6 +15,7 @@ import { Menu, Popover } from '@headlessui/react'
 import Pagination from '../../components/overlay/pagination/Pagination'
 import BookList from '../../components/book/bookList'
 import FilterModal from './filterModal'
+import Sidebar from '../../components/layout/sidebar/sidebar'
 
 export default function Book() {
 
@@ -178,36 +179,7 @@ setData(Array(227).fill(dummyData))
           </div>
         </nav>
       </header>
-      <div tw="md:hidden border-b border-gray-200">
-        <nav tw="relative flex justify-between items-center text-center max-w-screen-lg mx-auto">
-          <a tw="py-3 w-full font-semibold active:bg-gray-100" href="">자유연재</a>
-          <a tw="py-3 w-full font-semibold">리뷰</a>
-          <a tw="py-3 w-full font-semibold">내 서재</a>
-        </nav>
-      </div>
-      <aside tw="absolute w-[300px] md:hidden h-screen bg-gray-50 top-0 z-50 duration-300 transition-all ease-in-out shadow" css={[sidebarIsOpen ? tw``: tw`-translate-x-[300px]`]}>
-        <nav tw="">
-          <div tw="flex justify-end border-b border-gray-400 p-3">
-            <button type="button" onClick={sidebarHandler}><HiXMark tw="w-8 h-8"/></button>
-          </div>
-          <div tw="flex items-center p-3">
-            <Avatar size="md" alt="avatar" src={"https://api.lorem.space/image/face?w=128&h=128&hash=BDC01094"} width={48} height={48}/>
-            <div tw="ml-4">
-              <p tw="text-xl font-bold">빵냥 님</p>
-              <span tw="text-gray-400">mkht0210@gmail.com</span>
-            </div>
-          </div>
-          <div tw="flex flex-col p-3">
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">알림</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">내 서재</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">작품 쓰기</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">스토리룸</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">이벤트</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">고객센터</a>
-            <a tw="px-4 py-2 w-full hover:bg-gray-100 font-semibold text-lg">공지사항</a>
-          </div>
-        </nav>
-      </aside>
+      <Sidebar isOpen={sidebarIsOpen} onClick={sidebarHandler}/>
       <main tw="w-full flex flex-col mt-[115px] overflow-x-hidden">
              
         <section tw="relative w-full max-w-screen-lg mx-auto">
@@ -242,15 +214,19 @@ setData(Array(227).fill(dummyData))
         </section>
         <section tw="mt-12 max-w-screen-lg mx-auto">
           <div tw="flex flex-wrap mx-auto mb-4">
-            {/* <div tw="w-full border-b border-gray-200"></div>
-            {data.slice(offset, offset + limit).map((data, index) => (
-              <BookItem key={index} id={index+1} book={data}/>
-            ))} */}
             <BookList offset={offset} limit={limit} data={data}/>
           </div>
-          <div tw="flex justify-center">
-            <Pagination total={data.length} limit={limit} page={page} setPage={setPage}/>
-          </div>
+          { data && data.length > 0 && 
+            <div tw="flex justify-center">              
+            <Pagination
+              total={data.length}
+              limit={limit}
+              page={page}
+              setPage={setPage}
+              viewPerPage={5}
+            />
+            </div>
+          }
         </section>
         <div css={[tw`fixed w-full h-full top-0 left-0 z-10`, isOpenFilterModal ? tw`` : tw`hidden`]}>
           <FilterModal isOpen={isOpenFilterModal} onClose={() => setIsOpenFilterModal()} onClick={handleOpenFilterModal}/>

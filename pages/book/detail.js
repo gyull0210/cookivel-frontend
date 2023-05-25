@@ -9,9 +9,10 @@ import { Pagination, Navigation, Scrollbar, Autoplay } from "swiper"
 import { HiBars3, HiMagnifyingGlass, HiOutlineBell, HiChevronRight, HiChevronLeft, HiXMark, HiLockClosed, HiOutlineHeart, HiOutlineUser } from 'react-icons/hi2'
 import Button from '../../components/core/button/Button'
 import Avatar from '../../components/core/avatar/Avatar'
-import MainCarousel from '../../components/overlay/mainCarosel/MainCarosel'
+//import MainCarousel from '../../components/overlay/mainCarosel/MainCarosel'
 import { useEffect, useRef, useState } from 'react'
 import useDetectClose from '../../components/hooks/useDetectClose'
+import { faker } from '@faker-js/faker/locale/ko'
 
 export default function Detail() {
 
@@ -22,6 +23,43 @@ export default function Detail() {
 
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [sidebarIsOpen, sidebarRef, sidebarHandler] = useDetectClose(false);
+
+  const book = {
+    bookTitle: faker.lorem.lines(1),
+    bookCover: faker.image.urlLoremFlickr({width:208, height:240}),
+    writer: faker.person.fullName(),
+    chapters: faker.number.int({min:1, max:500}),
+    description: faker.lorem.lines(3),
+    tags:[
+      faker.lorem.word(),
+      faker.lorem.word(),
+      faker.lorem.word(),
+      faker.lorem.word(),
+      faker.lorem.word(),
+    ],
+    read: faker.number.int({min:0, max:5000}),
+    like: faker.number.int({min:0, max:1000}),
+    subscribe: faker.number.int({min:0, max:500})
+  }
+
+  const author = {
+    writer: faker.person.fullName(),
+    avatar: faker.image.avatar(),
+    description: faker.lorem.lines(1),
+    works: faker.lorem.slug(1)
+  }
+
+  const chapter = {
+    chapterTitle: faker.lorem.paragraph(1),
+    read: faker.number.int({min:0, max:100}),
+    like: faker.number.int({min:0, max:100})
+  }
+
+  const [chapterList, setChapterList] = useState([])
+
+  useEffect(() => {
+    setChapterList(Array(10).fill(chapter))
+  },[])
   
   return (
     <>
@@ -128,55 +166,40 @@ export default function Detail() {
           <div tw="w-full flex gap-6 py-6">
             <div tw="">
               <a tw="relative block w-48 h-64 rounded-lg overflow-hidden">
-                <img tw="w-full h-full" src="https://api.lorem.space/image/movie?w=208&h=240" alt="책표지" />
+                <img tw="w-full h-full" src={book.bookCover} alt="책표지" />
               </a>
             </div>
             <div tw="flex flex-col gap-4">
               <div tw="flex justify-between">
                 <div tw="">
-                  <h1 tw="text-3xl font-bold">제목입니다</h1>
-                  <span tw="">닉네임</span>
-                  <span tw="ml-2 text-gray-400">300화</span>
+                  <h1 tw="text-3xl font-bold">{book.bookTitle}</h1>
+                  <span tw="">{book.writer}</span>
+                  <span tw="ml-2 text-gray-400">{book.chapters} 화</span>
                 </div>
                 <div tw="ml-2 md:inline-flex gap-6 text-gray-400 hidden">
                   <div tw="flex flex-col items-center">
                     <HiOutlineUser tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
+                    <span tw="text-sm">{book.read}</span>
                   </div>
                   <div tw="flex flex-col items-center">
                     <HiOutlineHeart tw="w-6 h-6 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
+                    <span tw="text-sm">{book.like}</span>
                     </div>
                   <div tw="flex flex-col items-center">
                     <HiOutlineBell tw="w-6 h-6 stroke-1 text-gray-400"/>
-                    <span tw="text-sm">12</span>
+                    <span tw="text-sm">{book.subscribe}</span>
                   </div>
                 </div> 
               </div>
               <article tw="">
-              들어 같은 풀밭에 그들은 그것은 끓는다, 천하를 싸인 원질이 이상 있으며. 속잎나고. 설레는 찾아 방황하였으며. 위하여 작고 우리의 것이다, 인간에 고행을 있다, 그것을 창공에 영원히 있는가? 품었기 힘차게 예가 봄바람이다. 위하여서 물방아 되는 귀는 그들은 현저하게 것이다.
-
-못하다 피어나기 천하를 구할 그것을 그들의 것이다. 
+              {book.description}
               </article>
               <div tw="flex flex-wrap gap-2">
-                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200 cursor-pointer">
-                    <span tw="text-sm text-gray-400">태그</span>
+                {book.tags.map((tag, i) => (
+                <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200 cursor-pointer" key={i}>
+                    <span tw="text-sm text-gray-400">{tag}</span>
                   </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5 hover:bg-gray-200">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
-                  <a tw="bg-gray-100 rounded px-2 py-0.5">
-                    <span tw="text-sm text-gray-400">태그</span>
-                  </a>
+                ))}
               </div>
               <div tw="flex justify-center gap-4">
                 <button tw="w-full bg-black text-white py-2 text-center border border-black rounded-lg">첫 화 보기</button>
@@ -195,31 +218,29 @@ export default function Detail() {
                   <div tw="text-sm">보던순</div>
                 </div>
                 <div tw="text-sm">
-                  총 300화
+                  총 {book.chapters}화
                 </div>
               </div>
-              <div tw="flex gap-6 py-4 h-40">
+              {chapterList.map((chapter, i) => (
+              <div tw="flex gap-6 py-4 h-40" key={i}>
                 <div tw="">
                   <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
-                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
+                    <img tw="w-full h-full object-cover" src={book.bookCover} alt="책표지"/>
                   </a>
                 </div>
                 <div tw="h-36 flex flex-1 flex-col items-stretch">
                   <div tw="">
-                    <h1 tw="text-base font-semibold">제목입니다</h1>
-                    <span tw="text-sm text-gray-400">20화</span>
-                  </div>
-                  <div tw="text-sm text-gray-400 line-clamp-1">
-                    한줄 설명입니다
+                    <h1 tw="text-base font-semibold">{chapter.chapterTitle}</h1>
+                    <span tw="text-sm text-gray-400">{i+1}화</span>
                   </div>
                   <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
                   <div tw="flex items-center">
                     <HiOutlineUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
+                    <span tw="text-sm">{chapter.read}</span>
                   </div>
                   <div tw="flex items-center">
                     <HiOutlineHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
+                    <span tw="text-sm">{chapter.like}</span>
                     </div>
                   </div>
                 </div>
@@ -228,71 +249,8 @@ export default function Detail() {
                     <HiLockClosed tw="w-6 h-6 fill-gray-400" />
                   </button>
                 </div>
-              </div>
-              <div tw="flex gap-6 py-4 h-40">
-                <div tw="">
-                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
-                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
-                  </a>
-                </div>
-                <div tw="h-36 flex flex-1 flex-col items-stretch">
-                  <div tw="">
-                    <h1 tw="text-base font-semibold">제목입니다</h1>
-                    <span tw="text-sm text-gray-400">20화</span>
-                  </div>
-                  <div tw="text-sm text-gray-400 line-clamp-1">
-                    한줄 설명입니다
-                  </div>
-                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
-                  <div tw="flex items-center">
-                    <HiOutlineUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
-                  </div>
-                  <div tw="flex items-center">
-                    <HiOutlineHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
-                    </div>
-                  </div>
-                </div>
-                <div tw="flex items-center justify-end">
-                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
-                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
-                  </button>
-                </div>
-              </div>
-              <div tw="bg-gray-200 border-b w-full"></div>
-              <div tw="flex gap-6 py-4 h-40">
-                <div tw="">
-                  <a tw="block relative w-24 h-32 rounded-lg overflow-hidden">
-                    <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/movie?w=160&h=200" alt="책표지"/>
-                  </a>
-                </div>
-                <div tw="h-36 flex flex-1 flex-col items-stretch">
-                  <div tw="">
-                    <h1 tw="text-base font-semibold">제목입니다</h1>
-                    <span tw="text-sm text-gray-400">20화</span>
-                  </div>
-                  <div tw="text-sm text-gray-400 line-clamp-1">
-                    한줄 설명입니다
-                  </div>
-                  <div tw="md:inline-flex gap-4 text-gray-400 hidden items-end">
-                  <div tw="flex items-center">
-                    <HiOutlineUser tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
-                  </div>
-                  <div tw="flex items-center">
-                    <HiOutlineHeart tw="w-4 h-4 stroke-1 stroke-gray-400 fill-white"/>
-                    <span tw="text-sm">13</span>
-                    </div>
-                  </div>
-                </div>
-                <div tw="flex items-center justify-end">
-                  <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
-                    <HiLockClosed tw="w-6 h-6 fill-gray-400" />
-                  </button>
-                </div>
-              </div>
-              <div tw="bg-gray-200 border-b w-full"></div>
+              </div>))}             
+              
               <div tw="flex justify-center">
                 <div tw="py-6 flex gap-4">
                   <button tw="p-3 hover:bg-gray-200 active:bg-gray-300 rounded-full" type="button">
@@ -325,12 +283,12 @@ export default function Detail() {
             <div tw="py-6 w-96 mx-auto">
               <div tw="flex flex-col items-center px-6 py-6 bg-gray-100 rounded-lg">
                 <a tw="block relative w-36 h-36 rounded-lg overflow-hidden">
-                  <img tw="w-full h-full object-cover" src="https://api.lorem.space/image/face?w=200&h=200" alt="닉네임"/>
+                  <img tw="w-full h-full object-cover" src={author.avatar} alt="닉네임"/>
                 </a>
                 <div tw="py-4">
-                  <h3 tw="text-base font-bold">닉네임</h3>
-                  <p tw="text-gray-400">소개말입니다.</p>
-                  <span tw="text-sm">대표작이름, 대표작이름</span>
+                  <h3 tw="text-base font-bold">{author.writer}</h3>
+                  <p tw="text-gray-400">{author.description}</p>
+                  <span tw="text-sm">{author.works}</span>
                 </div>
                 <div tw="">
                   <button type="button" tw="w-full bg-black px-6 py-3 text-white rounded-lg">작가 팔로우하기</button>
