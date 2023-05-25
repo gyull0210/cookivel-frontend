@@ -110,23 +110,7 @@ const StoryForm = () => {
             <span tw="mt-2 hidden text-sm text-red-400">제목의 형식에 맞지 않습니다</span>
             <span tw="mt-2 text-sm text-gray-400">최대 20자까지 입력할 수 있습니다. </span>
           </div>
-          <div tw="relative">
-            <label tw="block" htmlFor="description">설명</label>
-            <TextareaAutosize 
-              type="text" 
-              id="description" 
-              name="description" 
-              placeholder="설명" 
-              className="peer" 
-              minRows={5} 
-              tw="w-full rounded-md border border-gray-300 px-3 py-2 shadow shadow-gray-100 placeholder:text-gray-400 focus:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) valid:[&:not(:placeholder-shown)]:(border-green-500 border-2) [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:(border-red-400 border-2) resize-none" 
-              required
-              autoComplete="off"
-              {...register("description", { required: true, maxLength: 300 })}
-            />
-            {errors.description?.required && <span tw="mt-2 hidden text-sm text-red-400">설명은 300자 이내로 작성해주세요.</span>}
-            <span tw="mt-2 text-sm text-gray-400">최대 300자까지 입력할 수 있습니다. </span>      
-          </div>
+          
           <div tw="relative">
             <label tw="mr-2" htmlFor="length">작품 길이</label>
             <div tw="flex items-center gap-6">
@@ -181,6 +165,44 @@ const StoryForm = () => {
               </div>   
             </div>
           </div>
+          
+          <div tw="relative">
+            <label tw="mr-2" htmlFor="tags">태그</label>
+            {/* <div contentEditable="true" tw="w-full rounded-md border border-gray-300 shadow shadow-gray-100 focus-within:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) overflow-hidden">
+              <input type="text" id="tags" name="tags" placeholder="태그" className="peer" tw="w-full border-none focus:(border-transparent outline-none ring-transparent) placeholder:text-gray-400 valid:[&:not(:placeholder-shown)]:(border-green-500 border-2) [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:(border-red-400 border-2)" 
+              required pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autoComplete="off" />
+            </div> */}
+            {/* <Controller
+              name="tags"
+              control={control}
+              defaultValue={false}
+              render={()=>(           
+              <Tags
+                tagifyRef={tagifyRef} // optional Ref object for the Tagify instance itself, to get access to  inner-methods
+                settings={settings}  // tagify settings object
+                //{...tagifyProps}   // dynamic props such as "loading", "showDropdown:'abc'", "value"
+                onChange={onChange}
+              />)}
+            /> */}
+            <TagsInput />
+          </div>
+          <div tw="relative">
+            <label tw="block" htmlFor="description">설명</label>
+            <TextareaAutosize 
+              type="text" 
+              id="description" 
+              name="description" 
+              placeholder="설명" 
+              className="peer" 
+              minRows={5} 
+              tw="w-full rounded-md border border-gray-300 px-3 py-2 shadow shadow-gray-100 placeholder:text-gray-400 focus:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) valid:[&:not(:placeholder-shown)]:(border-green-500 border-2) [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:(border-red-400 border-2) resize-none" 
+              required
+              autoComplete="off"
+              {...register("description", { required: true, maxLength: 300 })}
+            />
+            {errors.description?.required && <span tw="mt-2 hidden text-sm text-red-400">설명은 300자 이내로 작성해주세요.</span>}
+            <span tw="mt-2 text-sm text-gray-400">최대 300자까지 입력할 수 있습니다. </span>      
+          </div>
           <div tw="relative">
             <label tw="mr-2" htmlFor="isPublic">공개유무</label>
             {/* <Controller
@@ -222,26 +244,6 @@ const StoryForm = () => {
               checked={enabled}
               onChange={(e)=>setEnabled(e.target.checked)}
             />
-          </div>
-          <div tw="relative">
-            <label tw="mr-2" htmlFor="tags">태그</label>
-            {/* <div contentEditable="true" tw="w-full rounded-md border border-gray-300 shadow shadow-gray-100 focus-within:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) overflow-hidden">
-              <input type="text" id="tags" name="tags" placeholder="태그" className="peer" tw="w-full border-none focus:(border-transparent outline-none ring-transparent) placeholder:text-gray-400 valid:[&:not(:placeholder-shown)]:(border-green-500 border-2) [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:(border-red-400 border-2)" 
-              required pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autoComplete="off" />
-            </div> */}
-            {/* <Controller
-              name="tags"
-              control={control}
-              defaultValue={false}
-              render={()=>(           
-              <Tags
-                tagifyRef={tagifyRef} // optional Ref object for the Tagify instance itself, to get access to  inner-methods
-                settings={settings}  // tagify settings object
-                //{...tagifyProps}   // dynamic props such as "loading", "showDropdown:'abc'", "value"
-                onChange={onChange}
-              />)}
-            /> */}
-            <TagsInput />
           </div>
           <div tw="relative flex gap-6">
             <button tw="w-full py-3 px-6 bg-gray-100 border-gray-300 rounded-lg" type="reset">취소</button>

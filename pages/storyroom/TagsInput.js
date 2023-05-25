@@ -2,6 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 import tw from 'twin.macro'
 
+/**
+ * @description
+ * TagsInput + dropdown select 컴포넌트
+ * Input에 focus가 주어지면 dropdown select를 펼친다
+ * 직접 태그를 입력할 수도 있고
+ * dropdown 에서 태그를 선택할 수도 있다
+ * 
+ * 개선점
+ * 1. 최소 태그 갯수와 최대 태그 갯수를 고정해야 한다
+ * 2. 중복 태그에 대한 에러메세지 추가
+ * 3. 선택한 태그는 dropdown 리스트에서 제거, 태그 삭제시 다시 복구
+ * 4. 오류 방지를 위해 특수문자를 패턴으로 제거
+ */
+
 const TagsInput = (props) => {
 
   //const { value, onChange } = props;
@@ -24,13 +38,9 @@ const TagsInput = (props) => {
   
   const handleSelect = (e) => {
     const { innerText } = e.target;
+    
     setTags([...tags, innerText]);
-    //setTag('');
   };
-
-  const addTag = (e) => {
-    setTag(e.target.value);
-  }
 
   const removeTag = (i) => {
     const clonetags = tags.slice();
@@ -41,8 +51,14 @@ const TagsInput = (props) => {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && tag.trim() !== '') {
       e.preventDefault();
+      
       setTags([...tags, tag.trim()]);
       setTag('');
+    }
+
+    if (e.key === 'Backspace' && tag.trim() === '') {
+      e.preventDefault();
+      setTags(tags.slice(0, tags.length - 1));
     }
   }
 
@@ -57,7 +73,7 @@ const TagsInput = (props) => {
   return (
     <>
       <div 
-      tw="flex flex-wrap w-full px-2 py-2 rounded-md border border-gray-300 shadow shadow-gray-100 placeholder:text-gray-400 overflow-hidden focus-within:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0])"
+      tw="relative flex flex-wrap w-full px-2 py-2 rounded-md border border-gray-300 shadow shadow-gray-100 placeholder:text-gray-400 overflow-hidden focus-within:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0])"
       
       >
         <div tw="relative flex flex-wrap gap-2">
@@ -66,7 +82,7 @@ const TagsInput = (props) => {
             key={i}
             tw="flex items-center gap-4 bg-gray-200 text-gray-500 text-sm px-2 py-2 rounded-md shadow shadow-gray-100 hover:(bg-red-200 border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0])"
           >
-            {tag}
+            <span tw="pl-2">{tag}</span>
             <button 
               tw=""
               type="button"
@@ -85,15 +101,18 @@ const TagsInput = (props) => {
           onKeyDown={handleKeyDown}
           onFocus={onFocus}
           onBlur={onBlur}
+          pattern=""
+          required
         />
         </div>
       </div>
-      {   
+      {
+      <div tw="relative w-full z-10">  
         <div
-          tw="w-full border border-gray-300 rounded-lg overflow-hidden"
-          css={focus ? null : tw`h-[-9999px]`}
+          tw="absolute w-full bg-white border border-gray-300 rounded-lg overflow-hidden"
+          css={focus ? null : tw`invisible duration-150`}
         >
-          <ul tw="w-full">
+          <ul tw="w-full h-72 overflow-y-auto overflow-x-hidden">
             {whitelist.map((whitelist, i) => (
               <div 
                 tw="w-full hover:bg-[#E6CEA0] p-2" 
@@ -106,6 +125,7 @@ const TagsInput = (props) => {
             ))}           
           </ul>
         </div>
+      </div> 
       } 
     </>
   )
