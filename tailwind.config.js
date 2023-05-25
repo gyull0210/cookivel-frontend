@@ -6,6 +6,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        mobile: '320px',
+        tablet: '992px',
+        fullscreen: '1970px'
+      },
       colors: ({colors}) => ({
         primary: colors.sky[400],
         secondary: colors.sky[400],
@@ -34,17 +39,34 @@ module.exports = {
           '100%': {
               opacity: '0',
               transform: 'translateY(0)'
-          },
+          },       
+      },
+      'highlight': {
+        '0%': {
+          width: '0',
+          opacity: '0',
+          transform: 'rotate(-3deg)'
+        },
+        '25%': {
+          width: '50',
+          opacity: '1',
+          transform: 'rotate(-3deg)'
+        }
       }
       },
       animation: {
         'fadeIn': 'fadeIn 0.5s ease-out',
-        'fadeOut': 'fadeOut 0.5s ease-out'
+        'fadeOut': 'fadeOut 0.5s ease-out',
+        'highlight': 'highlight 0.5s ease-in-out'
       },
       fontFamily: {
         sans: ['Pretendard Variable, Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif'],
         pretendard: 'Pretendard Variable, Pretendard, sans-serif',
         jua:'Jua, sans-serif'
+      },
+      backgroundImage: {
+        'cookie': "url('./cookie.jpg')",
+        'lunatic': "url(./lunatic.png)"
       }
     },
   },
