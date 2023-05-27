@@ -24,6 +24,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
+          <link href="/furry.ico" rel="icon" sizes="any"/>
           <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"/>
         </Head>
         <body>

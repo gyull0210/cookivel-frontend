@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 import tw from 'twin.macro'
 
@@ -10,16 +10,16 @@ import tw from 'twin.macro'
  * dropdown 에서 태그를 선택할 수도 있다
  * 
  * 개선점
- * 1. 최소 태그 갯수와 최대 태그 갯수를 고정해야 한다
+ * 1. 최소 태그 갯수와 최대 태그 갯수를 고정해야 한다 O
  * 2. 중복 태그에 대한 에러메세지 추가
  * 3. 선택한 태그는 dropdown 리스트에서 제거, 태그 삭제시 다시 복구
- * 4. 오류 방지를 위해 특수문자를 패턴으로 제거
+ * 4. 오류 방지를 위해 특수문자를 패턴으로 제거 O
+ * 5. ref를 통해서 tags 값에 접근할 수 있게 해야 함
  */
 
 const TagsInput = (props) => {
 
-  //const { value, onChange } = props;
-
+  const {} = props;
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState("");
 
@@ -38,8 +38,11 @@ const TagsInput = (props) => {
   
   const handleSelect = (e) => {
     const { innerText } = e.target;
-    
-    setTags([...tags, innerText]);
+
+    if (innerText !== '' && !tags.includes(innerText) && tags.length < 7) {
+      setTags([...tags, innerText]);
+      setTag('');
+    }
   };
 
   const removeTag = (i) => {
@@ -49,11 +52,15 @@ const TagsInput = (props) => {
   }
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && tag.trim() !== '') {
+    if (e.key === 'Enter') {
       e.preventDefault();
-      
-      setTags([...tags, tag.trim()]);
-      setTag('');
+      if(tag.trim() !== ''){
+      const newTag = tag.trim().replace(/[^\wㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+      if (newTag !== '' && !tags.includes(newTag) && tags.length < 7) {
+        setTags([...tags, newTag]);
+        setTag('');
+      }
+     }
     }
 
     if (e.key === 'Backspace' && tag.trim() === '') {
@@ -66,15 +73,14 @@ const TagsInput = (props) => {
     setTag(e.target.value);
   };
 
-  useEffect(()=>{
-    console.log(tags)
+  useEffect(() => {
+    console.log(tags);
   },[tags])
-
+ 
   return (
     <>
-      <div 
-      tw="relative flex flex-wrap w-full px-2 py-2 rounded-md border border-gray-300 shadow shadow-gray-100 placeholder:text-gray-400 overflow-hidden focus-within:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0])"
-      
+      <div
+      tw="relative flex flex-wrap w-full px-2 py-2 rounded-md border border-gray-300 shadow shadow-gray-100 placeholder:text-gray-400 overflow-hidden focus-within:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0])"       
       >
         <div tw="relative flex flex-wrap gap-2">
         {tags && tags.map((tag, i) => (
@@ -92,8 +98,8 @@ const TagsInput = (props) => {
             </button>
           </div>
         ))}
-        <input
-          tw="w-64 border-none focus:(outline-none border-transparent ring-transparent)"
+        <input         
+          tw="w-64 border-none placeholder:text-gray-400 focus:(outline-none border-transparent ring-transparent)"
           type="text"
           value={tag}
           placeholder="태그를 입력해주세요(2개 이상)"
@@ -101,18 +107,17 @@ const TagsInput = (props) => {
           onKeyDown={handleKeyDown}
           onFocus={onFocus}
           onBlur={onBlur}
-          pattern=""
+          pattern="/[^\wㄱ-ㅎㅏ-ㅣ가-힣]/g"
           required
         />
         </div>
-      </div>
-      {
+      </div>    
       <div tw="relative w-full z-10">  
         <div
           tw="absolute w-full bg-white border border-gray-300 rounded-lg overflow-hidden"
           css={focus ? null : tw`invisible duration-150`}
         >
-          <ul tw="w-full h-72 overflow-y-auto overflow-x-hidden">
+          <ul tw="w-full overflow-y-auto overflow-x-hidden">
             {whitelist.map((whitelist, i) => (
               <div 
                 tw="w-full hover:bg-[#E6CEA0] p-2" 
@@ -125,10 +130,13 @@ const TagsInput = (props) => {
             ))}           
           </ul>
         </div>
-      </div> 
-      } 
+      </div>
+      {/* <span tw="text-red-500 text-sm">태그는 한글, 영문, 숫자 이외에 공백이나 특수문자를 포함할 수 없습니다.</span> */}
+      <span tw="block mt-2 text-gray-400 text-sm">태그는 최대 7개까지 등록할 수 있습니다.</span> 
     </>
   )
 }
+
+TagsInput.displayName = "TagsInput";
 
 export default TagsInput;

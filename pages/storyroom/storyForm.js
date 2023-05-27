@@ -8,58 +8,37 @@ import ImgUploadForm from './imgUploadForm';
 import CropperModal from './cropperModal';
 import Toggle from './Toggle';
 import TagsInput from './TagsInput';
+import Portal from '../portal';
+import ErrorModal from './errorModal';
 
 const StoryForm = () => {
 
   const [enabled, setEnabled] = useState(false);
   const [toggle, setToggle] = useState(false);
 
-  const [tags, setTags] = useState([]);
+  const [isOpenErrorModal, setIsOpenErrorModal] = useState(false);
+
+  const errorMsg = "이게뭐노";
+
+  const handleErrorModal = () => {
+    setIsOpenErrorModal(!isOpenErrorModal)
+  }
 
   const { register, handleSubmit, watch, formState: { errors }, control } = useForm();
   const onSubmit = data => console.log(data);
 
-  const addTag = (event) => {
-    const inputVal = event.target.value;
-    // 이미 입력되어 있는 태그인지 검사하여 이미 있는 태그라면 추가하지 말기 
-    // 아무것도 입력하지 않은 채 Enter 키 입력시 메소드 실행하지 말기
-    // 태그가 추가되면 input 창 비우기 
-    if(event.key === "Enter" && inputVal !== '' && !tags.includes(inputVal)){
-      setTags([...tags,inputVal]);
-      event.target.value = '';
-    }
-  }
-
-  const removeTag = (indexToRemove) => {
-    // 태그를 삭제하는 메소드
-    const filter = tags.filter((el,index) => index !== indexToRemove);
-    setTags(filter);
-  }
-
-  useEffect(() => {
-    console.log(tags)
-  },[tags])
-
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
   const handleOpenUploadModal = () => {
     setIsUploadModalOpen(!isUploadModalOpen)
   }
 
   const [cropData, setCropData] = useState("")
 
-  const [bookData, setData] = useState({
-    bookImg: cropData,
-    bookTitle: "",
-    description: "",
-    length: "",
-    series: false,
-    isPublic: false,
-    tags:[]
-  })
-
-  const handleTagsInput = (tags) => {
-    setTags({tags})
-  }
+  const tagsInputRef = useRef(null);
+  
+  const whitelist = ['판타지', '현대판타지', '로맨스', '로맨스판타지', 'BL', 'GL', '호러'];
+  
 
   return (
     <div tw="max-w-screen-lg mx-auto py-6">
@@ -108,7 +87,7 @@ const StoryForm = () => {
               {...register("title", { required: true, maxLength: 20 })}
             />
             <span tw="mt-2 hidden text-sm text-red-400">제목의 형식에 맞지 않습니다</span>
-            <span tw="mt-2 text-sm text-gray-400">최대 20자까지 입력할 수 있습니다. </span>
+            <span tw="block mt-2 text-sm text-gray-400">최대 20자까지 입력할 수 있습니다. </span>
           </div>
           
           <div tw="relative">
@@ -167,24 +146,9 @@ const StoryForm = () => {
           </div>
           
           <div tw="relative">
-            <label tw="mr-2" htmlFor="tags">태그</label>
-            {/* <div contentEditable="true" tw="w-full rounded-md border border-gray-300 shadow shadow-gray-100 focus-within:(border-gray-500 outline-none border-transparent ring-2 ring-[#E6CEA0]) overflow-hidden">
-              <input type="text" id="tags" name="tags" placeholder="태그" className="peer" tw="w-full border-none focus:(border-transparent outline-none ring-transparent) placeholder:text-gray-400 valid:[&:not(:placeholder-shown)]:(border-green-500 border-2) [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:(border-red-400 border-2)" 
-              required pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autoComplete="off" />
-            </div> */}
-            {/* <Controller
-              name="tags"
-              control={control}
-              defaultValue={false}
-              render={()=>(           
-              <Tags
-                tagifyRef={tagifyRef} // optional Ref object for the Tagify instance itself, to get access to  inner-methods
-                settings={settings}  // tagify settings object
-                //{...tagifyProps}   // dynamic props such as "loading", "showDropdown:'abc'", "value"
-                onChange={onChange}
-              />)}
-            /> */}
-            <TagsInput />
+            <label tw="mr-2" htmlFor="tags">태그</label>            
+            {/* <TagsInput /> */}
+            
           </div>
           <div tw="relative">
             <label tw="block" htmlFor="description">설명</label>
@@ -247,7 +211,7 @@ const StoryForm = () => {
           </div>
           <div tw="relative flex gap-6">
             <button tw="w-full py-3 px-6 bg-gray-100 border-gray-300 rounded-lg" type="reset">취소</button>
-            <button tw="w-full py-3 px-6 bg-black text-white rounded-lg" type="button">등록</button>
+            <button tw="w-full py-3 px-6 bg-black text-white rounded-lg" type="submit" onClick={handleSubmit(onSubmit)}>등록</button>
           </div>
         </div>
       </form>
@@ -259,6 +223,12 @@ const StoryForm = () => {
         cropData={cropData}
         setCropData={setCropData}
       />}
+        <ErrorModal
+          errors={errorMsg}
+          isOpen={isOpenErrorModal} 
+          onClose={setIsOpenErrorModal} 
+          onClick={handleErrorModal}
+        />
     </div>
   )
 }
